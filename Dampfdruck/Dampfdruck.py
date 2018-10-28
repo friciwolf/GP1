@@ -18,7 +18,7 @@ N=10000 #Anzahl der Elemente die zur Berechnung von L betrachtet werden = max. o
 #Kalibrierungsdaten
 #Aus dem Resultat von Kalib.py
 def T_real(T_gemessen):
-    return 0.9727951049804687*(T_gemessen-50) + 1.126251220703125 + 50
+    return 1.0279656989228758*(T_gemessen-50) + -1.1577476232528214 + 50
 
 t, p, T = [], [], [] #Temperatur in °C!!!
 data = cassy.CassyDaten("Dampfdruckkurve.lab")
