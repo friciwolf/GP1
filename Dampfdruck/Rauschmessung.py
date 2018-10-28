@@ -8,17 +8,16 @@ Created on Sat Oct 27 17:24:44 2018
 import matplotlib.pyplot as plt
 import numpy as np
 import scipy
+import praktikum.cassy as cassy
 
 def gauss(x, m, s):
     return(np.power(scipy.pi*2*s**2, -0.5)*np.exp(-(x-m)**2/(2*s**2)))
 
-f = open("pT-Gauss.dat")
 t, p, T = [], [], [] #Temperatur in °C!!!
-for line in f:
-    data = line.split("\t")
-    t.append(float(data[1]))
-    T.append(float(data[2]))
-    p.append(float(data[4]))
+data = cassy.CassyDaten("Rauschmessung.lab")
+t = data.messung(1).datenreihe("t").werte
+T = data.messung(1).datenreihe("&J_A11").werte
+p = data.messung(1).datenreihe("p_B1").werte
     
 print("Temperaturverteilung") #vllt Poisson???
 print("s=" + str(np.std(T))+", m="+str(np.average(T))+", err="+str(np.std(T)/np.sqrt(len(T))))
