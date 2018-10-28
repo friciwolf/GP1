@@ -88,6 +88,6 @@ print("Resultate:")
 print("T bei T=0°C = " + str(T0)+" +-"+str(sigmaT0)+ " oder +-" + str(0.04443156295496722) + " (aus der Rauschmessung)"+ " oder +-" +" DIGITALISIERUNGSFEHLER")
 print("T bei T=100°C = " + str(T100)+" +-"+str(sigmaT100)+ " oder +-" + str(0.04443156295496722) + " (aus der Rauschmessung)"+ " oder +-" +" DIGITALISIERUNGSFEHLER")
 
-a,ea,b,eb,chiq,corr = anal.lineare_regression_xy(np.array([0, 100])-50, np.array([T0, T100])-50, np.ones(2), np.ones(2))
+a,ea,b,eb,chiq,corr = anal.lineare_regression_xy(np.array([T0, T100])-50, np.array([0, 100])-50, np.ones(2), np.ones(2))
 print("Damit ergibt sich die Korrekturgleichung:")
 print("T_real = "+ str(a)+"*(T_gemessen-50) + " + str(b)+" + 50")
