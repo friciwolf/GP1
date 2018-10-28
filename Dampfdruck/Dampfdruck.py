@@ -4,12 +4,6 @@
 Created on Sat Oct 27 16:08:54 2018
 
 @author: Mate
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
->>>>>>> 8791f053e71a070377bb6fcd68c1266330aa5963
-
 hello world - asdgasd
 """
 import matplotlib.pyplot as plt
