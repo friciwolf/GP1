@@ -4,7 +4,6 @@
 Created on Sat Oct 27 17:24:44 2018
 
 @author: Mate
-
 """
 import matplotlib.pyplot as plt
 import numpy as np
@@ -22,28 +21,34 @@ for line in f:
     p.append(float(data[4]))
     
 print("Temperaturverteilung") #vllt Poisson???
-print("s=" + str(np.std(T))+", m="+str(np.average(T)))
-plt.hist(T)
+print("s=" + str(np.std(T))+", m="+str(np.average(T))+", err="+str(np.std(T)/np.sqrt(len(T))))
+plt.hist(T, normed=True)
 x=np.arange(min(T), max(T), 0.001)
-plt.plot(x, gauss(x, np.average(T), np.std(T))*100) #TODO: Falsche Verteilung??? Faktor 100 daneben!!
-plt.hist(T, normed=True, bins=np.arange(min(T), max(T), 0.5))
-plt.title("Temperaturverteilung - falsch, Gauss mit Faktor 100!\n s=" + str(np.std(T))+", m="+str(np.average(T)))
-plt.show()
+plt.plot(x, gauss(x, np.average(T), np.std(T)))
+plt.title(u"Temperaturverteilung+Gauß\n s=" + str(np.std(T))+", m="+str(np.average(T)))
+plt.xlabel(u"T/°C")
+plt.ylabel('rel')
+plt.figure()
 
 plt.plot(t, T)
 plt.title("Rauschmessung Raumtemperatur")
-plt.show()
+plt.ylabel(u"T/°C")
+plt.xlabel('time/s')
+plt.figure()
 
 print("==="*20)
 print("Druckverteilung") #vllt Poisson???
-print("s=" + str(np.std(p))+", m="+str(np.average(p)))
+print("s=" + str(np.std(p))+", m="+str(np.average(p))+", err="+str(np.std(p)/np.sqrt(len(p))))
 
 x=np.arange(min(p), max(p), 0.01)
 plt.plot(x, gauss(x, np.average(p), np.std(p)))
 plt.hist(p, normed=True, bins=np.arange(984, 986, 0.25))
-plt.title("Druckverteilung \n s=" + str(np.std(p))+", m="+str(np.average(p)))
-plt.show()
+plt.title(u"Druckverteilung+Gauß \n s=" + str(np.std(p))+", m="+str(np.average(p)))
+plt.xlabel(u"p/hPa")
+plt.ylabel('rel')
+plt.figure()
 
 plt.plot(t, p)
+plt.ylabel(u"p/hPa")
+plt.xlabel('time/s')
 plt.title("Rauschmessung Atmosphärendruck")
-plt.show()
