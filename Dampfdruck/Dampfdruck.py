@@ -31,17 +31,17 @@ T = T_real(T)
 T = T+273.15
 #Plots
 
-plt.plot(t, T-273.15)
+plt.plot(t, T, color='red')
 plt.title("Abkühlung des Kolbens")
 plt.ylabel("Temperatur in K")
 plt.xlabel("Zeit in s")
-plt.show()
+plt.figure()
 
 plt.plot(t, p)
 plt.title("Dampfdruckänderung im Kolben")
-plt.ylabel("Druck in Pa")
+plt.ylabel("Druck in hPa")
 plt.xlabel("Zeit in s")
-plt.show()
+plt.figure()
 
 L_Werte=[[],[]]
 T_Werte=[[],[]]
@@ -58,12 +58,14 @@ L,eL,b,eb,chiq,corr = anal.lineare_regression_xy(np.array(T_Werte[0]), np.array(
 plt.plot(T_Werte[0], L_Werte[0])
 x=np.arange(min(T_Werte[0])-2,max(T_Werte[0])+2,0.01)
 plt.plot(x, L*x+b)
-plt.title("Lamda in Abhängigkeit von T")
-plt.show()
+plt.title("Verdampfungsenthalpie in Abhängigkeit von T")
+plt.xlabel('Temperatur in K')
+plt.ylabel('Enthalpie in J/mol')
+plt.figure()
 print("Tabelle von Werten")
-print("L || T")
+print("    L     ||        T   ")
 for i in range(1,11):
-    print(str(T_Werte[0][i-1]) + " || " + str(L*T_Werte[0][i-1]+b))
+    print('{:.5f} || {}'.format(T_Werte[0][i-1],L*T_Werte[0][i-1]+b))
 
 x=np.power(T[:N], -1)-np.power(T[0], -1)
 y=(-np.log(p)[:N]+np.log(p[0]))*R
