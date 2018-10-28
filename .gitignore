@@ -4,3 +4,6 @@ Beispiele/.DS_Store
 Dampfdruck/Protokoll.aux
 Dampfdruck/Protokoll.log
 Dampfdruck/Protokoll.synctex.gz
+*.aux
+*.log
+*.gz
