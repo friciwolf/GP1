@@ -4,7 +4,12 @@
 Created on Sat Oct 27 16:08:54 2018
 
 @author: Mate
+<<<<<<< HEAD
 Test
+=======
+
+hello world - asdgasd
+>>>>>>> 5afdde3bdc25e8da200124c216554f934fde3d22
 """
 import matplotlib.pyplot as plt
 import numpy as np
