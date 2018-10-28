@@ -4,11 +4,8 @@
 Created on Sat Oct 27 16:08:54 2018
 
 @author: Mate
-<<<<<<< HEAD
-hello world - asdgasd
-=======
 
->>>>>>> b3b037678d859a56fa3106ca951174999559250a
+hello world - asdgasd
 """
 import matplotlib.pyplot as plt
 import numpy as np
