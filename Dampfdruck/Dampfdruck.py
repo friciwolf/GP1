@@ -4,7 +4,6 @@
 Created on Sat Oct 27 16:08:54 2018
 
 @author: Mate
-hello world - asdgasd
 """
 import matplotlib.pyplot as plt
 import numpy as np
