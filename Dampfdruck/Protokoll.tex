@@ -6,6 +6,7 @@
 \usepackage{geometry}
 \usepackage{color}
 \usepackage{siunitx} %\SI{44.9}{\celsius}
+\usepackage[german]{babel}
 %\usepackage{circuitikz} für Stromkreise
 \long\def\/*#1*/{} %Kommentare mit \/* ---- */
 \geometry{
@@ -23,6 +24,7 @@
 	\begin{center}
 		\section*{Versuchsbericht}
 	\end{center}
+\tableofcontents
 \section{Versuchsziele}
 Ziel des Versuchs war es durch die Messung der Dampfdruckkurve von Wasser, also den Druck in Abhängigkeit von der Temperatur während der Abkühlphase bei festem Volumen, die molare Verdampfungsenthalpie von Wasser zu bestimmen. Der Dampfdruck ist ein Gleichgewichtsdruck, der sich einstellt, wenn sowohl die flüssige Phase, als auch die gasförmige Phase im Gleichgewicht sind bei hinreichender Größe des Volumens. Die molare Verdampfungsenthalpie ist die Wärme, die ein Mol Flüssigkeit aufnimmt, um in die Gasphase übergehen zu können, und wird auch latente Wärme genannt.
 Theoretische Grundlagen
@@ -59,33 +61,32 @@ Einstellungen: Messung alle 10ms, 16000 mal $\widehat{=}$ 3min
 
 \section {Kalibrierung des Thermosensors}  {\color{red}[Sollen wir die Gasdichtigkeit vorziehen, um T0 und T100 in einem Punkt beschreiben zu können oder so tun, als wäre das Thermometerbei der Gasdichtigkeitsmessung im Kolben gewesen, und wir hätten davor T0 gemessen, weil am Aufbau nichts mehr verändert werden sollte?]}
 
-Die Temperatur in Eiswasser wird zunächst gemessen, deren theoretischer Wert 0$\deg$C ist. Dazu wird Eis mit ein wenig Wasser gemischt und gewartet, bis ein Temperaturausgleich stattgefunden hat, der, solange noch festes Eis vorhanden ist, bei 0$\deg$C sein sollte, und die 7s Ansprechzeit, die der Sensor nach Angaben des Herstellers hat, verstrichen ist. Später, wenn das Wasser siedet, wird noch dessen Siedetemperatur bestimmt, die 100$\deg$C sein sollte. Mit einem linearen Modell kann man nun $T_real(T_gemessen)$ bestimmen.
+Die Temperatur in Eiswasser wird zunächst gemessen, deren theoretischer Wert \SI{0}{\celsius} ist. Dazu wird Eis mit ein wenig Wasser gemischt und gewartet, bis ein Temperaturausgleich stattgefunden hat, der, solange noch festes Eis vorhanden ist, bei \SI{0}{\celsius} sein sollte, und die 7s Ansprechzeit, die der Sensor nach Angaben des Herstellers hat, verstrichen ist. Später, wenn das Wasser siedet, wird noch dessen Siedetemperatur bestimmt, die \SI{100}{\celsius} sein sollte. Mit einem linearen Modell kann man nun $T_{real}(T_{gemessen})$ bestimmen.
 Einstellungen: Messung alle 100ms, insgesamt 3 Minuten lang.
 
-3.	Gasdichtigkeit
-Um festzustellen, wie gasdicht der Aufbau ist, wird mit der Handpumpe im Kolben ein Unterdruck von etwa 190hPa absolut erzeugt. Dann wird über einen Zeitraum von 10 Minuten der Druck gemessen, um hinterher mit Hilfe einer linearen Regression die Leckrate bestimmen zu können, die nicht höher sein sollte als 0.2 mbar/min $[sollen wir 0.07 schreiben?]$, um zu gewährleisten, dass die gemessenen Druckwerte während der Hauptmessung nicht zu stark verfälscht werden. 
-Einstellungen: Messung alle 100ms, insgesamt 3 Minuten lang.
+\section{Gasdichtigkeit}
+Um festzustellen, wie gasdicht der Aufbau ist, wird mit der Handpumpe im Kolben ein Unterdruck von etwa 190 hPa absolut erzeugt. Dann wird über einen Zeitraum von 10 Minuten der Druck gemessen, um hinterher mit Hilfe einer linearen Regression die Leckrate bestimmen zu können, die nicht höher sein sollte als 0.2 mbar/min {\color{red}[sollen wir 0.07 schreiben?]}, um zu gewährleisten, dass die gemessenen Druckwerte während der Hauptmessung nicht zu stark verfälscht werden. 
+Einstellungen: Messung alle 100 ms, insgesamt 3 Minuten lang.
 
 
-4.	Hauptmessung
-Durch den zuvor erzeugten Unterdruck kann über den Dreiwegehahn Wasser in den Rundkolben gesaugt werden, bis dieser etwa halb voll ist. Mit Hilfe des Heizpilzes wird das Wasser bei Kontakt zur Umgebung zum Kochen gebracht und so lange kochen gelassen, bis der entstehende Wasserdampf sämtliche Restluft aus dem Rundkolben gedrückt hat. Dies prüft man, indem man den Verbindungsschlauch zur Umgebung in ein Wasserbad hält. Der Wasserdampf kondensiert sofort, das heißt, solange Blasen aufsteigen, befindet sich noch Luft im Rundkolben, deren Partialdruck die Messung verfälschen würde. In dieser Zeit wird auch die Kalibrierung bei 100$\deg$C durchgeführt. Schließlich wird der Heizpilz schnell mit dem Laborheber heruntergefahren und die Messung des Dampfdrucks und der Gastemperatur gestartet. Später sollen die Ergebnisse p und T in der Form $ln(p/p_0)$ gegen $1/T-1/T_0$ aufgetragen werden, um aus der Steigung des Graphen $\Lambda$ zu bestimmen.
-Einstellungen: Messung alle 100ms, unbegrenzte Messdauer (Ende bei t???)
+\section{Hauptmessung}
+Durch den zuvor erzeugten Unterdruck kann über den Dreiwegehahn Wasser in den Rundkolben gesaugt werden, bis dieser etwa halb voll ist. Mit Hilfe des Heizpilzes wird das Wasser bei Kontakt zur Umgebung zum Kochen gebracht und so lange kochen gelassen, bis der entstehende Wasserdampf sämtliche Restluft aus dem Rundkolben gedrückt hat. Dies prüft man, indem man den Verbindungsschlauch zur Umgebung in ein Wasserbad hält. Der Wasserdampf kondensiert sofort, das heißt, solange Blasen aufsteigen, befindet sich noch Luft im Rundkolben, deren Partialdruck die Messung verfälschen würde. In dieser Zeit wird auch die Kalibrierung bei \SI{100}{\celsius} durchgeführt. Schließlich wird der Heizpilz schnell mit dem Laborheber heruntergefahren und die Messung des Dampfdrucks und der Gastemperatur gestartet. Später sollen die Ergebnisse p und T in der Form $\ln(p/p_0)$ gegen $1/T-1/T_0$ aufgetragen werden, um aus der Steigung des Graphen $\Lambda$ zu bestimmen.
+Einstellungen: Messung alle 100 ms, unbegrenzte Messdauer {\color{red}(Ende bei t???)}\\
 
-5.	Gasdichtigkeit 2
+\section{Gasdichtigkeit 2}
 
 Nach der eigentlichen Versuchsdurchführung kann eine weitere Gasdichtigkeitsmessung wie 3. Durchgeführt werden, um zu gewährleisten, dass sich die Leckrate am Aufbau nicht verändert hat. Diese entfällt aber bei uns, da keine Zeit mehr ist.
 
-Auswertung
-$ - 7s Ansprechzeit?$
-{\color{red} T100 wirklich 100 Grad bei unserem Druck?}
-1.	Rauschmessung
+\section{Auswertung}
+{\color{red}- 7s Ansprechzeit?}\\
+{\color{red}T100 wirklich 100 Grad bei unserem Druck?}\\
+\section{Rauschmessung}
 Die Rauschmessung umfasst 3326 Datenpunkte, bei denen der Temperatursensor in Ruhe die als konstant angenommene Raumtemperatur gemessen hat, der Absolutdrucksensor zugleich den konstanten Umgebungsdruck. Dabei soll die Streuung der Werte um den Mittelwert erarbeitet werden, um den statistischen Fehler für alle folgenden Messungen abschätzen zu können.
 Die Ergebnisse sind wie folgt:
 \begin{figure}
 	2 Abb.s
 \end{figure}
-Die Temperaturmessung ergab einen Mittelwert von etwa 25.1580$\deg$C mit einer Standardabweichung von 0.0444$\deg$C. {\color{red}[Wie viele Nachkommastellen?]} Daraus ergibt sich ein statistischer Fehler von 0.00077$\deg$. (vgl. Abb.X)
-Die Druckmessung lieferte einen Mittelwert von 984.796 hPa mit einer Standardabweichung von 0.184 hPa und einem Fehler von 0.00319 hPa. (vgl. Abb.X)
-2.
+Die Temperaturmessung ergab einen Mittelwert von etwa \SI{25.1580}{\celsius} mit einer Standardabweichung von \SI{0.0444}{\celsius}. {\color{red}[Wie viele Nachkommastellen?]} Daraus ergibt sich ein statistischer Fehler von \SI{0.00077}{\celsius}. {\color{red}(vgl. Abb.X)}
+Die Druckmessung lieferte einen Mittelwert von 984.796 hPa mit einer Standardabweichung von 0.184 hPa und einem Fehler von 0.00319 hPa. {\color{red}(vgl. Abb.X)}
 
 \end{document}
