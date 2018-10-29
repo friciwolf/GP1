@@ -15,8 +15,10 @@ Bis schließlich die Clausius-Clapeyron-Gleichung
 Daraus kann man durch Integrieren einen Zusammenhang zwischen dem Druck p und der Temperatur T herauslesen, der über Naturkonstanten und die molare Verdampfungsenthalpie \Lambda gegeben ist. 
 Versuchsaufbau
 Ein Rundkolben, der an einem Stativ befestigt ist, befindet sich über einem mit einem Laborheber in der Höhe einstellbaren Heizpilz. Der Kolben hat einen abgedichteten Einlass für den Temperatursensor und oben wird mit dichten Schläuchen ein Drucksensor (Absolutdrucksensor S (524065)) angebracht und ebenso die Zuleitung zu einem Dreiwegehahn gelegt, von dem ein weiteres Ende mit einer Handpumpe verbunden wird. Ein Ausgang ist mit der Umgebung verbunden. (vgl. Abb. 1) Ein Becherglas mit Eiswasser und ein Becherglas mit unbearbeitetem Wasser stehen bereit. Zur Datensammlung und Erstauswertung wird ein Cassy-System mit den zugehörigen Sensoren verwendet.
+
 Versuchsdurchführung
-Der Temperatursensor ist auf ein Intervall von -20°C-120°C eingestellt, der Drucksensor auf ein Intervall von 0hPa-1500hPa
+Der Temperatursensor ist auf ein Intervall von -20°C-120°C eingestellt, der Drucksensor auf ein Intervall von 0hPa-1500hPa.
+
 1.	Rauschmessung
 Bei Raumtemperatur und Umgebungsdruck findet eine „Leerlauf“-Messung statt, um den statistischen Fehler der Messgeräte gut abschätzen zu können. Dabei wird ein kurzes Zeitintervall bei hoher Messrate ausgewertet. 
 Einstellungen: Messung alle 10ms, 16000mal=>3min
@@ -39,5 +41,12 @@ Einstellungen: Messung alle 100ms, unbegrenzte Messdauer (Ende bei #?)
 Nach der eigentlichen Versuchsdurchführung kann eine weitere Gasdichtigkeitsmessung wie 3. Durchgeführt werden, um zu gewährleisten, dass sich die Leckrate am Aufbau nicht verändert hat. Diese entfällt aber bei uns, da keine Zeit mehr ist.
 
 Auswertung
+1.	Rauschmessung
+Die Rauschmessung umfasst 3326 Datenpunkte, bei denen der Temperatursensor in Ruhe die als konstant angenommene Raumtemperatur gemessen hat, der Absolutdrucksensor zugleich den konstanten Umgebungsdruck. Dabei soll die Streuung der Werte um den Mittelwert erarbeitet werden, um den statistischen Fehler für alle folgenden Messungen abschätzen zu können.
+Die Ergebnisse sind wie folgt:
+#2 Abb.s
+Die Temperaturmessung ergab einen Mittelwert von etwa 25.1580°C mit einer Standardabweichung von 0.0444°C. #[Wie viele Nachkommastellen?] Daraus ergibt sich ein statistischer Fehler von 0.00077°C. (vgl. Abb.X)
+Die Druckmessung lieferte einen Mittelwert von 984.796 hPa mit einer Standardabweichung von 0.184 hPa und einem Fehler von 0.00319 hPa. (vgl. Abb.X)
+2.	
 # - 7s Ansprechzeit?
 # T100 wirklich 100 Grad bei unserem Druck?
