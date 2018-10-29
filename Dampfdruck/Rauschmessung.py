@@ -28,7 +28,7 @@ plt.title(u"Rauschmessung bei Raumtemperatur\n $\sigma$=" + str(np.std(T))+" ; $
 plt.xlabel(u"T/°C")
 plt.ylabel('Relatives Vorkommen')
 plt.savefig("Images/RauschmessungRT_T_histo.jpg")
-plt.show()
+plt.figure()
 
 plt.plot(t, T)
 plt.title("Rauschmessung bei Raumtemperatur")
