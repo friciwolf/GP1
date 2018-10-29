@@ -4,6 +4,8 @@
 \usepackage{amssymb}
 \usepackage[utf8]{inputenc}
 \usepackage{geometry}
+\usepackage{color}
+\usepackage{siunitx} %\SI{44.9}{\celsius}
 %\usepackage{circuitikz} für Stromkreise
 \long\def\/*#1*/{} %Kommentare mit \/* ---- */
 \geometry{
@@ -21,15 +23,14 @@
 	\begin{center}
 		\section*{Versuchsbericht}
 	\end{center}
-\section{Einführung}
-\section{Fehlerrechnung}
-Zuerst wurde eine Rauschmessung durchgeführt, um die Messunsicherheiten abschätzen zu können.
-
 \section{Versuchsziele}
 Ziel des Versuchs war es durch die Messung der Dampfdruckkurve von Wasser, also den Druck in Abhängigkeit von der Temperatur während der Abkühlphase bei festem Volumen, die molare Verdampfungsenthalpie von Wasser zu bestimmen. Der Dampfdruck ist ein Gleichgewichtsdruck, der sich einstellt, wenn sowohl die flüssige Phase, als auch die gasförmige Phase im Gleichgewicht sind bei hinreichender Größe des Volumens. Die molare Verdampfungsenthalpie ist die Wärme, die ein Mol Flüssigkeit aufnimmt, um in die Gasphase übergehen zu können, und wird auch latente Wärme genannt.
 Theoretische Grundlagen
 Hintergrund ist die Clausius-Clapeyron-Gleichung, die aus den ersten beiden Hauptsätzen der Thermodynamik folgt.
 Der erste Hauptsatz behandelt dabei die Energieerhaltung:
+\begin{equation}
+	Formel
+\end{equation}
 
 Der zweite die Umwandelbarkeit von verschiedenen Energieformen ineinander, was oft mit Hilfe der Entropie formuliert wird:
 \begin{equation} 
@@ -48,15 +49,16 @@ Bis schließlich die Clausius-Clapeyron-Gleichung
  	 Formel 
  \end{equation} folgt.
 Daraus kann man durch Integrieren einen Zusammenhang zwischen dem Druck p und der Temperatur T herauslesen, der über Naturkonstanten und die molare Verdampfungsenthalpie $\Lambda$ gegeben ist. 
-Versuchsaufbau
-Ein Rundkolben, der an einem Stativ befestigt ist, befindet sich über einem mit einem Laborheber in der Höhe einstellbaren Heizpilz. Der Kolben hat einen abgedichteten Einlass für den Temperatursensor und oben wird mit dichten Schläuchen ein Drucksensor (Absolutdrucksensor S (524065)) angebracht und ebenso die Zuleitung zu einem Dreiwegehahn gelegt, von dem ein weiteres Ende mit einer Handpumpe verbunden wird. Ein Ausgang ist mit der Umgebung verbunden. (vgl. Abb. 1) Ein Becherglas mit Eiswasser und ein Becherglas mit unbearbeitetem Wasser stehen bereit. Zur Datensammlung und Erstauswertung wird ein Cassy-System mit den zugehörigen Sensoren verwendet.
+\section{Versuchsaufbau}
+Ein Rundkolben, der an einem Stativ befestigt ist, befindet sich über einem mit einem Laborheber in der Höhe einstellbaren Heizpilz. Der Kolben hat einen abgedichteten Einlass für den Temperatursensor und oben wird mit dichten Schläuchen ein Drucksensor (Absolutdrucksensor S (524065)) angebracht und ebenso die Zuleitung zu einem Dreiwegehahn gelegt, von dem ein weiteres Ende mit einer Handpumpe verbunden wird. Ein Ausgang ist mit der Umgebung verbunden. {\color{red}(vgl. Abb. 1)} Ein Becherglas mit Eiswasser und ein Becherglas mit unbearbeitetem Wasser stehen bereit. Zur Datensammlung und Erstauswertung wird ein Cassy-System mit den zugehörigen Sensoren verwendet.
 Versuchsdurchführung
-Der Temperatursensor ist auf ein Intervall von -20$\deg$C-120$\deg$C eingestellt, der Drucksensor auf ein Intervall von 0hPa-1500hPa
-1.	Rauschmessung
+Der Temperatursensor ist auf ein Intervall von \SI{-20}{\celsius} bis \SI{120}{\celsius} eingestellt, der Drucksensor auf ein Intervall von \SI{0}{\hecto\pascal}-\SI{1500}{\hecto\pascal}
+\section{Rauschmessung}
 Bei Raumtemperatur und Umgebungsdruck findet eine 'Leerlauf'-Messung statt, um den statistischen Fehler der Messgeräte gut abschätzen zu können. Dabei wird ein kurzes Zeitintervall bei hoher Messrate ausgewertet. 
-Einstellungen: Messung alle 10ms, 16000mal=>3min
+Einstellungen: Messung alle 10ms, 16000 mal $\widehat{=}$ 3min
 
-2.	Kalibrierung des Thermosensors  \*[Sollen wir die Gasdichtigkeit vorziehen, um T0 und T100 in einem Punkt beschreiben zu können oder so tun, als wäre das Thermometerbei der Gasdichtigkeitsmessung im Kolben gewesen, und wir hätten davor T0 gemessen, weil am Aufbau nichts mehr verändert werden sollte?]*\
+\section {Kalibrierung des Thermosensors}  {\color{red}[Sollen wir die Gasdichtigkeit vorziehen, um T0 und T100 in einem Punkt beschreiben zu können oder so tun, als wäre das Thermometerbei der Gasdichtigkeitsmessung im Kolben gewesen, und wir hätten davor T0 gemessen, weil am Aufbau nichts mehr verändert werden sollte?]}
+
 Die Temperatur in Eiswasser wird zunächst gemessen, deren theoretischer Wert 0$\deg$C ist. Dazu wird Eis mit ein wenig Wasser gemischt und gewartet, bis ein Temperaturausgleich stattgefunden hat, der, solange noch festes Eis vorhanden ist, bei 0$\deg$C sein sollte, und die 7s Ansprechzeit, die der Sensor nach Angaben des Herstellers hat, verstrichen ist. Später, wenn das Wasser siedet, wird noch dessen Siedetemperatur bestimmt, die 100$\deg$C sein sollte. Mit einem linearen Modell kann man nun $T_real(T_gemessen)$ bestimmen.
 Einstellungen: Messung alle 100ms, insgesamt 3 Minuten lang.
 
@@ -74,8 +76,16 @@ Einstellungen: Messung alle 100ms, unbegrenzte Messdauer (Ende bei t???)
 Nach der eigentlichen Versuchsdurchführung kann eine weitere Gasdichtigkeitsmessung wie 3. Durchgeführt werden, um zu gewährleisten, dass sich die Leckrate am Aufbau nicht verändert hat. Diese entfällt aber bei uns, da keine Zeit mehr ist.
 
 Auswertung
-\/* - 7s Ansprechzeit?
-# T100 wirklich 100 Grad bei unserem Druck?*/
-
+$ - 7s Ansprechzeit?$
+{\color{red} T100 wirklich 100 Grad bei unserem Druck?}
+1.	Rauschmessung
+Die Rauschmessung umfasst 3326 Datenpunkte, bei denen der Temperatursensor in Ruhe die als konstant angenommene Raumtemperatur gemessen hat, der Absolutdrucksensor zugleich den konstanten Umgebungsdruck. Dabei soll die Streuung der Werte um den Mittelwert erarbeitet werden, um den statistischen Fehler für alle folgenden Messungen abschätzen zu können.
+Die Ergebnisse sind wie folgt:
+\begin{figure}
+	2 Abb.s
+\end{figure}
+Die Temperaturmessung ergab einen Mittelwert von etwa 25.1580$\deg$C mit einer Standardabweichung von 0.0444$\deg$C. {\color{red}[Wie viele Nachkommastellen?]} Daraus ergibt sich ein statistischer Fehler von 0.00077$\deg$. (vgl. Abb.X)
+Die Druckmessung lieferte einen Mittelwert von 984.796 hPa mit einer Standardabweichung von 0.184 hPa und einem Fehler von 0.00319 hPa. (vgl. Abb.X)
+2.
 
 \end{document}
