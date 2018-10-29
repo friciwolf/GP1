@@ -20,7 +20,7 @@ T = data.messung(1).datenreihe("&J_A11").werte
 p = data.messung(1).datenreihe("p_B1").werte
 
 print("Temperaturverteilung")
-print("m=" + str(np.average(T))+" ; s="+str(np.std(T))+", err="+str(np.std(T)))
+print("m=" + str(np.average(T))+" ; s="+str(np.std(T))+", err="+str(np.std(T)/np.sqrt(len(T))))
 plt.hist(T,7, normed=True)
 x=np.arange(np.average(T)-0.25, np.average(T)+0.25, 0.001)
 plt.plot(x, gauss(x, np.average(T), np.std(T)))
@@ -45,7 +45,7 @@ print("m=" + str(np.average(p))+", s="+str(np.std(p))+", err="+str(np.std(p)/np.
 x=np.arange(min(p), max(p), 0.01)
 plt.hist(p, 3, normed=True)#, bins=np.arange(984, 986, 0.25))
 plt.plot(x, gauss(x, np.average(p), np.std(p)))
-plt.title(u"Rauschmessung Druck \n s=" + str(np.std(p))+", m="+str(np.average(p)))
+plt.title(u"Rauschmessung Druck \n $\sigma$=" + str(np.std(p))+"; $\mu$="+str(np.average(p)))
 plt.xlabel(u"Druck/hPa")
 plt.ylabel('Relatives Vorkommen')
 plt.savefig("Images/RauschmessungRT_p_histo.jpg")
