@@ -74,7 +74,7 @@ plt.ylabel(u'Temperatur/°C')
 plt.savefig("Images/Kalib_T_0.pdf")
 plt.figure()
 
-x=np.arange(min(T), max(T), 0.01)
+x=np.arange(np.average(T)-0.4, np.average(T)+0.4, 0.01)
 plt.hist(T, normed=True)
 plt.plot(x, gauss(x, np.average(T), np.std(T)))
 plt.title("Streuung der gemessenen Temperaturwerte bei T=0°C\n $\sigma_{\mu}$=" + str(round_up(sigmaT0,1))+"°C, $\mu$="+str(np.round(T0,1))+"°C (ab t=200 s berechnet)")
