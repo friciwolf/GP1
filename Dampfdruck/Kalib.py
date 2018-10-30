@@ -132,7 +132,7 @@ plt.title("Temperatur bei T=100°C\n $\mu$ ="+ str(np.round(T100,1))+" °C, " + 
 plt.axvline(x=24, color="red", linestyle = "--")
 plt.axvline(x=150, color="red", linestyle = "--")
 plt.gcf().subplots_adjust(top=0.8)
-plt.xlabel('time/s')
+plt.xlabel('Zeit/s')
 plt.ylabel(u'T/°C')
 plt.savefig("Images/Kalib_T_100.pdf")
 plt.figure()
