@@ -24,7 +24,7 @@ T = data.messung(1).datenreihe("&J_A11").werte
 p = data.messung(1).datenreihe("p_B1").werte
 
 print("Temperaturverteilung")
-print("m=" + str(np.round(np.average(T),1))+" ; s="+str(np.round(np.std(T),1))+", err="+str(round_up(np.std(T)/np.sqrt(len(T)),1)))
+print("m=" + str(np.round(np.average(T),1))+" °C , s="+str(np.round(np.std(T),1))+" °C , err="+str(round_up(np.std(T)/np.sqrt(len(T)),1))+" °C")
 plt.hist(T,7, normed=True)
 x=np.arange(np.average(T)-0.25, np.average(T)+0.25, 0.001)
 plt.plot(x, gauss(x, np.average(T), np.std(T)))
@@ -44,7 +44,7 @@ plt.figure()
 
 print("==="*20)
 print("Druckverteilung") #vllt Poisson???
-print("m=" + str(np.average(p))+", s="+str(np.std(p))+", err="+str(np.std(p)/np.sqrt(len(p))))
+print("m=" + str(np.round(np.average(p),2))+" hPa, s="+str(np.round(np.std(p),2))+" hPa, err="+str(round_up(np.std(p)/np.sqrt(len(p)),2))+ " hPa")
 
 x=np.arange(min(p), max(p), 0.01)
 plt.hist(p, 3, normed=True)#, bins=np.arange(984, 986, 0.25))
