@@ -36,6 +36,7 @@ def round_up(x, digits): #für obere Abschätzung der Fehler
     
 def T_th(T_gem, a, b, sT_gem, sa, sb):
     T = (T_gem-b-50)/a + 50
+    #Gauss auf T_th = (T_gem-b-50)/a + 50) bzgl. a, b, T_gem:
     sT = np.sqrt((T_gem/a**2)**2 * sa**2 + a**-2 * sb**2 + a**-2 * sT_gem**2)
     return np.array([T, sT])
 
@@ -44,14 +45,12 @@ data = cassy.CassyDaten("Kalibrierung 1 + Dichtigkeit.lab")
 t = data.messung(1).datenreihe("t").werte
 T = data.messung(1).datenreihe("&J_A11").werte
 p = data.messung(1).datenreihe("p_B1").werte
-#Fehler ausrechnen!!
-sigmat=np.std(t)
 sigmaT=np.std(T)
 sigmap=np.sqrt(0.01**2+0.75**2)
-errt=sigmat/np.sqrt(len(t))
 errT=sigmaT/np.sqrt(len(T))
 errp=sigmap
-####Temperaturkalibrierung:
+
+#Temperaturkalibrierung:
 
 #T=0°C
 N_Tslice=2000
@@ -63,7 +62,7 @@ sigmaT0 = np.std(T)/len(T)
 print("s=" + str(round_up(sigmaT0,1))+" °C, m="+str(np.round(T0,1))+" °C")
 plt.title("Temperatur bei T=0°C\n $\sigma_{\mu}$=" + str(round_up(sigmaT0,1))+"°C, $\mu$="+str(np.round(T0,1))+"°C (ab t=200 s berechnet)")
 plt.plot(np.arange(min(t), max(t), 0.1),np.ones(len(t))*T0, color="green")
-#Rückkehr an die ursprüngliche Daten...
+#Rückkehr an die ursprüngliche Daten wegen des plots...
 T = data.messung(1).datenreihe("&J_A11").werte
 plt.plot(t, T)
 T=T[N_Tslice:]
@@ -148,8 +147,8 @@ plt.savefig("Images/Kalib_T_histo_100.pdf")
 plt.figure()
 
 print("Ergebnis auf die Korrekturgleichung:")
-#Die Fehler kommen aus der Rauschmessung, aus der Fluktuation der Werte hier und aus dem Fehler des Geräts:
-#sigmaTn_tot**2 = sigmaT_Rausch**2 + sigmaT_Gerät**2 + sigmaT0**2
+#Die Fehler kommen aus der Rauschmessung, aus der Fluktuation der Werte bei Temperatur T und aus dem Fehler des Geräts:
+#sigmaT_tot**2 = sigmaT_Rausch**2 + sigmaT_Gerät**2 + sigmaT0**2
 sigmaT0_tot = np.sqrt(sigmaT_Rausch**2+sigmaT_Gerät_kl_70**2+sigmaT0**2)
 sigmaT100_tot = np.sqrt(sigmaT_Rausch**2+sigmaT_Gerät_gr_70**2+sigmaT100**2)
 print("T bei T=0°C : T_gem = " + str(np.round(T0,1))+" °C +-"+str(round_up(sigmaT0_tot,1)) + " °C")
