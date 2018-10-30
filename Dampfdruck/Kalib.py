@@ -14,7 +14,7 @@ import praktikum.analyse as ana
 def gauss(x, m, s):
     return(np.power(scipy.pi*2*s**2, -0.5)*np.exp(-(x-m)**2/(2*s**2)))
 
-t, p, T = [], [], [] #Temperatur in °C!!!
+t, p, T = [], [], [] #Temperatur in °C!
 data = cassy.CassyDaten("Kalibrierung 1 + Dichtigkeit.lab")
 t = data.messung(1).datenreihe("t").werte
 T = data.messung(1).datenreihe("&J_A11").werte
