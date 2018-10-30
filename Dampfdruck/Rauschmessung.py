@@ -13,7 +13,7 @@ import praktikum.cassy as cassy
 def gauss(x, m, s):
     return(np.power(scipy.pi*2*s**2, -0.5)*np.exp(-(x-m)**2/(2*s**2)))
 
-def round_up(x, digits): #obere Abschätzung der Fehler
+def round_up(x, digits): #für obere Abschätzung der Fehler
     if digits!=0: return np.ceil(x*10**digits)/10**digits
     else: return np.ceil(x)
 
@@ -35,7 +35,7 @@ plt.savefig("Images/RauschmessungRT_T_histo.jpg")
 plt.figure()
 
 plt.plot(t, T)
-plt.title("Rauschmessung bei Raumtemperatur")
+plt.title(u"Rauschmessung bei Raumtemperatur\n $\sigma$=" + str(np.round(np.std(T),1))+"$^{\circ}C$, $\mu$="+str(np.round(np.average(T),1))+ "$^{\circ}C$, $\sigma_{\mu} = $"+str(round_up(np.std(T)/np.sqrt(len(T)),1))+"$^{\circ}C$")
 plt.ylabel(u"T/°C")
 plt.xlabel('Zeit/s')
 plt.plot(t,np.array([np.mean(T)]*len(t)),color='green')
