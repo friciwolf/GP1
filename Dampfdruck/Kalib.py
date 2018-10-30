@@ -157,7 +157,6 @@ print("T bei T=100°C : T_gem = " + str(np.round(T100,1))+" °C +-"+str(round_up
       
 #Führe lineare Reg. bzgl. T_gem durch, dann stelle auf T_th um, weil wir nur Fehler auf y angeben können...
 a,ea,b,eb,chiq,corr = ana.lineare_regression(np.array([0, 100])-50,np.array([T0, T100])-50, np.array([sigmaT0_tot,sigmaT100_tot]))
-#TODO: Fehler einfügen
 print("\nDamit ergibt sich die Korrekturgleichung:")
 print("T_gem = "+ str(a)+"*(T_th-50) + " + str(b)+" + 50")
 print("oder auf T_th umgestellt:")
