@@ -3,6 +3,7 @@
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage[utf8]{inputenc}
+\usepackage{graphicx}
 \usepackage{geometry}
 \usepackage{color}
 \usepackage{siunitx} %\SI{44.9}{\celsius}
@@ -18,11 +19,12 @@
 }
 \pagenumbering{arabic}
 
-\title{Versuch XYZ}
-
+\title{Messung der Dampfdruckkurve von Wasser}
+\author{Máté Farkas, Patrick Schillings}
 \begin{document}
 	\begin{center}
-		\section*{Versuchsbericht}
+		\part*{Versuchsbericht}
+		\newpage
 	\end{center}
 \tableofcontents
 \section{Versuchsziele}
@@ -61,7 +63,22 @@ Daraus kann man durch Integrieren einen Zusammenhang zwischen dem Druck p und de
 \end{equation}
 Mit der idealen Gasgleichung $pV=\nu RT$ und der Gaskonstanten R.
 \section{Versuchsaufbau}
-Ein Rundkolben, der an einem Stativ befestigt ist, befindet sich über einem mit einem Laborheber in der Höhe einstellbaren Heizpilz. Der Kolben hat einen abgedichteten Einlass für den Temperatursensor und oben wird mit dichten Schläuchen ein Drucksensor (Absolutdrucksensor S (524065)) angebracht und ebenso die Zuleitung zu einem Dreiwegehahn gelegt, von dem ein weiteres Ende mit einer Handpumpe verbunden wird. Ein Ausgang ist mit der Umgebung verbunden. {\color{red}(vgl. Abb. 1)} Ein Becherglas mit Eiswasser und ein Becherglas mit unbearbeitetem Wasser stehen bereit. Zur Datensammlung und Erstauswertung wird ein Cassy-System mit den zugehörigen Sensoren verwendet.
+Ein Rundkolben, der an einem Stativ befestigt ist, befindet sich über einem mit einem Laborheber in der Höhe einstellbaren Heizpilz. Der Kolben hat einen abgedichteten Einlass für den Temperatursensor und oben wird mit dichten Schläuchen ein Drucksensor (Absolutdrucksensor S (524065)) angebracht und ebenso die Zuleitung zu einem Dreiwegehahn gelegt, von dem ein weiteres Ende mit einer Handpumpe verbunden wird. Ein Ausgang ist mit der Umgebung verbunden (vgl. Abb. \ref{Aufbau}).
+\begin{figure}
+	\begin{center}
+		\includegraphics[scale=0.85]{Images/Aufbau.jpg}
+		\label{Aufbau}
+		\caption{Der Versuchsaufbau}
+	\end{center}
+\end{figure}
+Ein Becherglas mit Eiswasser und ein Becherglas mit unbearbeitetem Wasser stehen bereit. Zur Datensammlung und Erstauswertung wird ein Cassy-System mit den zugehörigen Sensoren verwendet (vgl. Abb. \ref{Cassy}).
+\begin{figure}
+	\begin{center}
+		\includegraphics[scale=0.33]{Images/Cassy.jpg}
+		\label{Cassy}
+		\caption{Das verwendete Cassy-System samt Temperatur-Box und Druck-Input}
+	\end{center}
+\end{figure}
 Versuchsdurchführung
 Der Temperatursensor ist auf ein Intervall von \SI{-20}{\celsius} bis \SI{120}{\celsius} eingestellt, der Drucksensor auf ein Intervall von \SI{0}{\hecto\pascal}-\SI{1500}{\hecto\pascal}
 
@@ -76,7 +93,7 @@ Die Temperatur in Eiswasser wird zunächst gemessen, deren theoretischer Wert \S
 Einstellungen: Messung alle 100ms, insgesamt 3 Minuten lang.
 
 \subsection{Gasdichtigkeit}
-Um festzustellen, wie gasdicht der Aufbau ist, wird mit der Handpumpe im Kolben ein Unterdruck von etwa 190 hPa absolut erzeugt. Dann wird über einen Zeitraum von 10 Minuten der Druck gemessen, um hinterher mit Hilfe einer linearen Regression die Leckrate bestimmen zu können, die nicht höher sein sollte als 0.2 mbar/min {\color{red}[sollen wir 0.07 schreiben?]}, um zu gewährleisten, dass die gemessenen Druckwerte während der Hauptmessung nicht zu stark verfälscht werden. 
+Um festzustellen, wie gasdicht der Aufbau ist, wird mit der Handpumpe im Kolben ein Unterdruck von etwa 190 hPa absolut erzeugt. Dann wird über einen Zeitraum von 10 Minuten der Druck gemessen, um hinterher mit Hilfe einer linearen Regression die Leckrate bestimmen zu können, die nicht höher sein sollte als 0.2 mbar/min {\color{red}[sollen wir 0.7 schreiben?]}, um zu gewährleisten, dass die gemessenen Druckwerte während der Hauptmessung nicht zu stark verfälscht werden. 
 Einstellungen: Messung alle 100 ms, insgesamt 3 Minuten lang.
 
 
@@ -92,12 +109,39 @@ Nach der eigentlichen Versuchsdurchführung kann eine weitere Gasdichtigkeitsmes
 {\color{red}- 7s Ansprechzeit?}\\
 {\color{red}T100 wirklich 100 Grad bei unserem Druck?}\\
 \subsection{Rauschmessung}
-Die Rauschmessung umfasst 3326 Datenpunkte, bei denen der Temperatursensor in Ruhe die als konstant angenommene Raumtemperatur gemessen hat, der Absolutdrucksensor zugleich den konstanten Umgebungsdruck. Dabei soll die Streuung der Werte um den Mittelwert erarbeitet werden, um den statistischen Fehler für alle folgenden Messungen abschätzen zu können.
-Die Ergebnisse sind wie folgt:
+Die Rauschmessung umfasst 3326 Datenpunkte, bei denen der Temperatursensor in Ruhe die als konstant angenommene Raumtemperatur gemessen hat, der Absolutdrucksensor zugleich den konstanten Umgebungsdruck. Dabei soll die Streuung der Werte um den Mittelwert erarbeitet werden, um den statistischen Fehler für alle folgenden Messungen abschätzen zu können.\\
+Die Ergebnisse sind wie folgt (Abb. \ref{RM_T} und \ref{RM_p}):\\
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[scale=0.9]{Images/RauschmessungRT_T.jpg}
+		\caption{Messergebnisse der Raumtemperatur-Rauschmessung}
+		\label{RM_T}
+	\end{center}
+\end{figure}\\
 \begin{figure}
-	2 Abb.s
+	\begin{center}
+			\includegraphics[scale=0.9]{Images/RauschmessungRT_p.jpg}
+		\caption{Messergebnisse der Umgebungsdruck-Rauschmessung}
+		\label{RM_p}
+	\end{center}
 \end{figure}
-Die Temperaturmessung ergab einen Mittelwert von etwa \SI{25.1580}{\celsius} mit einer Standardabweichung von \SI{0.0444}{\celsius}. {\color{red}[Wie viele Nachkommastellen?]} Daraus ergibt sich ein statistischer Fehler von \SI{0.00077}{\celsius}. {\color{red}(vgl. Abb.X)}
-Die Druckmessung lieferte einen Mittelwert von 984.796 hPa mit einer Standardabweichung von 0.184 hPa und einem Fehler von 0.00319 hPa. {\color{red}(vgl. Abb.X)}
-
+Die Temperaturmessung ergab einen Mittelwert von etwa \SI{25.1580}{\celsius} mit einer Standardabweichung von \SI{0.0444}{\celsius}. {\color{red}[Wie viele Nachkommastellen?]} Daraus ergibt sich ein statistischer Fehler von \SI{0.00077}{\celsius} (vgl. Abb.\ref{RM_T_histo}).\\
+Die Druckmessung lieferte einen Mittelwert von 984.796 hPa mit einer Standardabweichung von 0.184 hPa und einem Fehler von 0.00319 hPa (vgl. Abb.\ref{RM_p_histo}).
+\begin{figure}
+	\begin{center}
+		\includegraphics[scale=0.9]{Images/RauschmessungRT_T_histo.jpg}
+		\caption{Histogramm der T-Rauschmessung}
+		\label{RM_T_histo}
+	\end{center}
+\end{figure}
+\begin{figure}
+	\begin{center}
+		\includegraphics[scale=0.9]{Images/RauschmessungRT_p_histo.jpg}
+		\caption{Histogramm der p-Rauschmessung}
+		\label{RM_p_histo}
+	\end{center}
+\end{figure}
 \end{document}
+\subsection{Kalibrierung des Thermosensors}
+Zur Kalibrierung des Thermometers wurde die Temperatur bei theoretischen \SI{0}{\celsius} und \SI{100}{\celsius} aufgezeichnet {\color{red}(vgl. Abb.)}.
+
