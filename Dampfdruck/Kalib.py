@@ -155,7 +155,7 @@ sigmaT100_tot = np.sqrt(sigmaT_Rausch**2+sigmaT_Gerät_gr_70**2+sigmaT100**2)
 print("T bei T=0°C : T_gem = " + str(np.round(T0,1))+" °C +-"+str(round_up(sigmaT0_tot,1)) + " °C")
 print("T bei T=100°C : T_gem = " + str(np.round(T100,1))+" °C +-"+str(round_up(sigmaT100_tot,1)) + " °C")
       
-#Führe lineare Reg. bzgl. T_gem durch, dann stelle auf T_th um, weil wir nur Fehler auf y angeben können...
+#Führe lineare Reg. bzgl. T_gem durch, dann stelle auf T_th um, weil wir bei der lin_reg nur Fehler auf y angeben können...
 a,ea,b,eb,chiq,corr = ana.lineare_regression(np.array([0, 100])-50,np.array([T0, T100])-50, np.array([sigmaT0_tot,sigmaT100_tot]))
 print("\nDamit ergibt sich die Korrekturgleichung:")
 print("T_gem = "+ str(a)+"*(T_th-50) + " + str(b)+" + 50")
