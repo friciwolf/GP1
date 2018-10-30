@@ -46,6 +46,7 @@ t = data.messung(1).datenreihe("t").werte
 T = data.messung(1).datenreihe("&J_A11").werte
 p = data.messung(1).datenreihe("p_B1").werte
 sigmaT=np.std(T)
+#0.01: wegen Output von Rauschmessung.py (siehe oben), 0.75: Auflösungsvermögen
 sigmap=np.sqrt(0.01**2+0.75**2)
 errT=sigmaT/np.sqrt(len(T))
 errp=sigmap
