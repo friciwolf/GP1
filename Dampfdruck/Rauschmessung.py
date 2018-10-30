@@ -43,7 +43,7 @@ plt.savefig("Images/RauschmessungRT_T.jpg")
 plt.figure()
 
 print("==="*20)
-print("Druckverteilung") #vllt Poisson???
+print("Druckverteilung")
 print("m=" + str(np.round(np.average(p),2))+" hPa, s="+str(np.round(np.std(p),2))+" hPa, err="+str(round_up(np.std(p)/np.sqrt(len(p)),2))+ " hPa")
 
 x=np.arange(min(p), max(p), 0.01)
