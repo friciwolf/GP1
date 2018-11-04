@@ -110,23 +110,17 @@ Nach der eigentlichen Versuchsdurchführung kann eine weitere Gasdichtigkeitsmes
 {\color{red}T100 wirklich 100 Grad bei unserem Druck?}\\
 \subsection{Rauschmessung}
 Die Rauschmessung umfasst 3326 Datenpunkte, bei denen der Temperatursensor in Ruhe die als konstant angenommene Raumtemperatur gemessen hat, der Absolutdrucksensor zugleich den konstanten Umgebungsdruck. Dabei soll die Streuung der Werte um den Mittelwert erarbeitet werden, um den statistischen Fehler für alle folgenden Messungen abschätzen zu können.\\
-Die Ergebnisse sind wie folgt (Abb. \ref{RM_T} und \ref{RM_p}):\\
+Die Ergebnisse sind wie folgt (Abb. \ref{RM_T_p}):\\
 \begin{figure}[h]
 	\begin{center}
-		\includegraphics[scale=0.9]{Images/RauschmessungRT_T.jpg}
+		\includegraphics[scale=0.45]{Images/RauschmessungRT_T.jpg}
+		\includegraphics[scale=0.45]{Images/RauschmessungRT_p.jpg}
 		\caption{Messergebnisse der Raumtemperatur-Rauschmessung}
-		\label{RM_T}
+		\label{RM_T_p}
 	\end{center}
 \end{figure}\\
-\begin{figure}
-	\begin{center}
-			\includegraphics[scale=0.9]{Images/RauschmessungRT_p.jpg}
-		\caption{Messergebnisse der Umgebungsdruck-Rauschmessung}
-		\label{RM_p}
-	\end{center}
-\end{figure}
-Die Temperaturmessung ergab einen Mittelwert von etwa \SI{25.1580}{\celsius} mit einer Standardabweichung von \SI{0.0444}{\celsius}. {\color{red}[Wie viele Nachkommastellen?]} Daraus ergibt sich ein statistischer Fehler von \SI{0.00077}{\celsius} (vgl. Abb.\ref{RM_T_histo}).\\
-Die Druckmessung lieferte einen Mittelwert von 984.796 hPa mit einer Standardabweichung von 0.184 hPa und einem Fehler von 0.00319 hPa (vgl. Abb.\ref{RM_p_histo}).
+Die Temperaturmessung ergab einen Mittelwert von etwa \SI{25.15797}{\celsius} mit einer Standardabweichung von \SI{0.04443}{\celsius}.  Daraus ergibt sich ein statistischer Fehler von \SI{0.00077}{\celsius} (vgl. Abb.\ref{RM_T_histo}).\\
+Die Druckmessung lieferte einen Mittelwert von 984.7955 hPa mit einer Standardabweichung von 0.1838 hPa und einem Fehler von 0.0032 hPa (vgl. Abb.\ref{RM_p_histo}).
 \begin{figure}
 	\begin{center}
 		\includegraphics[scale=0.9]{Images/RauschmessungRT_T_histo.jpg}
@@ -143,21 +137,50 @@ Die Druckmessung lieferte einen Mittelwert von 984.796 hPa mit einer Standardabw
 \end{figure}
 
 \subsection{Kalibrierung des Thermosensors}
-Zur Kalibrierung des Thermometers wurde die Temperatur bei theoretischen \SI{0}{\celsius} in Eiswasser und \SI{100}{\celsius} in siedenden Wasser bei Umgebungsdruck aufgezeichnet {\color{red}(vgl. Abb.)}.
+Zur Kalibrierung des Thermometers wurde die Temperatur bei theoretischen \SI{0}{\celsius} in Eiswasser und \SI{100}{\celsius} in siedenden Wasser bei Umgebungsdruck aufgezeichnet (vgl. Abb. \ref{K_Roh}).
+\begin{figure}
+	\begin{center}
+		\includegraphics[scale=0.45]{Images/Kalib_T_0.pdf}
+		\includegraphics[scale=0.45]{Images/Kalib_T_100.pdf}
+		\caption{Rohdaten und Histogramm der Kalibrierung in Eiswasser}
+		\label{K_Roh}
+	\end{center}
+\end{figure}
 Mit einem linearen Modell, dessen Unterstützungspunkt in der Mitte liegt, wird eine stabile Umrechnung von den gemessenen Werten zu den realen angestrebt: $T_{gem} = a*(T_{th}-50) + b + 50$ oder auf $T_{th}$ umgestellt $T_{th} = (T_{gem}-b-50)/a + 50$. \\
 Die Messungen ergaben:\\
 -Mittelwert T0 + Fehler (vgl. Abb.)\\
+\begin{figure}
+	\begin{center}
+		\includegraphics[scale=0.9]{Images/Kalib_T_0_histo.pdf}
+		\caption{Histogramm der Kalibrierung in Eiswasser}
+		\label{K_T0_histo}
+	\end{center}
+\end{figure}
 -Mittelwert T100 +Fehler (vgl. Abb.)\\
+\begin{figure}
+	\begin{center}
+		\includegraphics[scale=0.9]{Images/Kalib_T_histo_100}
+		\caption{Histogramm der Kalibrierung in siedenden Wasser}
+		\label{K_T100_histo}
+	\end{center}
+\end{figure}
 Somit lautet die Umrechnung:\\
 -Umrechnung + Fehler\\
 \subsection{Gasdichtigkeitsmessung}
 Die Gasdichtigkeitsmessung ist eine einfache Prüfung, ob die Druckwerte sich im Laufe der Messung nicht zu stark verändern werden.\\
-Die Ergebnisse waren wie in Abb. dargestellt. \\
+\begin{figure}
+	\begin{center}
+		\includegraphics[scale=0.9]{Images/Kalib_Dichtigkeitsmessung.pdf}
+		\caption{Verlauf der Dichtigkeitsmessung}
+		\label{GD_data}
+	\end{center}
+\end{figure}
+Die Ergebnisse waren wie in Abb. \ref{GD_data} dargestellt. \\
 Eine lineare Regression ergibt ..., was einer Steigung von ... entspricht (+Fehler?). Mit diesen Werten konnte weitergearbeitet werden.
 \subsection{Messung der Dampfdruckkurve}
 In der eigentlichen Hauptmessung ...\\
 Abb.s\\
 $\Lambda$\\ 
 \section{Ergebnisse}
-vgl. Literaturwerte, wo waren unsere Fehler? Was haben wir nicht beachtet?
+vgl. Literaturwerte, wo waren unsere Fehler? Was haben wir nicht beachtet? - Druck
 \end{document}
