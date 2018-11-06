@@ -16,7 +16,8 @@ def gauss(x, m, s):
 def round_up(x, digits): #für obere Abschätzung der Fehler
     if digits!=0: return np.ceil(x*10**digits)/10**digits
     else: return np.ceil(x)
-def round_good(m,s,err): #für obere Abschätzung der Fehler
+    
+def round_good(m,s,err):
     '''
     Passt Mittelwert- und Standardabweichungsnachkommastellen an den Fehler an (2 signifikante Stellen des Fehlers)
     m=mean
@@ -25,7 +26,7 @@ def round_good(m,s,err): #für obere Abschätzung der Fehler
     '''
     i=2
     test=list('{:.20f}'.format(err))
-    while test[i]=='0':
+    while test[i]=='0': #TODO: wie groß sind die Fehler auf L? Kommastelle finden oder nicht?
         i+=1
     return np.round([m,s,err],i)
 
@@ -75,7 +76,8 @@ plt.xlabel('Zeit/s')
 plt.title("Rauschmessung Druck")
 plt.savefig("Images/RauschmessungRT_p.jpg")
 plt.plot(t,np.array([np.mean(p)]*len(t)),color='green')
-=======
+plt.figure()
+
 #----------------------------#
 #Auswertung der Rauschmessung#
 #----------------------------#
