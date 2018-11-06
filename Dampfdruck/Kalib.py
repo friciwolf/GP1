@@ -35,6 +35,14 @@ def gauss(x, m, s):
     return(np.power(scipy.pi*2*s**2, -0.5)*np.exp(-(x-m)**2/(2*s**2)))
 
 def T_th(T_gem, a, b, sT_gem, sa, sb,sT_gemsys,sasys,sbsys):
+    """
+    Wandelt unter Angabe der Parameter die gemessenen T-Werte in richtige um.
+    T_gem: Umzuwandelnde Werte
+    a, b: Parameter in  T = (T_gem-b-50)/a + 50
+    sT_gam, sa, sb: Statistische Fehler des Werts und der Parameter
+    sT_gemsys,sasys,sbsys: Systematische Fehler des Werts und der Parameter
+    Return: T_real, statistischer, systematischer Fehler auf T_real
+    """
     T = (T_gem-b-50)/a + 50
     #Gauss auf T_th = (T_gem-b-50)/a + 50) bzgl. a, b, T_gem:
     sT = np.sqrt(((T_gem-b-50)/a**2)**2 * sa**2 + a**-2 * sb**2 + a**-2 * sT_gem**2)
