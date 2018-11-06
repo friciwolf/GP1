@@ -24,7 +24,7 @@ import praktikum.cassy as cassy
 import Kalib
 
 def T_real(T_gem):
-    return (T_gem-Kalib.b-50)/Kalib.a +50
+    return  (T_gem-Kalib.b-50)/Kalib.a +50
     
 #Fehler Beachten+Daraufaddieren!!!!!
 R=sc.R
