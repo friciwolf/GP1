@@ -23,6 +23,7 @@
 \author{Máté Farkas, Patrick Schillings}
 \begin{document}
 	\begin{center}
+		\maketitle
 		\part*{Versuchsbericht}
 		\newpage
 	\end{center}
@@ -88,7 +89,7 @@ Der Temperatursensor ist auf ein Intervall von \SI{-20}{\celsius} bis \SI{120}{\
 Bei Raumtemperatur und Umgebungsdruck findet eine 'Leerlauf'-Messung statt, um den statistischen Fehler der Messgeräte gut abschätzen zu können. Dabei wird ein kurzes Zeitintervall bei hoher Messrate ausgewertet. 
 Einstellungen: Messung alle 10ms, 16000 mal $\widehat{=}$ 3min
 
-\subsection {Kalibrierung des Thermosensors}  {\color{red}[Sollen wir die Gasdichtigkeit vorziehen, um T0 und T100 in einem Punkt beschreiben zu können oder so tun, als wäre das Thermometerbei der Gasdichtigkeitsmessung im Kolben gewesen, und wir hätten davor T0 gemessen, weil am Aufbau nichts mehr verändert werden sollte?]}
+\subsection {Kalibrierung des Thermosensors}  {\color{red}[Sollen wir die Gasdichtigkeit vorziehen, um T0 und T100 in einem Punkt beschreiben zu können oder so tun, als wäre das Thermometer bei der Gasdichtigkeitsmessung im Kolben gewesen, und wir hätten davor T0 gemessen, weil am Aufbau nichts mehr verändert werden sollte?]}
 
 Die Temperatur in Eiswasser wird zunächst gemessen, deren theoretischer Wert \SI{0}{\celsius} ist. Dazu wird Eis mit ein wenig Wasser gemischt und gewartet, bis ein Temperaturausgleich stattgefunden hat, der, solange noch festes Eis vorhanden ist, bei \SI{0}{\celsius} sein sollte, und die 7s Ansprechzeit, die der Sensor nach Angaben des Herstellers hat, verstrichen ist. Später, wenn das Wasser siedet, wird noch dessen Siedetemperatur bestimmt, die \SI{100}{\celsius} sein sollte. Mit einem linearen Modell kann man nun $T_{real}(T_{gemessen})$ bestimmen.
 Einstellungen: Messung alle 100ms, insgesamt 3 Minuten lang.
@@ -221,9 +222,10 @@ $\Lambda$\\
 \section{Ergebnisse}
 Verglichen mit dem Literaturwert...
 Es gibt einige Aspekte, die wir vernachlässigt haben:
-Das genutzte Thermometer hat eine Ansprechzeit von 7s um $99\%$ des wahren Wertes zu erreichen. Das ist zwar oft nicht vernachlässigbar, aber da die Abkühlung sehr langsam vonstatten geht, 
-Kalib Methode, Treal bei T100
-Dicht rausrechnen mit exp
-Druck
+Das genutzte Thermometer hat eine Ansprechzeit von 7s um $99\%$ des wahren Wertes zu erreichen. Das ist zwar oft nicht vernachlässigbar, aber da die Abkühlung sehr langsam vonstatten geht, tritt kein großer Temperaturshift auf.
+Weiterhin ist die Methode, die zur Kalibration des Thermosensors genutzt wurde, zweifelhaft. Bei kochendem Wasser wird die Temperatur vielleicht gut durchmischt sein, sodass man auch einen realen Wert annehmen kann, die Kalibration in Eiswasser aber ist sehr unsicher. Die Temperatur nicht an jeder Stelle gleich, am Eis ist es kälter, am Flüssigkeitsrand durch Wärmeleitung wärmer als die theoretisch angenommenen \SI{0}{\celsius}, sodass man nicht so recht weiß, welchen Fehler man dafür einschätzen soll. Auch bei siedendem Wasser kommt eine Unsicherheit dazu, denn für einen bestimmten Druck herrscht auch eine unterschiedliche Siedetemperatur, die wir an dieser Stelle nicht näher einberechnet haben, da, wie später noch einmal ausgeführt wird, auch der Druck nicht genau bestimmbar ist, und was wieder zu neuen Ablesefehlern geführt hätte.
+Es wäre wahrscheinlich besser gewesen, ohne Kalibrierung zu arbeiten. {\color{red}Dazu hier Vergleichswerte unter Missachtung der Kalibrierung}:\\
+Nun zum Druck: Über eine Ungenauigkeit des Drucksensors ist nichts bekannt, auch nicht über seine Funktionsweise. Uns bleibt nur zur Abschätzung die Daten der hiesigen Wetterstation zu berücksichtigen und über die barometrische Höhenformel näherungsweise mit unserer Messung zu vergleichen, wobei allerdings der Luftdruck auch nicht zu messen war. Der Mittelwert unseres Umgebungsdruckes beträgt etwa $\SI{984.8}{\hecto \pascal}$ bei einer Höhe von 279 m ü.NN, die mit Phyphox gemessen wurden. Die Wetterstation gibt zur gleichen Zeit einen Druck von $\SI{991}{\hecto \pascal}$ bei 222 m ü.NN an. Zur Abschätzung: $p(h)=p_0*e^{-\frac{h}{h_B}}$, wobei mit $p_0=\SI{1018}{\hecto \pascal}$ und der barometrischen Höhe $h_B=\SI{8.3}{\kilo \meter}$ gilt: $p(222m) \approx \SI{991}{\hecto \pascal}$ und $p(279m) \approx \SI{984.3}{\hecto \pascal}$. Es sollte also nicht allzu relevante Änderungen geben.\\
+Gravierender dagegen ist die Leckrate des Aufbaus, die zwar herausrechenbar ist, indem man einen exponentiellen Zusammenhang benutzt mit dem von uns bei etwa $0.165*p_0$ gemessenen Anfangswert von etwa $60*(0.010501 \pm 5.3*10^{-5})\SI{}{\frac{\milli \bar } {\minute}}$, was aber aus Mangel einer zweiten Dichtigkeitsmessung unterlassen wurde. \\
 vgl. Literaturwerte, wo waren unsere Fehler? Was haben wir nicht beachtet? - 
 \end{document}
