@@ -68,22 +68,27 @@ plt.figure()
 #Berechnung der Verdampfungsenthalpie
 L_Werte=[[],[],[], []] #L_sys, s_sys, L_stat, s_stat
 T_Werte=[[],[],[]]
-for i in range(1,11):
-    xi=np.power(T_real[:1000*i], -1)-np.power(T_real[0], -1)
-    yi=(-np.log(p)[:1000*i]+np.log(p[0]))*R
-    sxi_sys = np.sqrt(np.power(T_real[:1000*i], -4)*sTsys[:1000*i]**2+ np.power(T_real[0], -4)*sTsys[0])
-    syi_sys = R*Kalib.sigmap*np.sqrt(np.power(p[:1000*i], -2)+np.power(p[0], -2))
+indizes = []
+TestTemp0 = 273.0+40.0 #bis 100
+while TestTemp0<=373:
+    indizes.append(np.argmax(np.round(T_real, 0)==TestTemp0))
+    TestTemp0+=10.0
+for i in indizes:
+    xi=np.power(T_real[:i], -1)-np.power(T_real[0], -1)
+    yi=(-np.log(p)[:i]+np.log(p[0]))*R
+    sxi_sys = np.sqrt(np.power(T_real[:i], -4)*sTsys[:i]**2+ np.power(T_real[0], -4)*sTsys[0])
+    syi_sys = R*Kalib.sigmap*np.sqrt(np.power(p[:i], -2)+np.power(p[0], -2))
     Lsys,eLsys,bsys,ebsys,chiqsys,corr = ana.lineare_regression_xy(xi, yi, sxi_sys, syi_sys)
-    sxi_stat = np.sqrt(np.power(T_real[:1000*i], -4)*sTstat[:1000*i]**2+ np.power(T_real[0], -4)*sTstat[0])
-    syi_stat = R*Kalib.sigmap*np.sqrt(np.power(p[:1000*i], -2)+np.power(p[0], -2))
+    sxi_stat = np.sqrt(np.power(T_real[:i], -4)*sTstat[:i]**2+ np.power(T_real[0], -4)*sTstat[0])
+    syi_stat = R*Kalib.sigmap*np.sqrt(np.power(p[:i], -2)+np.power(p[0], -2))
     Lstat,eLstat,bstat,ebstat,chiqstat,corr = ana.lineare_regression_xy(xi, yi, sxi_stat, syi_stat)
     L_Werte[0].append(Lsys)
     L_Werte[1].append(eLsys)
     L_Werte[2].append(Lstat)
     L_Werte[3].append(eLstat)
-    T_Werte[0].append(T_real[1000*i])
-    T_Werte[1].append(sTstat[1000*i])
-    T_Werte[2].append(sTsys[1000*i])
+    T_Werte[0].append(T_real[i])
+    T_Werte[1].append(sTstat[i])
+    T_Werte[2].append(sTsys[i])
 
 #wichte L nach den Fehlern
 L_gew = (L_Werte[0]/np.power(L_Werte[1], 2) + L_Werte[2]/np.power(L_Werte[3], 2))/(np.power(L_Werte[1], -2) + np.power(L_Werte[3], -2))
@@ -103,8 +108,8 @@ plt.figure()
 #Wertetabelle
 print("\nTabelle von Werten")
 print("    T     ||        L   ")
-for i in range(1,11):
-    print('{:.5f} || {}'.format(T_Werte[0][i-1],L*T_Werte[0][i-1]+b))
+for i in range(len(indizes)):
+    print('{:.0f} || {}'.format(np.round(T_Werte[0][i]-273),np.round(L*T_Werte[0][i]+b, 1)))
 
 #Für die Clausius-Clapeyron-Ausgleichsgerade
 x=np.power(T_real[:N], -1)-np.power(T_real[0], -1)
