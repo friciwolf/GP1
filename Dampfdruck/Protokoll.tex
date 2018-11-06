@@ -27,6 +27,7 @@
 		\newpage
 	\end{center}
 \tableofcontents
+\newpage
 \section{Versuchsziele}
 Ziel des Versuchs war es durch die Messung der Dampfdruckkurve von Wasser, also den Druck in Abhängigkeit von der Temperatur während der Abkühlphase bei festem Volumen, die molare Verdampfungsenthalpie von Wasser zu bestimmen. Der Dampfdruck ist ein Gleichgewichtsdruck, der sich einstellt, wenn sowohl die flüssige Phase, als auch die gasförmige Phase im Gleichgewicht sind bei hinreichender Größe des Volumens. Die molare Verdampfungsenthalpie ist die Wärme, die ein Mol Flüssigkeit aufnimmt, um in die Gasphase übergehen zu können, und wird auch latente Wärme genannt.
 \section{Theoretische Grundlagen}
@@ -110,23 +111,18 @@ Nach der eigentlichen Versuchsdurchführung kann eine weitere Gasdichtigkeitsmes
 {\color{red}T100 wirklich 100 Grad bei unserem Druck?}\\
 \subsection{Rauschmessung}
 Die Rauschmessung umfasst 3326 Datenpunkte, bei denen der Temperatursensor in Ruhe die als konstant angenommene Raumtemperatur gemessen hat, der Absolutdrucksensor zugleich den konstanten Umgebungsdruck. Dabei soll die Streuung der Werte um den Mittelwert erarbeitet werden, um den statistischen Fehler für alle folgenden Messungen abschätzen zu können.\\
-Die Ergebnisse sind wie folgt (Abb. \ref{RM_T} und \ref{RM_p}):\\
+Die Ergebnisse sind wie folgt (Abb. \ref{RM_T_p}):\\
 \begin{figure}[h]
 	\begin{center}
-		\includegraphics[scale=0.9]{Images/RauschmessungRT_T.jpg}
+		\includegraphics[scale=0.45]{Images/RauschmessungRT_T.jpg}
+		\includegraphics[scale=0.45]{Images/RauschmessungRT_p.jpg}
 		\caption{Messergebnisse der Raumtemperatur-Rauschmessung}
-		\label{RM_T}
+		\label{RM_T_p}
 	\end{center}
 \end{figure}\\
-\begin{figure}
-	\begin{center}
-			\includegraphics[scale=0.9]{Images/RauschmessungRT_p.jpg}
-		\caption{Messergebnisse der Umgebungsdruck-Rauschmessung}
-		\label{RM_p}
-	\end{center}
-\end{figure}
-Die Temperaturmessung ergab einen Mittelwert von etwa \SI{25.1580}{\celsius} mit einer Standardabweichung von \SI{0.0444}{\celsius}. {\color{red}[Wie viele Nachkommastellen?]} Daraus ergibt sich ein statistischer Fehler von \SI{0.00077}{\celsius} (vgl. Abb.\ref{RM_T_histo}).\\
-Die Druckmessung lieferte einen Mittelwert von 984.796 hPa mit einer Standardabweichung von 0.184 hPa und einem Fehler von 0.00319 hPa (vgl. Abb.\ref{RM_p_histo}).
+Die Temperaturmessung ergab einen Mittelwert von etwa \SI{25.15797}{\celsius} mit einer Standardabweichung von \SI{0.04443}{\celsius}.  Daraus ergibt sich ein statistischer Fehler von \SI{0.00077}{\celsius} (vgl. Abb.\ref{RM_T_histo}).\\
+Die Druckmessung lieferte einen Mittelwert von \SI{984.7955}{\hecto \pascal} mit einer Standardabweichung von \SI{0.1838}{\hecto \pascal} und einem Fehler von \SI{0.0032}{\hecto \pascal} (vgl. Abb.\ref{RM_p_histo}).
+Systematische Fehler werden in dieser Messung nicht betrachtet, da hier nicht das Ergebnis interessant war, sondern die Standardabweichung. Diese wird im Folgenden benutzt werden, um eine genauere Fehlerabschätzung für den statistischen Fehler der Versuche zu bekommen, unter der Annahme, dass der Thermosensor stets gleich stark streut.
 \begin{figure}
 	\begin{center}
 		\includegraphics[scale=0.9]{Images/RauschmessungRT_T_histo.jpg}
@@ -143,21 +139,63 @@ Die Druckmessung lieferte einen Mittelwert von 984.796 hPa mit einer Standardabw
 \end{figure}
 
 \subsection{Kalibrierung des Thermosensors}
-Zur Kalibrierung des Thermometers wurde die Temperatur bei theoretischen \SI{0}{\celsius} in Eiswasser und \SI{100}{\celsius} in siedenden Wasser bei Umgebungsdruck aufgezeichnet {\color{red}(vgl. Abb.)}.
+Zur Kalibrierung des Thermometers wurde die Temperatur bei theoretischen \SI{0}{\celsius} in Eiswasser und \SI{100}{\celsius} in siedenden Wasser bei Umgebungsdruck aufgezeichnet (vgl. Abb. \ref{K_Roh}).
+\begin{figure}
+	\begin{center}
+		\includegraphics[scale=0.45]{Images/Kalib_T_0.pdf}
+		\includegraphics[scale=0.45]{Images/Kalib_T_100.pdf}
+		\caption{Rohdaten und Histogramm der Kalibrierung in Eiswasser}
+		\label{K_Roh}
+	\end{center}
+\end{figure}
 Mit einem linearen Modell, dessen Unterstützungspunkt in der Mitte liegt, wird eine stabile Umrechnung von den gemessenen Werten zu den realen angestrebt: $T_{gem} = a*(T_{th}-50) + b + 50$ oder auf $T_{th}$ umgestellt $T_{th} = (T_{gem}-b-50)/a + 50$. \\
-Die Messungen ergaben:\\
--Mittelwert T0 + Fehler (vgl. Abb.)\\
--Mittelwert T100 +Fehler (vgl. Abb.)\\
-Somit lautet die Umrechnung:\\
--Umrechnung + Fehler\\
+
+In Eiswasser stellte sich ein Mittelwert von $T_0=\SI{2.4865}{\celsius} \pm \SI{0.0015}{\celsius} \pm \SI{0.2}{\celsius}$ ein, wobei der erste Fehler den statistischen Fehler als Standardabweichung der Rauschmessung geteilt durch die Wurzel aus der Anzahl der jetzt gemessenen Werte und der zweite den systematischen Fehler aus der Angabe des Herstellers des Thermosensors angibt.  (vgl. Abb. \ref{K_T0_histo})\\
+\begin{figure}
+	\begin{center}
+		\includegraphics[scale=0.9]{Images/Kalib_T_0_histo.pdf}
+		\caption{Histogramm der Kalibrierung in Eiswasser}
+		\label{K_T0_histo}
+	\end{center}
+\end{figure}
+Die Messung in siedendem Wasser ergab $T_{100}=\SI{99.766}{\celsius} \pm \SI{0.0025}{\celsius} \pm \SI{0.4}{\celsius}$. (vgl. Abb. \ref{K_T100_histo})\\
+\begin{figure}
+	\begin{center}
+		\includegraphics[scale=0.9]{Images/Kalib_T_histo_100}
+		\caption{Histogramm der Kalibrierung in siedenden Wasser}
+		\label{K_T100_histo}
+	\end{center}
+\end{figure}
+Somit lautet die Umrechnung
+mit $a = 0.9728 \pm 0.0006 \pm 0.0045$
+und mit $b = \SI{1.13}{\celsius} \pm \SI{0.03}{\celsius} \pm \SI{0.22}{\celsius}$:
+\begin{equation}
+T_{th} = (T_{gem}-\SI{1.13}{\celsius}-\SI{50}{\celsius})/0.9728 + \SI{50}{\celsius}
+\label{Kalibrierung}
+\end{equation}
+Es ergibt sich zum Beispiel mit Fehlern aus der Gaußschen Fehlerfortpflanzung $T_{th}(T_{100}) = \SI{100.00}{\celsius} \pm  \SI{0.06}{\celsius} \pm \SI{0.52}{\celsius}$
+und $T_{th}(T_0) = \SI{0.00}{\celsius} \pm \SI{0.06}{\celsius} \pm \SI{0.38}{\celsius}$
+\\
 \subsection{Gasdichtigkeitsmessung}
 Die Gasdichtigkeitsmessung ist eine einfache Prüfung, ob die Druckwerte sich im Laufe der Messung nicht zu stark verändern werden.\\
-Die Ergebnisse waren wie in Abb. dargestellt. \\
-Eine lineare Regression ergibt ..., was einer Steigung von ... entspricht (+Fehler?). Mit diesen Werten konnte weitergearbeitet werden.
+\begin{figure}
+	\begin{center}
+		\includegraphics[scale=0.9]{Images/Kalib_Dichtigkeitsmessung.pdf}
+		\caption{Verlauf der Dichtigkeitsmessung}
+		\label{GD_data}
+	\end{center}
+\end{figure}
+Die Ergebnisse waren wie in Abb. \ref{GD_data} dargestellt. \\
+Der Fehler auf jeden gemessenen Druckwert beträgt bedingt durch die Auflösefähigkeit des Absolutdrucksensors von $0.05\%$ auf den Wertebereich von \SI{1500}{\hecto \pascal} und die
+ Standardabweichung aus der Rauschmessung $s^{2} = s^{2}_{Aufl}+s^{2}_{Rausch} = \SI{0.60}{\hecto \pascal}$. 
+Eine lineare Regression der Form $p(t)=m*t+b$ ergibt $m = (0.010501 \pm 5.3*10^{-5})\SI{}{\hecto \pascal/ \second}$ und $b = (159.151 \pm 0.019)\SI{}{\hecto \pascal}$ mit einem ordentlichen $\chi ^{2}/N=1142.24 / 6346$. Das entspricht also einem Verlust von $6*(0.010501 \pm 5.3*10^{-5})\SI{}{\milli \bar / \minute}$ bei einem Innendruck von $162.483 \pm 0.025 \SI{}{\hecto \pascal} = 0.165*p_0$. Mit diesen Werten konnte weitergearbeitet werden.
 \subsection{Messung der Dampfdruckkurve}
 In der eigentlichen Hauptmessung ...\\
 Abb.s\\
 $\Lambda$\\ 
 \section{Ergebnisse}
-vgl. Literaturwerte, wo waren unsere Fehler? Was haben wir nicht beachtet?
+Kalib Methode, Treal bei T100
+Dicht rausrechnen mit exp
+Druck
+vgl. Literaturwerte, wo waren unsere Fehler? Was haben wir nicht beachtet? - 
 \end{document}
