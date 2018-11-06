@@ -188,12 +188,40 @@ Die Gasdichtigkeitsmessung ist eine einfache Prüfung, ob die Druckwerte sich im
 Die Ergebnisse waren wie in Abb. \ref{GD_data} dargestellt. \\
 Der Fehler auf jeden gemessenen Druckwert beträgt bedingt durch die Auflösefähigkeit des Absolutdrucksensors von $0.05\%$ auf den Wertebereich von \SI{1500}{\hecto \pascal} und die
  Standardabweichung aus der Rauschmessung $s^{2} = s^{2}_{Aufl}+s^{2}_{Rausch} = \SI{0.60}{\hecto \pascal}$. 
-Eine lineare Regression der Form $p(t)=m*t+b$ ergibt $m = (0.010501 \pm 5.3*10^{-5})\SI{}{\hecto \pascal/ \second}$ und $b = (159.151 \pm 0.019)\SI{}{\hecto \pascal}$ mit einem ordentlichen $\chi ^{2}/N=1142.24 / 6346$. Das entspricht also einem Verlust von $6*(0.010501 \pm 5.3*10^{-5})\SI{}{\milli \bar / \minute}$ bei einem Innendruck von $162.483 \pm 0.025 \SI{}{\hecto \pascal} = 0.165*p_0$. Mit diesen Werten konnte weitergearbeitet werden.
+Eine lineare Regression der Form $p(t)=m*t+b$ ergibt $m = (0.010501 \pm 5.3*10^{-5})\SI{}{\hecto \pascal/ \second}$ und $b = (159.151 \pm 0.019)\SI{}{\hecto \pascal}$ mit einem ordentlichen $\chi ^{2}/N=1142.24 / 6346$. Das entspricht also einem Verlust von $60*(0.010501 \pm 5.3*10^{-5})\SI{}{\milli \bar / \minute}$ bei einem Innendruck von $162.483 \pm 0.025 \SI{}{\hecto \pascal} = 0.165*p_0$. Mit diesen Werten konnte weitergearbeitet werden.
 \subsection{Messung der Dampfdruckkurve}
-In der eigentlichen Hauptmessung ...\\
+In der eigentlichen Hauptmessung wurden die Rohdaten aus Abb.\ref{DD_Roh} aufgezeichnet.\\
+\begin{figure}
+	\begin{center}
+		\includegraphics[scale=0.45]{Images/Dampfdruck_T.pdf}
+		\includegraphics[scale=0.45]{Images/Dampfdruck_p.pdf}
+		\caption{T und p während des Abkühlvorgangs}
+		\label{DD_Roh}
+	\end{center}
+\end{figure}
+
+\begin{figure}
+	\begin{center}
+		\includegraphics[scale=0.9]{Images/Dampfdruck_L.pdf}
+		\caption{Verdampfungsenthalpie $\Lambda$ in Abhängigkeit von der Temperatur}
+		\label{DD_L(T)}
+	\end{center}
+\end{figure}
+
+\begin{figure}
+	\begin{center}
+		\includegraphics[scale=0.9]{Images/Dampfdruck_ln.pdf}
+		\caption{$\ln(\frac{p}{p_0})$ gegen $\frac{1}{T} - \frac{1}{T_0}$}
+		\label{DD_ln-1}
+	\end{center}
+\end{figure}
+
 Abb.s\\
 $\Lambda$\\ 
 \section{Ergebnisse}
+Verglichen mit dem Literaturwert...
+Es gibt einige Aspekte, die wir vernachlässigt haben:
+Das genutzte Thermometer hat eine Ansprechzeit von 7s um $99\%$ des wahren Wertes zu erreichen. Das ist zwar oft nicht vernachlässigbar, aber da die Abkühlung sehr langsam vonstatten geht, 
 Kalib Methode, Treal bei T100
 Dicht rausrechnen mit exp
 Druck
