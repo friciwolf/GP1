@@ -90,13 +90,12 @@ Ein Becherglas mit Eiswasser und ein Becherglas mit unbearbeitetem Wasser stehen
 Bei Raumtemperatur und Umgebungsdruck findet eine 'Leerlauf'-Messung statt, um den statistischen Fehler der Messgeräte gut abschätzen zu können. Dabei wird ein kurzes Zeitintervall bei hoher Messrate ausgewertet. 
 Einstellungen: Messung alle 10ms, 16000 mal $\widehat{=}$ 3min
 
-\subsection {Kalibrierung des Thermosensors}  {\color{red}[Sollen wir die Gasdichtigkeit vorziehen, um T0 und T100 in einem Punkt beschreiben zu können oder so tun, als wäre das Thermometer bei der Gasdichtigkeitsmessung im Kolben gewesen, und wir hätten davor T0 gemessen, weil am Aufbau nichts mehr verändert werden sollte?]}
-
+\subsection {Kalibrierung des Thermosensors}  
 Die Temperatur in Eiswasser wird zunächst gemessen, deren theoretischer Wert \SI{0}{\celsius} ist. Dazu wird Eis mit ein wenig Wasser gemischt und gewartet, bis ein Temperaturausgleich stattgefunden hat, der, solange noch festes Eis vorhanden ist, bei \SI{0}{\celsius} sein sollte, und die 7s Ansprechzeit, die der Sensor nach Angaben des Herstellers hat, verstrichen ist. Später, wenn das Wasser siedet, wird noch dessen Siedetemperatur bestimmt, die \SI{100}{\celsius} sein sollte. Mit einem linearen Modell kann man nun $T_{real}(T_{gemessen})$ bestimmen.
 Einstellungen: Messung alle 100ms, insgesamt 3 Minuten lang.
 
 \subsection{Gasdichtigkeit}
-Um festzustellen, wie gasdicht der Aufbau ist, wird mit der Handpumpe im Kolben ein Unterdruck von etwa 190 hPa absolut erzeugt. Dann wird über einen Zeitraum von 10 Minuten der Druck gemessen, um hinterher mit Hilfe einer linearen Regression die Leckrate bestimmen zu können, die nicht höher als 0.2 mbar/min sein sollte {\color{red}[sollen wir 0.7 schreiben?]}, um zu gewährleisten, dass die gemessenen Druckwerte während der Hauptmessung nicht zu stark verfälscht werden. 
+Um festzustellen, wie gasdicht der Aufbau ist, wird mit der Handpumpe im Kolben ein Unterdruck von etwa 190 hPa absolut erzeugt. Dann wird über einen Zeitraum von 10 Minuten der Druck gemessen, um hinterher mit Hilfe einer linearen Regression die Leckrate bestimmen zu können, die nicht höher als 0.2 mbar/min sein sollte, um zu gewährleisten, dass die gemessenen Druckwerte während der Hauptmessung nicht zu stark verfälscht werden. 
 Einstellungen: Messung alle 100 ms, insgesamt 3 Minuten lang.
 
 
@@ -106,7 +105,7 @@ Einstellungen: Messung alle 100 ms, unbegrenzte Messdauer (Ende nach etwa einer 
 
 \subsection{Gasdichtigkeit 2}
 
-Nach der eigentlichen Versuchsdurchführung kann eine weitere Gasdichtigkeitsmessung wie 3. Durchgeführt werden, um zu gewährleisten, dass sich die Leckrate am Aufbau nicht verändert hat. Diese entfällt aber bei uns, da keine Zeit mehr ist.
+Nach der eigentlichen Versuchsdurchführung kann eine weitere Gasdichtigkeitsmessung wie 4.3. durchgeführt werden, um zu gewährleisten, dass sich die Leckrate am Aufbau nicht verändert hat. Diese entfällt aber bei uns, da keine Zeit mehr ist.
 
 \section{Auswertung}
 {\color{red}- 7s Ansprechzeit?}\\
@@ -179,7 +178,7 @@ Es ergibt sich zum Beispiel mit Fehlern aus der Gaußschen Fehlerfortpflanzung $
 und $T_{th}(T_0) = \SI{0.00}{\celsius} \pm \SI{0.06}{\celsius} \pm \SI{0.38}{\celsius}$
 \\
 \subsection{Gasdichtigkeitsmessung}
-Die Gasdichtigkeitsmessung ist eine einfache Prüfung, ob die Druckwerte sich im Laufe der Messung nicht zu stark verändern werden.\\
+Die Gasdichtigkeitsmessung ist eine einfache Prüfung, ob die Druckwerte sich im Laufe der Messung nicht zu stark verändern werden.
 \begin{figure}
 	\begin{center}
 		\includegraphics[scale=0.9]{Images/Kalib_Dichtigkeitsmessung.pdf}
@@ -189,7 +188,7 @@ Die Gasdichtigkeitsmessung ist eine einfache Prüfung, ob die Druckwerte sich im
 \end{figure}
 Die Ergebnisse waren wie in Abb. \ref{GD_data} dargestellt. \\
 Der Fehler auf jeden gemessenen Druckwert beträgt bedingt durch die Auflösefähigkeit des Absolutdrucksensors von $0.05\%$ auf den Wertebereich von \SI{1500}{\hecto \pascal} und die
- Standardabweichung aus der Rauschmessung $s^{2} = s^{2}_{Aufl}+s^{2}_{Rausch} = \SI{0.60}{\hecto \pascal}$. 
+ Standardabweichung aus der Rauschmessung $s^{2} = s^{2}_{Aufl\ddot{o}sung}+s^{2}_{Rausch} = \SI{0.60}{\hecto \pascal}$. 
 Eine lineare Regression der Form $p(t)=m*t+b$ ergibt $m = (0.010501 \pm 5.3*10^{-5})\SI{}{\hecto \pascal/ \second}$ und $b = (159.151 \pm 0.019)\SI{}{\hecto \pascal}$ mit einem ordentlichen $\chi ^{2}/N=1142.24 / 6346$. Das entspricht also einem Verlust von $60*(0.010501 \pm 5.3*10^{-5})\SI{}{\milli \bar / \minute}$ bei einem Innendruck von $162.483 \pm 0.025 \SI{}{\hecto \pascal} \approx 0.165*p_0$. Mit diesen Werten konnte weitergearbeitet werden.
 \subsection{Messung der Dampfdruckkurve}
 In der eigentlichen Hauptmessung wurden die Rohdaten aus Abb.\ref{DD_Roh} aufgezeichnet.\\
@@ -221,12 +220,36 @@ In der eigentlichen Hauptmessung wurden die Rohdaten aus Abb.\ref{DD_Roh} aufgez
 Abb.s\\
 $\Lambda$\\ 
 \section{Ergebnisse}
-Verglichen mit dem Literaturwert...
+{\color{red} Verglichen mit dem Literaturwert...}
+
+\begin{center}
+
+	\begin{tabular}{|c|c|}
+		\hline
+		T in K & $\Lambda$ in kJ/mol\\
+		\hline
+		\hline
+		40 & 39570.8 \\
+		\hline
+		50 & 40076.6 \\
+		\hline
+		60 & 40577.2 \\
+		\hline
+		70 & 41077.8 \\
+		\hline
+		80 & 41580.5 \\
+		\hline
+		90 & 42079.0 \\
+		\hline
+		100 & 42584.4 \\
+		\hline  
+	\end{tabular} 
+\end{center}
 Es gibt einige Aspekte, die wir vernachlässigt haben:
 Das genutzte Thermometer hat eine Ansprechzeit von 7s um $99\%$ des wahren Wertes zu erreichen. Das ist zwar oft nicht vernachlässigbar, aber da die Abkühlung sehr langsam vonstatten geht, tritt kein großer Temperaturshift auf.
 Weiterhin ist die Methode, die zur Kalibration des Thermosensors genutzt wurde, zweifelhaft. Bei kochendem Wasser wird die Temperatur vielleicht gut durchmischt sein, sodass man auch einen realen Wert annehmen kann, die Kalibration in Eiswasser aber ist sehr unsicher. Die Temperatur nicht an jeder Stelle gleich, am Eis ist es kälter, am Flüssigkeitsrand durch Wärmeleitung wärmer als die theoretisch angenommenen \SI{0}{\celsius}, sodass man nicht so recht weiß, welchen Fehler man dafür einschätzen soll. Auch bei siedendem Wasser kommt eine Unsicherheit dazu, denn für einen bestimmten Druck herrscht auch eine unterschiedliche Siedetemperatur, die wir an dieser Stelle nicht näher einberechnet haben, da, wie später noch einmal ausgeführt wird, auch der Druck nicht genau bestimmbar ist, und was wieder zu neuen Ablesefehlern geführt hätte.
 Es wäre wahrscheinlich besser gewesen, ohne Kalibrierung zu arbeiten. {\color{red}Dazu hier Vergleichswerte unter Missachtung der Kalibrierung}:\\
 Nun zum Druck: Über eine Ungenauigkeit des Drucksensors ist nichts bekannt, auch nicht über seine Funktionsweise. Uns bleibt nur zur Abschätzung die Daten der hiesigen Wetterstation zu berücksichtigen und über die barometrische Höhenformel näherungsweise mit unserer Messung zu vergleichen, wobei allerdings der Luftdruck auch nicht zu messen war. Der Mittelwert unseres Umgebungsdruckes beträgt etwa $\SI{984.8}{\hecto \pascal}$ bei einer Höhe von 279 m ü.NN, die mit Phyphox gemessen wurden. Die Wetterstation gibt zur gleichen Zeit einen Druck von $\SI{991}{\hecto \pascal}$ bei 222 m ü.NN an. Zur Abschätzung: $p(h)=p_0*e^{-\frac{h}{h_B}}$, wobei mit $p_0=\SI{1018}{\hecto \pascal}$ und der barometrischen Höhe $h_B=\SI{8.3}{\kilo \meter}$ gilt: $p(222m) \approx \SI{991}{\hecto \pascal}$ und $p(279m) \approx \SI{984.3}{\hecto \pascal}$. Es sollte also nicht allzu relevante Änderungen geben.\\
-Gravierender dagegen ist die Leckrate des Aufbaus, die zwar herausrechenbar ist, indem man einen exponentiellen Zusammenhang benutzt mit dem von uns bei etwa $0.165*p_0$ gemessenen Anfangswert von etwa $60*(0.010501 \pm 5.3*10^{-5})\SI{}{\frac{\milli \bar } {\minute}}$, was aber aus Mangel einer zweiten Dichtigkeitsmessung unterlassen wurde. \\
-vgl. Literaturwerte, wo waren unsere Fehler? Was haben wir nicht beachtet? - 
+Gravierender dagegen ist die Leckrate des Aufbaus, die zwar herausrechenbar ist, indem man einen exponentiellen Zusammenhang benutzt mit dem von uns bei etwa $0.165*p_0$ gemessenen Anfangswert von etwa $60*(0.010501 \pm 5.3*10^{-5})\SI{}{ \, \milli \bar /{\minute}}$, was aber aus Mangel einer zweiten Dichtigkeitsmessung unterlassen wurde. \\
+{\color{red}vgl. Literaturwerte, wo waren unsere Fehler? Was haben wir nicht beachtet? - }
 \end{document}
