@@ -3,7 +3,7 @@
 """
 Created on Sat Oct 27 17:24:44 2018
 
-@author: Mate
+@author: Mate, Patrick
 """
 import matplotlib.pyplot as plt
 import numpy as np
@@ -89,5 +89,5 @@ if __name__ == "__main__":
     plt.ylabel(u"Druck/hPa")
     plt.xlabel('Zeit/s')
     plt.title("Rauschmessung Druck")
-    plt.savefig("Images/RauschmessungRT_p.jpg")
     plt.plot(t,np.array([np.mean(p)]*len(t)),color='green')
+    plt.savefig("Images/RauschmessungRT_p.jpg")
