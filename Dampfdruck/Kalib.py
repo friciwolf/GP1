@@ -29,6 +29,7 @@ import Rauschmessung
 sigmaT_Gerät_kl_70 = 0.2 #kleiner oder
 sigmaT_Gerät_gr_70 = 0.4 #größer als 70 °C
 sigma_p_dig=1500*0.05/100 #Auflösung Druck
+sigmap=np.sqrt((Rauschmessung.sp)**2+sigma_p_dig**2)
 
 
 def gauss(x, m, s):
@@ -67,7 +68,6 @@ if __name__ == "__main__":
     #Erstauswertung
     mp,sp,errp=Rauschmessung.round_good(np.mean(p),np.std(p),np.std(p)/np.sqrt(len(p)))
     errstatp=np.sqrt((Rauschmessung.sp/np.sqrt(len(p)))**2+sigma_p_dig**2)
-    sigmap=np.sqrt((Rauschmessung.sp)**2+sigma_p_dig**2)
     #errT=sT0/np.sqrt(len(T))
     #errp=sigmap
     
