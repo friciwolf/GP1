@@ -9,6 +9,8 @@
 \usepackage{siunitx} %\SI{44.9}{\celsius}
 \usepackage[german]{babel}
 \usepackage{fancyref}
+\usepackage{url}
+\usepackage{footnote}
 %\usepackage{circuitikz} für Stromkreise
 \long\def \/*#1*/{} %Kommentare mit \/* ---- */
 \geometry{
@@ -253,10 +255,10 @@
 	\section{Ergebnisse}
 	
 	\begin{center}
-		
+		\begin{minipage*}{6cm}
 		\begin{tabular}{|c|c|}
 			\hline
-			T in $^\circ$C &  $\Lambda$ in kJ/mol (Literatur)\\
+			T in $^\circ$C &  $\Lambda$ in kJ/mol (Literatur)\footnote{}\\
 			\hline
 			\hline
 			40 & 43345.1\\
@@ -273,7 +275,10 @@
 			\hline
 			100 & 40633.6\\
 			\hline  			
-		\end{tabular} 
+		\end{tabular}\par
+		\bigskip
+		Quelle:wissenschaft-technik-ethik.de/wasser\_eigenschaften.html
+	\end{minipage*}
 	\end{center}
 	Es gibt einige Aspekte, die wir vernachlässigt haben:
 	Das genutzte Thermometer hat eine Ansprechzeit von 7s um $99\%$ des wahren Wertes zu erreichen. Das ist zwar oft nicht vernachlässigbar, aber da die Abkühlung sehr langsam vonstatten geht, tritt kein großer Temperaturshift auf.
