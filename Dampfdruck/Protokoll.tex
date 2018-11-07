@@ -64,6 +64,7 @@
 	Daraus kann man durch Integrieren einen Zusammenhang zwischen dem Druck p und der Temperatur T herauslesen, der über Naturkonstanten und die molare Verdampfungsenthalpie $\Lambda$ gegeben ist: 
 	\begin{equation}
 	\ln\left(\frac{p}{p_0}\right)=-\frac{\Lambda}{R}\left(\frac{1}{T}-\frac{1}{T_0}\right)
+	\label{e6}
 	\end{equation}
 	Mit der idealen Gasgleichung $pV=\nu RT$ und der Gaskonstanten R.
 	\section{Versuchsaufbau}
@@ -174,7 +175,11 @@
 	T_{th} = (T_{gem}-\SI{1.13}{\celsius}-\SI{50}{\celsius})/0.9728 + \SI{50}{\celsius}
 	\label{Kalibrierung}
 	\end{equation}
-	Es ergibt sich zum Beispiel mit Fehlern aus der Gaußschen Fehlerfortpflanzung $T_{th}(T_{100}) = \SI{100.00}{\celsius} \pm  \SI{0.06}{\celsius} \pm \SI{0.52}{\celsius}$
+	Es ergibt sich zum Beispiel mit Fehlern aus der Gaußschen Fehlerfortpflanzung 	
+	\begin{equation}
+	\sigma_T = \sqrt{\left(\frac{T_gem-b-50 ^{\circ}C}{a^2}\right)^2 \cdot \sigma_a^2 +\left(\frac{\sigma_b}{a}\right)^2 + \left(\frac{\sigma_{Tgem}}{a}\right)^2}
+	\end{equation}
+	$T_{th}(T_{100}) = \SI{100.00}{\celsius} \pm  \SI{0.06}{\celsius} \pm \SI{0.52}{\celsius}$
 	und $T_{th}(T_0) = \SI{0.00}{\celsius} \pm \SI{0.06}{\celsius} \pm \SI{0.38}{\celsius}$
 	\\
 	\subsection{Gasdichtigkeitsmessung}
@@ -200,7 +205,28 @@
 			\label{DD_Roh}
 		\end{center}
 	\end{figure}
+	Diese kann man nun in die Form $ln\frac{p}{p_0\\}$ und $\frac{1}{T} - \frac{1}{T_0}$ bringen, um mit ihnen und Gleichung \ref{e6} die molare Verdampfungsenthalpie zu bestimmen (vgl. Abb. \ref{DD_ln-1}). Dies geschieht durch eine lineare Regression. 
+	\begin{figure}
+		\begin{center}
+			\includegraphics[scale=0.9]{Images/Dampfdruck_ln.pdf}
+			\caption{$\ln(\frac{p}{p_0})$ gegen $\frac{1}{T} - \frac{1}{T_0}$}
+			\label{DD_ln-1}
+		\end{center}
+	\end{figure}
+	Die Fehler, die aus der Rauschmessung und den Geräten entstanden und durch die Kalibrierung bearbeitet wurden, werden dabei entsprechend der Fehlerfortpflanzung weitergetragen.
+	\begin{equation}
+	\text{Mit x} = \frac{1}{T} - \frac{1}{T_0}:
+	\sigma_x = \sqrt{\left(\frac{\sigma_T}{T^2}\right)^2+\left(\frac{\sigma_{T_0}}{T_0^2}\right)^2}
+	\end{equation}
 	
+	\begin{equation}
+	\text{Mit y} = -R\ln\left(\frac{p}{p_0}\right):
+	\sigma_y = R \sqrt{\left(\frac{\sigma_p}{p}\right)^2 +\left(\frac{\sigma_{p0}}{p_0}\right)^2 }
+	\end{equation}
+\\
+	Um eine Tabelle von $\Lambda$ zu ermöglichen, wurden in Tausenderschritten die Werte der Enthalpie berechnet. Da man sowohl einen statistischen, als auch einen systematischen Fehler hat, muss diese Rechnung zweimal durchgeführt werden. Die resultierenden Endwerte werden nach dem Fehler gewichtet zusammengefügt 
+	Die Abhängigkeit von $\Lambda$ von der Temperatur kann man gut in Abb. \ref{DD_L(T)} sehen.	
+		
 	\begin{figure}
 		\begin{center}
 			\includegraphics[scale=0.9]{Images/Dampfdruck_L.pdf}
@@ -209,53 +235,32 @@
 		\end{center}
 	\end{figure}
 	
-	\begin{figure}
-		\begin{center}
-			\includegraphics[scale=0.9]{Images/Dampfdruck_ln.pdf}
-			\caption{$\ln(\frac{p}{p_0})$ gegen $\frac{1}{T} - \frac{1}{T_0}$}
-			\label{DD_ln-1}
-		\end{center}
-	\end{figure}
-	
-	Abb.s\\
-	$\Lambda$\\ 
 	\section{Ergebnisse}
 	{\color{red} Verglichen mit dem Literaturwert...}
 	
 	\begin{center}
 		
-		\begin{tabular}{|c|c|}
+		\begin{tabular}{|c|c|c|}
 			\hline
-			T in K  $\Lambda$ in kJ/mol (gemessen) &  $\Lambda$ in kJ/mol (Literatur)\\
+			T in K & $\Lambda$ in kJ/mol (gemessen) &  $\Lambda$ in kJ/mol (Literatur)\\
 			\hline
 			\hline
-			40 &  43345.1\\
+			40 & 39570.8 & 43345.1\\
 			\hline
-			50 &  42916.1\\
+			50 & 40076.6 & 42916.1\\
 			\hline
-			60 & 42478.3\\
+			60 & 40577.2 & 42478.3\\
 			\hline
-			70 &  42031.6\\
+			70 & 41077.8 & 42031.6\\
 			\hline
-			80 &41575.8\\
+			80 & 41580.5 & 41575.8\\
 			\hline
-			90 & 40873.2\\
+			90 & 42079.0 & 40873.2\\
 			\hline
-			100 & 40633.6\\
+			100 & 42584.4 & 40633.6\\
 			\hline  			
 		\end{tabular} 
 	\end{center}
-	\begin{equation}
-	\text{Mit x} = \frac{1}{T} - \frac{1}{T_0}:
-	\sigma_x = \sqrt{\left(\frac{\sigma_T}{T^2}\right)^2+\left(\frac{\sigma_T_0}{T_0^2}\right)^2}
-	\end{equation}
-	\begin{equation}
-		\text{Mit y} = -R\ln\left(\frac{p}{p_0}\right):
-		\sigma_y = R \sqrt{\left(\frac{\sigma_p}{p}\right)^2 +\left(\frac{\sigma_{p0}}{p_0}\right)^2 }
-	\end{equation}
-	\begin{equation}
-		\sigma_T = \sqrt{\left(\frac{T_gem-b-50 ^{\circ}C}{a^2}\right)^2 \cdot \sigma_a^2 +\left(\frac{\sigma_b}{a}\right)^2 + \left(\frac{\sigma_{Tgem}}{a}\right)^2}
-	\end{equation}
 	Es gibt einige Aspekte, die wir vernachlässigt haben:
 	Das genutzte Thermometer hat eine Ansprechzeit von 7s um $99\%$ des wahren Wertes zu erreichen. Das ist zwar oft nicht vernachlässigbar, aber da die Abkühlung sehr langsam vonstatten geht, tritt kein großer Temperaturshift auf.
 	Weiterhin ist die Methode, die zur Kalibration des Thermosensors genutzt wurde, zweifelhaft. Bei kochendem Wasser wird die Temperatur vielleicht gut durchmischt sein, sodass man auch einen realen Wert annehmen kann, die Kalibration in Eiswasser aber ist sehr unsicher. Die Temperatur nicht an jeder Stelle gleich, am Eis ist es kälter, am Flüssigkeitsrand durch Wärmeleitung wärmer als die theoretisch angenommenen \SI{0}{\celsius}, sodass man nicht so recht weiß, welchen Fehler man dafür einschätzen soll. Auch bei siedendem Wasser kommt eine Unsicherheit dazu, denn für einen bestimmten Druck herrscht auch eine unterschiedliche Siedetemperatur, die wir an dieser Stelle nicht näher einberechnet haben, da, wie später noch einmal ausgeführt wird, auch der Druck nicht genau bestimmbar ist, und was wieder zu neuen Ablesefehlern geführt hätte.
