@@ -224,27 +224,38 @@
 	
 	\begin{center}
 		
-		\begin{tabular}{|c|c|c|}
+		\begin{tabular}{|c|c|}
 			\hline
-			T in K & $\Lambda$ in kJ/mol (gemessen) &  $\Lambda$ in kJ/mol (Literatur)\\
+			T in K  $\Lambda$ in kJ/mol (gemessen) &  $\Lambda$ in kJ/mol (Literatur)\\
 			\hline
 			\hline
-			40 & 39570.8 & 43345.1\\
+			40 &  43345.1\\
 			\hline
-			50 & 40076.6 & 42916.1\\
+			50 &  42916.1\\
 			\hline
-			60 & 40577.2 & 42478.3\\
+			60 & 42478.3\\
 			\hline
-			70 & 41077.8 & 42031.6\\
+			70 &  42031.6\\
 			\hline
-			80 & 41580.5 & 41575.8\\
+			80 &41575.8\\
 			\hline
-			90 & 42079.0 & 40873.2\\
+			90 & 40873.2\\
 			\hline
-			100 & 42584.4 & 40633.6\\
+			100 & 40633.6\\
 			\hline  			
 		\end{tabular} 
 	\end{center}
+	\begin{equation}
+	\text{Mit x} = \frac{1}{T} - \frac{1}{T_0}:
+	\sigma_x = \sqrt{\left(\frac{\sigma_T}{T^2}\right)^2+\left(\frac{\sigma_T_0}{T_0^2}\right)^2}
+	\end{equation}
+	\begin{equation}
+		\text{Mit y} = -R\ln\left(\frac{p}{p_0}\right):
+		\sigma_y = R \sqrt{\left(\frac{\sigma_p}{p}\right)^2 +\left(\frac{\sigma_{p0}}{p_0}\right)^2 }
+	\end{equation}
+	\begin{equation}
+		\sigma_T = \sqrt{\left(\frac{T_gem-b-50 ^{\circ}C}{a^2}\right)^2 \cdot \sigma_a^2 +\left(\frac{\sigma_b}{a}\right)^2 + \left(\frac{\sigma_{Tgem}}{a}\right)^2}
+	\end{equation}
 	Es gibt einige Aspekte, die wir vernachlässigt haben:
 	Das genutzte Thermometer hat eine Ansprechzeit von 7s um $99\%$ des wahren Wertes zu erreichen. Das ist zwar oft nicht vernachlässigbar, aber da die Abkühlung sehr langsam vonstatten geht, tritt kein großer Temperaturshift auf.
 	Weiterhin ist die Methode, die zur Kalibration des Thermosensors genutzt wurde, zweifelhaft. Bei kochendem Wasser wird die Temperatur vielleicht gut durchmischt sein, sodass man auch einen realen Wert annehmen kann, die Kalibration in Eiswasser aber ist sehr unsicher. Die Temperatur nicht an jeder Stelle gleich, am Eis ist es kälter, am Flüssigkeitsrand durch Wärmeleitung wärmer als die theoretisch angenommenen \SI{0}{\celsius}, sodass man nicht so recht weiß, welchen Fehler man dafür einschätzen soll. Auch bei siedendem Wasser kommt eine Unsicherheit dazu, denn für einen bestimmten Druck herrscht auch eine unterschiedliche Siedetemperatur, die wir an dieser Stelle nicht näher einberechnet haben, da, wie später noch einmal ausgeführt wird, auch der Druck nicht genau bestimmbar ist, und was wieder zu neuen Ablesefehlern geführt hätte.
