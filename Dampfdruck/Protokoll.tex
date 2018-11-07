@@ -109,8 +109,6 @@
 	Nach der eigentlichen Versuchsdurchführung kann eine weitere Gasdichtigkeitsmessung wie 4.3. durchgeführt werden, um zu gewährleisten, dass sich die Leckrate am Aufbau nicht verändert hat. Diese entfällt aber bei uns, da keine Zeit mehr ist.
 	
 	\section{Auswertung}
-	{\color{red}- 7s Ansprechzeit?}\\
-	{\color{red}T100 wirklich 100 Grad bei unserem Druck?}\\
 	\subsection{Rauschmessung}
 	Die Rauschmessung umfasst 3326 Datenpunkte, bei denen der Temperatursensor in Ruhe die als konstant angenommene Raumtemperatur gemessen hat, der Absolutdrucksensor zugleich den konstanten Umgebungsdruck. Dabei soll die Streuung der Werte um den Mittelwert erarbeitet werden, um den statistischen Fehler für alle folgenden Messungen abschätzen zu können.\\
 	Die Ergebnisse sind wie folgt (Abb. \ref{RM_T_p}):\\
@@ -227,6 +225,23 @@
 	Um eine Tabelle von $\Lambda$ zu ermöglichen, wurden in Tausenderschritten die Werte der Enthalpie berechnet. Da man sowohl einen statistischen, als auch einen systematischen Fehler hat, muss diese Rechnung zweimal durchgeführt werden. Die resultierenden Endwerte werden nach dem Fehler gewichtet zusammengefügt 
 	Die Abhängigkeit von $\Lambda$ von der Temperatur kann man gut in Abb. \ref{DD_L(T)} sehen.	
 		
+		
+	\begin{center}
+		\begin{tabular}{|c|c|c|}
+			\hline
+			T in K &  $\Lambda$ in kJ/mol (gemessen) & $\chi^2/N$\\
+			\hline
+			\hline
+			334 & 40832.6 $\pm$ 8.8 $\pm$ 30 & 6.541\\
+			\hline
+			345 & 40043.4 $\pm$ 15.9 $\pm$ 54.4 & 2.362\\
+			\hline
+			354 & 39429.4 $\pm$ 28.4$\pm$ 97.4 & 1.310\\
+			\hline
+			367 & 38558.5 $\pm$ 111.9 $\pm$ 383.6 & 1.029\\
+			\hline  			
+		\end{tabular} 
+	\end{center}
 	\begin{figure}
 		\begin{center}
 			\includegraphics[scale=0.9]{Images/Dampfdruck_L.pdf}
@@ -236,36 +251,34 @@
 	\end{figure}
 	
 	\section{Ergebnisse}
-	{\color{red} Verglichen mit dem Literaturwert...}
 	
 	\begin{center}
 		
-		\begin{tabular}{|c|c|c|}
+		\begin{tabular}{|c|c|}
 			\hline
-			T in K & $\Lambda$ in kJ/mol (gemessen) &  $\Lambda$ in kJ/mol (Literatur)\\
+			T in $^\circ$C &  $\Lambda$ in kJ/mol (Literatur)\\
 			\hline
 			\hline
-			40 & 39570.8 & 43345.1\\
+			40 & 43345.1\\
 			\hline
-			50 & 40076.6 & 42916.1\\
+			50  & 42916.1\\
 			\hline
-			60 & 40577.2 & 42478.3\\
+			60 & 42478.3\\
 			\hline
-			70 & 41077.8 & 42031.6\\
+			70 & 42031.6\\
 			\hline
-			80 & 41580.5 & 41575.8\\
+			80 & 41575.8\\
 			\hline
-			90 & 42079.0 & 40873.2\\
+			90 & 40873.2\\
 			\hline
-			100 & 42584.4 & 40633.6\\
+			100 & 40633.6\\
 			\hline  			
 		\end{tabular} 
 	\end{center}
 	Es gibt einige Aspekte, die wir vernachlässigt haben:
 	Das genutzte Thermometer hat eine Ansprechzeit von 7s um $99\%$ des wahren Wertes zu erreichen. Das ist zwar oft nicht vernachlässigbar, aber da die Abkühlung sehr langsam vonstatten geht, tritt kein großer Temperaturshift auf.
 	Weiterhin ist die Methode, die zur Kalibration des Thermosensors genutzt wurde, zweifelhaft. Bei kochendem Wasser wird die Temperatur vielleicht gut durchmischt sein, sodass man auch einen realen Wert annehmen kann, die Kalibration in Eiswasser aber ist sehr unsicher. Die Temperatur nicht an jeder Stelle gleich, am Eis ist es kälter, am Flüssigkeitsrand durch Wärmeleitung wärmer als die theoretisch angenommenen \SI{0}{\celsius}, sodass man nicht so recht weiß, welchen Fehler man dafür einschätzen soll. Auch bei siedendem Wasser kommt eine Unsicherheit dazu, denn für einen bestimmten Druck herrscht auch eine unterschiedliche Siedetemperatur, die wir an dieser Stelle nicht näher einberechnet haben, da, wie später noch einmal ausgeführt wird, auch der Druck nicht genau bestimmbar ist, und was wieder zu neuen Ablesefehlern geführt hätte.
-	Es wäre wahrscheinlich besser gewesen, ohne Kalibrierung zu arbeiten. {\color{red}Dazu hier Vergleichswerte unter Missachtung der Kalibrierung}:\\
+	Es wäre wahrscheinlich besser gewesen, ohne Kalibrierung zu arbeiten.\\
 	Nun zum Druck: Über eine Ungenauigkeit des Drucksensors ist nichts bekannt, auch nicht über seine Funktionsweise. Uns bleibt nur zur Abschätzung die Daten der hiesigen Wetterstation zu berücksichtigen und über die barometrische Höhenformel näherungsweise mit unserer Messung zu vergleichen, wobei allerdings der Luftdruck auch nicht zu messen war. Der Mittelwert unseres Umgebungsdruckes beträgt etwa $\SI{984.8}{\hecto \pascal}$ bei einer Höhe von 279 m ü.NN, die mit Phyphox gemessen wurden. Die Wetterstation gibt zur gleichen Zeit einen Druck von $\SI{991}{\hecto \pascal}$ bei 222 m ü.NN an. Zur Abschätzung: $p(h)=p_0*e^{-\frac{h}{h_B}}$, wobei mit $p_0=\SI{1018}{\hecto \pascal}$ und der barometrischen Höhe $h_B=\SI{8.3}{\kilo \meter}$ gilt: $p(222m) \approx \SI{991}{\hecto \pascal}$ und $p(279m) \approx \SI{984.3}{\hecto \pascal}$. Es sollte also nicht allzu relevante Änderungen geben.\\
 	Gravierender dagegen ist die Leckrate des Aufbaus, die zwar herausrechenbar ist, indem man einen exponentiellen Zusammenhang benutzt mit dem von uns bei etwa $0.165*p_0$ gemessenen Anfangswert von etwa $60*(0.010501 \pm 5.3*10^{-5})\SI{}{ \, \milli \bar /{\minute}}$, was aber aus Mangel einer zweiten Dichtigkeitsmessung unterlassen wurde. \\
-	{\color{red}vgl. Literaturwerte, wo waren unsere Fehler? Was haben wir nicht beachtet? - }
 \end{document}
