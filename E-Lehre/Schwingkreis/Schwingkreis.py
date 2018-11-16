@@ -41,7 +41,7 @@ t1,t2, U1, U2 = [], [], [], []
 t1, U1 = f_open("ALL0000/U1.dat")
 t2, U2 = f_open("ALL0000/U2.dat")
 
-plt.title("Entladung des Kondensators durch den Schwingkreis \n $R = 10 \Omega$")
+plt.title("Entladung des Kondensators über den Schwingkreis \n $R = 10 \Omega$")
 plt.plot(t1, U1, label="U1")
 plt.plot(t2, np.array(U2)*10, label="U2 - scale factor: 10")
 plt.legend()
