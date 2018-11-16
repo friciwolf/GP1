@@ -12,6 +12,8 @@ from scipy.signal import find_peaks_cwt
 import numpy as np
 from pylab import *
 
+#ist noch in der Entwicklungsphase liefert aber immerhin schonmal halbwegs vernünftige Werte...
+
 close('all')
 
 def calc_mean_distance(ind,v):
