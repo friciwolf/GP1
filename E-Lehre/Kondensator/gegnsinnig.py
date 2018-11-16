@@ -13,7 +13,10 @@ import numpy as np
 from pylab import *
 
 #ist noch in der Entwicklungsphase liefert aber immerhin schonmal halbwegs vernünftige Werte...
-
+'''
+Funktioniert auch für den Gleichsinnigen Fall, wobei die Bereiche für die Peakanalyse
+evtl. noch angepasst werden müssten. Ansonsten: gegensinnig ca. 661 Hz und gleichsinnig ca. 442 Hz
+'''
 close('all')
 
 def calc_mean_distance(ind,v):
