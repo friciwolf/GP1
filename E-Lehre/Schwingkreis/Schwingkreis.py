@@ -5,7 +5,6 @@ Created on Fri Nov 16 08:35:53 2018
 
 @author: Mate
 """
-
 import matplotlib.pyplot as plt
 import numpy as np
 import praktikum.analyse as anal
@@ -47,6 +46,7 @@ def lok_max(t, U):
             Tmax.append(t[i])
             m.append(U[i])
     return Tmax, m
+
 #TODO: Entscheidung ob Einhüllende Sinn fürs Plot macht
 def delta(t, U):
     """
@@ -88,7 +88,7 @@ for i in range(len(R)):
 #Grenzfall:
 f = "Grenzfall_Messung_9.lab"
 t, U, I = c_open(f)
-plt.title("Entladung des Kondensators über den Schwingkreis - Grenzfall bei \n R = ??? $\Omega$")
+plt.title("Entladung des Kondensators über den Schwingkreis - Grenzfall bei \n R = 111,3 $\Omega$")
 plt.plot(t, I, label="I")
 plt.plot(t, U, label="U")
 plt.savefig("Images/grenzfall.pdf")
