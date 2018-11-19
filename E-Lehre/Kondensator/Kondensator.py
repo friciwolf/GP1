@@ -30,8 +30,8 @@ wvm=np.argmax(IA==max(IA))+2 #weg vom Maximum bei IA, damit nur monoton fallend 
 C_Hersteller=10**(-5) #Farad 
 tau_theo=-1/(Widerstand.R*C_Hersteller)
 
-UE=UE-Uoffset+0.02
-IA=IA-Ioffset+0.00025
+UE=UE-Uoffset+0.0215 #0.0215
+IA=IA-Ioffset+0.00032 #0.00025      #Hier rumschrauben
 
 
 if __name__=='__main__':
@@ -42,6 +42,7 @@ if __name__=='__main__':
     plt.ylabel('Spannung in Volt',color='darkblue')
     plt.twinx()
     plt.plot(tA,IA, color='darkorange', label='Strom')
+    plt.axvline(tE[wvm], color="red", linestyle = "--")
     plt.ylabel('Strom in Ampere', rotation=270,verticalalignment='bottom',color='darkorange')
     #plt.savefig('Images/Kondensator_Auf.jpg')
     plt.figure()
@@ -52,7 +53,7 @@ if __name__=='__main__':
     plt.ylabel('Spannung in Volt',color='darkblue')
     plt.twinx()
     plt.plot(tE,IE, color='darkorange', label='Strom')
-    plt.ylabel('Strom in Ampere', rotation=270,verticalalignment='bottom',color='darkorange')
+    plt.ylabel('Strom in Ampere', rotation=270,verticalalignment='top',color='darkorange')
     #plt.savefig('Images/Kondensator_Ent.jpg')
     plt.figure()
 
@@ -91,7 +92,7 @@ if __name__=='__main__':
     
     #Plot Tau-Bestimmung Entladung
     plt.plot(tE,UE_log,'bo', label='logarrithmierte Messreihe U_Entladung')
-    plt.plot(tE,tauE*tE+bE, color='brown', label=u'Geradenanpassung $\\tau$*x+b mit $\\tau$={}, b={} mit Chi²/f={}'.format(tauE,bE,chiqE/len(tE)))
+    plt.plot(tE,tauE*tE+bE, color='brown', label=u'Geradenanpassung $\\tau$*x+b mit $\\tau$={}, b={} mit Chi²/f={}'.format(tauE,round(bE,2),round(chiqE/len(tE),2)))
     plt.title('Bestimmung des Parameters $\\tau$ aus der Entladungsspannung')
     plt.xlabel('Zeit in s')
     plt.ylabel('log(U_Entladung)')
@@ -101,7 +102,7 @@ if __name__=='__main__':
     
     #Plot Tau-Bestimmung Aufladung
     plt.plot(tA,IA_log,'bo', label='logarrithmierte Messreihe I_Aufladung')
-    plt.plot(tA,tauA*tA+bA,color='brown', label=u'Geradenanpassung $\\tau$*x+b mit $\\tau$={}, b={} mit Chi²/f={}'.format(tauA,bA,chiqA/len(tA)))
+    plt.plot(tA,tauA*tA+bA,color='brown', label=u'Geradenanpassung $\\tau$*x+b mit $\\tau$={}, b={} mit Chi²/f={}'.format(tauA,round(bA,2),round(chiqA/len(tA),2)))
     plt.title('Bestimmung des Parameters $\\tau$ aus dem Aufladungsstrom')
     plt.xlabel('Zeit in s')
     plt.ylabel('log(I_Aufladung)')
@@ -112,7 +113,6 @@ if __name__=='__main__':
 #Gewichteter Mittelwert
 tau_mittel,etau_mittel=ana.gewichtetes_mittel(np.array([tauA,tauE]),np.array([etauA,etauE]))
 
-#TODO: tau=|=Tau
 #Kapazität bestimmen
 C_s=-1/(tau_mittel*Widerstand.R)
 C_err_stat=C_s*(etau_mittel/tau_mittel)
@@ -128,15 +128,15 @@ if __name__=='__main__':
     s=5 #step, damit nicht ein Gewusel an Residuenpunkten
     
     plt.title('Residuenplot - Abweichung von der Geraden ln(U_Ent)-f(t)')
-    plt.errorbar(tE[::s],(UE_log-(tauE*tE+bE))[::s],yerr=np.array(Widerstand.U_err_stat/UE)[::s],fmt='ko',capsize=0.5)
+    plt.errorbar(tE[::s],(UE_log-(tauE*tE+bE))[::s],yerr=np.array(Widerstand.U_err_stat/UE)[::s],fmt='ko',capsize=2, markersize=3)
     plt.xlabel('t in s')
-    plt.ylabel('ln(U)-t/tau+b in V')
+    plt.ylabel('ln(U)-t/$\\tau$+b in V')
     #plt.savefig('Images/Kondensatur_ResE')
     plt.figure()
     
     plt.title('Residuenplot - Abweichung von der Geraden ln(I_Auf)-f(t)')
-    plt.errorbar(tA[::s],(IA_log-(tauA*tA+bA))[::s],yerr=np.array(Widerstand.I_err_stat/IA[wvm:])[::s],fmt='ko',capsize=0.5)
+    plt.errorbar(tA[::s],(IA_log-(tauA*tA+bA))[::s],yerr=np.array(Widerstand.I_err_stat/IA[wvm:])[::s],fmt='ko',capsize=2, markersize=3)
     plt.xlabel('t in s')
-    plt.ylabel('ln(I)-t/tau+b in V')
+    plt.ylabel('ln(I)-t/$\\tau$+b in V')
     #plt.savefig('Images/Kondensatur_ResA')
     
