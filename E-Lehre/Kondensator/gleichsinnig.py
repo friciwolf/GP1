@@ -12,11 +12,6 @@ from scipy.signal import find_peaks_cwt
 import numpy as np
 from pylab import *
 
-#ist noch in der Entwicklungsphase liefert aber immerhin schonmal halbwegs vernünftige Werte...
-'''
-Funktioniert auch für den Gleichsinnigen Fall, wobei die Bereiche für die Peakanalyse
-evtl. noch angepasst werden müssten. Ansonsten: gegensinnig ca. 661 Hz und gleichsinnig ca. 442 Hz
-'''
 close('all')
 
 def calc_mean_distance(ind,v):
@@ -29,7 +24,7 @@ def calc_mean_distance(ind,v):
     dis = dis/(len(ind)-1)
     return dis
 
-data = cassy.CassyDaten('Gegensinnig/gegen.koppl.eisen.lab')
+data = cassy.CassyDaten('Gleichsinnig/gleich.koppl.eisen.lab')
 U1 = data.messung(1).datenreihe('U_B1').werte
 U2 = data.messung(1).datenreihe('U_B2').werte
 t = data.messung(1).datenreihe('t').werte
@@ -64,7 +59,7 @@ grid()
 
 subplots_adjust(hspace = 0.5)
 
-fig.savefig('Auswertung/Rohdaten_gegensinnig.pdf')
+fig.savefig('Auswertung/Rohdaten_gleichsinnig.pdf')
 
 fig = figure()
 
@@ -72,12 +67,13 @@ fig = figure()
 t_err = 2*(t[1]-t[0])
 
 subplot(2,1,1)
-ind_max = find_peaks_cwt(U1,np.arange(1,20))
+ind_max = find_peaks_cwt(U1,np.arange(1,30))
 ind_max = ind_max[:16]
 
-scatter(t[:3000],U1[:3000],marker = ".")
+scatter(t[:4500],U1[:4500],marker = ".")
 scatter(t[ind_max],U1[ind_max],marker = "x",color = 'red')
 dis = calc_mean_distance(ind_max,t)
+
 freq1 = 1/dis
 freq1_err = (freq1/dis)*t_err
 print("Frequenz 1 aus Peaks: ",freq1, "+-",freq1_err)
@@ -87,10 +83,10 @@ title('erster Schwingkreis')
 grid()
 
 subplot(2,1,2)
-ind_max = find_peaks_cwt(U2,np.arange(1,20))
+ind_max = find_peaks_cwt(U2,np.arange(1,30))
 ind_max = ind_max[:16]
 
-scatter(t[:3000],U2[:3000],marker = ".")
+scatter(t[:4500],U2[:4500],marker = ".")
 scatter(t[ind_max],U2[ind_max],marker = "x",color = 'red')
 dis = calc_mean_distance(ind_max,t)
 freq2 = 1/dis
@@ -108,5 +104,5 @@ freq_mean = (freq1/freq1_err**2+freq2/freq2_err**2)/(1/freq1_err**2+1/freq2_err*
 freq_std = np.sqrt(1/(1/freq1_err**2+1/freq2_err**2))
 print("mittlere Frequenz aus Peaks",freq_mean,"+-",freq_std)
 
-fig.savefig('Auswertung/Peakanalyse_gegensinnig.pdf')
+fig.savefig('Auswertung/Peakanalyse_gleichsinnig.pdf')
 
