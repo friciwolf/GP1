@@ -39,7 +39,7 @@ I_err_array=[]
 U_sigma=[]
 I_sigma=[]
 U_B=20
-I_B=0.6 #TODO: Richtig?
+I_B=0.6
 
 
 sigmaU = U_B / 4096. / np.sqrt(12.)
