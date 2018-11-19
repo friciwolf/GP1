@@ -59,7 +59,7 @@ def analyse_Schwingung(file,R):
     ind_max = ind_max[1:]
     dis = calc_mean_distance(ind_max,t)
     
-    hist(U[1500:])
+    hist(U[1000:])
     title("Offset-Korrektur")
     off_set = np.mean(U[1000:])
     print(off_set)
