@@ -6,85 +6,128 @@ Created on Fri Nov 16 08:35:53 2018
 @author: Mate
 """
 import matplotlib.pyplot as plt
-import numpy as np
 import praktikum.analyse as anal
-import praktikum.cassy as cassy
+import numpy as np
+from defs import *
 
-def f_open(loc):
-    """
-    Zum Einlesen der Dateien der Oszilloskop
-    Parameter: loc - Ort der Datei
-    returns: t, U
-    """
-    file = open(loc)
-    t, U = [], []
-    for l in file:
-        data = l.split(",") # 3<=>t; 4<=>U
-        t.append(float(data[3]))
-        U.append(float(data[4]))
-    return t, U
+s_U_Ger = 10.0*np.power(2.0, -11) #Auflösungsvermögen in V
 
-def c_open(file):
-    """
-    Zum Einlesen der CASSY-Messungen
-    Parameter: file - Messdatei
-    returns: t, U, I 
-    """
-    data = cassy.CassyDaten(file)
-    t = data.messung(1).datenreihe("t").werte
-    I = data.messung(1).datenreihe("I_A2").werte
-    U = data.messung(1).datenreihe("U_B2").werte 
-    return t, U, I
+def s_U_sys(U): return 0.01+0.005*U
 
-def lok_max(t, U):
-    """
-    Berechnet die lokalen Maxima einer Schwingung
-    """
-    Tmax, m = [], []
-    for i in range(10, len(U)-11):
-        if max(np.array(U[i-10:i+10])) == U[i]:
-            Tmax.append(t[i])
-            m.append(U[i])
-    return Tmax, m
-
-#TODO: Entscheidung ob Einhüllende Sinn fürs Plot macht
 def delta(t, U):
     """
     Berechnet das Delta einer Schwingung
     """
-    delta = 0.0
+    d, ed = [], []
     tmaxima, maxima = lok_max(t, U)
-    delta = np.log(maxima[1]/maxima[0])/(tmaxima[1]-tmaxima[0])
-    return delta
+    if len(tmaxima) <= 3: return [1.0, 1.0]
+    for i in range(len(maxima)-1):
+        d.append(np.log(maxima[i]/maxima[i+1])/(tmaxima[i+1]-tmaxima[i]))
+        ed.append(s_U_Ger * np.sqrt(np.power(maxima[i],-2)+np.power(maxima[i+1],-2))/((tmaxima[i+1]-tmaxima[i])))
+    print(str(tmaxima)+"\n"+str(np.round(maxima,1)))
+    print("==="*20)
+    return gew_mittel(d, ed)
 
 #Plot der Messungen mit dem Oszilloskop
-for i in range(4):
-    t1,t2, U1, U2 = [], [], [], []
-    t1, U1 = f_open("ALL000"+str(i)+"/U1.dat")
-    t2, U2 = f_open("ALL000"+str(i)+"/U2.dat")
-    plt.title("Entladung des Kondensators über den Schwingkreis \n R = ??? $\Omega$")
-    plt.plot(t1, U1, label="U1")
-    plt.plot(t2, U2, label="U2")
-    plt.savefig("Images/O_"+str(i)+".pdf")
-    plt.legend()
-    plt.show()
-    plt.close()
+#for i in range(4):
+#    t1,t2, U1, U2 = [], [], [], []
+#    t1, U1 = f_open("ALL000"+str(i)+"/U1.dat")
+#    t2, U2 = f_open("ALL000"+str(i)+"/U2.dat")
+#    plt.title("Entladung des Kondensators über den Schwingkreis \n R = ??? $\Omega$")
+#    plt.plot(t1, U1, label="U1")
+#    plt.plot(t2, U2, label="U2")
+#    plt.savefig("Images/O_"+str(i)+".pdf")
+#    plt.legend()
+#    plt.show()
+#    plt.close()
 
 #Plot der Messungen mit den Widerständen R:
 R = [5.1, 47, 100, 1000, 208, 173, 137, 100.6]
-for i in range(len(R)): 
+offsetkorr = [1601, 401, 171, 900, 343, 220, 150, 60]
+R_plt = []
+Delta_werte = []
+Delta_werte_err = []
+
+for i in range(len(R)):
     f = str(R[i])+"_Messung_"+str(i+1)+".lab"
     t, U, I = c_open(f)
-    plt.title("Entladung des Kondensators über den Schwingkreis \n R = " +str(R[i]) + " $\Omega$")
-    d = delta(t, U)
-    plt.plot(t, U[0]*np.exp(d*np.array(t)), label = "Einhüllende")
-    plt.plot(t, I, label="I")
-    plt.plot(t, U, label="U")
-    plt.savefig("Images/C_"+str(R[i])+".pdf")
-    plt.legend()
-    plt.show()
-    plt.close()
-
+    if R[i] == 173:
+        U=U[:1501]
+        t=t[:1501]
+        I=I[:1501]
+    #Korreketur des Offsets:
+    dU = np.average(U[offsetkorr[i]:])
+    U=U-dU
+    
+    #Schwingfall
+    if i==0 or i==1: 
+        #Berechnung von Delta aus dem Amplitudenverhältnis
+        d, ed = delta(t, np.abs(U))
+        maxima = lok_max(t, np.abs(U))
+        emax = []
+        emax = s_U_Ger * np.ones(len(maxima[0]))
+        if len(maxima[0])>3: plt.plot(maxima[0], maxima[1], marker="x")
+        if dta!=1.0: plt.plot(t, U[0]*np.exp(-dta*np.array(t)), label = "Einhüllende")
+        print("Die Dämpfungskonstante Delta berechnet aus der Amplitude: \n d=" + str(np.round(dta,4)) + "+-" + str(np.round(edta,4)))
+        
+        #Berechnung von Delta aus der linearen Regression
+        #TODO: Fehler zu groß!
+#        d,ed,b,eb,chiq,corr = anal.lineare_regression(np.array(maxima[0]), np.log(maxima[1]), np.log(emax))
+#        print("Die Dämpfungskonstante Delta berechnet aus der linearen Regression: \n d=" + str(d) + "+-" + str(ed))
+        #plot
+        plt.title("Entladung des Kondensators über den Schwingkreis \n R = " +str(R[i]) + " $\Omega$")
+        plt.errorbar(maxima[0],maxima[1],yerr=emax, fmt="x")
+        plt.axvline(x=t[offsetkorr[i]], color="red", linestyle = "--")
+        plt.plot(t, I*20, label="20$\cdot$I")
+        plt.plot(t, U, label="U")
+        plt.savefig("Images/C_"+str(R[i])+".pdf")
+        plt.legend()
+        plt.show()
+        plt.close()
+        
+        plt.title("Entladung des Kondensators über den Schwingkreis - log \n R = " +str(R[i]) + " $\Omega$")
+        plt.errorbar(maxima[0],np.log(maxima[1]),yerr=np.log(emax), fmt="o",markersize=4, capsize=3)
+        plt.plot(t[:offsetkorr[i]], -d*t[:offsetkorr[i]]+eb, label="Regressionsgerade")
+        #plt.savefig("Images/C_"+str(R[i])+".pdf")
+        plt.legend()
+        plt.show()
+        plt.close()
+        
+    #i=2: Grenzfall
+    #Kriechfall
+    if i>=3 and i!=7:
+        #Lineare Regression für Delta
+        t_sliced = t[:offsetkorr[i]]
+        U_sliced = U[:offsetkorr[i]]
+        d,ed,b,eb,chiq,corr = anal.lineare_regression(np.array(t_sliced), np.log(U_sliced), np.log(s_U_Ger*np.ones(len(U_sliced))))
+        print("Die Dämpfungskonstante Delta berechnet aus der linearen Regression: \n d=" + str(d) + "+-" + str(ed))
+        #plot
+        plt.title("Entladung des Kondensators über den Schwingkreis \n R = " +str(R[i]) + " $\Omega$")
+        plt.axvline(x=t[offsetkorr[i]], color="red", linestyle = "--")
+        plt.plot(t, I*20, label="20$\cdot$I")
+        plt.plot(t, U, label="U")
+        plt.savefig("Images/C_"+str(R[i])+".pdf")
+        plt.legend()
+        plt.show()
+        plt.close()
+        
+        plt.title("Entladung des Kondensators über den Schwingkreis - log \n R = " +str(R[i]) + " $\Omega$")
+        plt.errorbar(t_sliced,np.log(U_sliced),yerr=np.log(s_U_Ger)*np.ones(len(U_sliced)), fmt="o",markersize=4, capsize=3)
+        plt.plot(t_sliced, d*t_sliced+eb, label="Regressionsgerade")
+        #plt.savefig("Images/C_"+str(R[i])+".pdf")
+        plt.legend()
+        plt.show()
+        plt.close()
+    
+    R_plt.append(R[i])
+    Delta_werte.append(d)
+    Delta_werte_err.append(ed)
+    
+plt.errorbar(R, np.abs(Delta_werte), Delta_werte_err, fmt="o",markersize=4, capsize=3)
+plt.title("Die Veränderung der Dämpfungskonstante als Funktion von R")
+plt.show()
+plt.close()
+    
 #Grenzfall:
 f = "Grenzfall_Messung_9.lab"
 t, U, I = c_open(f)
