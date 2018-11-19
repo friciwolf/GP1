@@ -125,6 +125,13 @@ if __name__=='__main__':
     plt.plot(x,R*x+b, color='red',label=u'Regression Rx+b mit R={}, b={},Chi²/f={}'.format(R,b,chiq/len(U_array)))
     plt.plot(x,RUp*x+bUp, color='lightblue',label=u'U+ mit R+={}, b+={},Chi²/f={}'.format(RUp,bUp,chiqUp/len(U_array)))
     plt.plot(x,RUm*x+bUm, color='lightgreen',label=u'U- mit R-={}, b-={},Chi²/f={}'.format(RUm,bUm,chiqUm/len(U_array)))
+    '''
+    #alternative Darstellung
+    plt.plot(x,RUp*x+bUp, color='lightblue',label = "Regression U+")
+    plt.plot(x,RUm*x+bUm,'--', color='lightblue', label = "Regression U-")
+    plt.plot(x,RIp*x+bIp, color='lightgreen',label = "Regression I+")
+    plt.plot(x,RIm*x+bIm,'--', color='lightgreen', label = "Regression I-")
+    '''
     plt.xlabel('I in A')
     plt.ylabel('U in V')
     plt.legend()
