@@ -101,4 +101,4 @@ def analyse_Schwingung(file,R):
     print("R_Rest: ",R_L,"+-",R_L_err,"Ohm")
     print("Herstellerwerte: L = 0.009 R_L = 2.5")
 
-analyse_Schwingung("Schwingkreis/Cassy/5.1_Messung_1.lab",5.1)
+analyse_Schwingung("5.1_Messung_1.lab",5.1)
