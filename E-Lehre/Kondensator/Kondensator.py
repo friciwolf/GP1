@@ -6,6 +6,7 @@ Created on Mon Nov 12 20:16:31 2018
 """
 
 import Widerstand
+import praktikum.analyse as ana
 
 
 #Aufladung
