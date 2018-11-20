@@ -36,19 +36,27 @@ w_array,A = analyse.fourier_fft(t,U1)
 ind_w1=analyse.peak(w_array,A,np.argmax(w_array>950),np.argmax(w_array>1020))
 ind_w2=analyse.peak(w_array,A,np.argmax(w_array>1100),np.argmax(w_array>1160))
 
-#axvline(t[ind_w[0]], color="RED", linestyle='dashed', linewidth=1)
-
 plot(w_array,A/max(A))
 plt.axvline(x=w_array[int(ind_w1)], color="darkred", linestyle = "--") 
-plt.text(w_array[int(ind_w1)],0.7,'{}'.format(w_array[int(ind_w1)]))
+plt.text(w_array[int(ind_w1)],0.7,'max_1:{} Hz'.format(np.round(w_array[int(ind_w1)],4)))
 plt.axvline(x=w_array[int(ind_w2)], color="darkred", linestyle = "--") 
-plt.text(w_array[int(ind_w2)],0.5,'{}'.format(w_array[int(ind_w2)]))
+plt.text(w_array[int(ind_w2)],0.5,'max_2:{} Hz'.format(np.round(w_array[int(ind_w2)],4)))
 xlim(0,4000)
 plt.savefig('Images/Schwebung_FFT')
 err1=w_array[int(np.ceil(ind_w1))]-w_array[int(np.floor(ind_w1))]
 err2=w_array[int(np.ceil(ind_w2))]-w_array[int(np.floor(ind_w2))]
+#Ausgabe der Werte
 print('f+={} +- {}'.format(w_array[int(ind_w1)],err1))
 print('f-={} +- {}'.format(w_array[int(ind_w2)],err2))
+
+f_p = w_array[int(ind_w1)]
+f_m = w_array[int(ind_w2)]
+f_sch = 1/2*(f_m-f_p)
+f_k = 1/2*(f_m+f_p)
+
+sigma = np.sqrt(1/2*(err1+err2))
+print('f_sch={} +- {}'.format(f_sch,sigma))
+print('f_k={} +- {}'.format(f_k,sigma))
 
 figure()
 #Rohdaten
