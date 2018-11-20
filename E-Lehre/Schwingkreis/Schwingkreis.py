@@ -18,6 +18,8 @@ def delta(t, U):
     """
     d, ed = [], []
     tmaxima, maxima = lok_max(t, U)
+    print(tmaxima)
+    print(maxima)
     if len(tmaxima) <= 3: return [1.0, 1.0]
     for i in range(len(maxima)-1):
         d.append(np.log(maxima[i]/maxima[i+1])/(tmaxima[i+1]-tmaxima[i]))
@@ -63,6 +65,14 @@ for i in range(len(R)):
         maxima = lok_max(t, np.abs(U))
         emax = []
         emax = s_U_Ger * np.ones(len(maxima[0]))
+        
+        #Residum
+        plt.axhline(0)
+        plt.plot(maxima[0], U[0]*np.exp(-d*np.array(maxima[0]))-maxima[1], label = "Residum exp")
+        plt.show()
+        plt.legend()
+        plt.close()
+        
         if len(maxima[0])>3: plt.plot(maxima[0], maxima[1], marker="x")
         if d!=1.0: plt.plot(t, U[0]*np.exp(-d*np.array(t)), label = "Einhüllende")
         print("Die Dämpfungskonstante Delta berechnet aus der Amplitude: \n d=" + str(np.round(d,4)) + "+-" + str(np.round(ed,4)))
@@ -76,8 +86,16 @@ for i in range(len(R)):
         plt.errorbar(maxima[0],maxima[1],yerr=emax, fmt="x")
         plt.axvline(x=t[offsetkorr[i]], color="red", linestyle = "--")
         plt.plot(t, I*20, label="20$\cdot$I")
+        plt.plot(t, np.exp(d2*np.array(t)+b), label = "Einhüllende2")
         plt.plot(t, U, label="U")
         plt.savefig("Images/C_"+str(R[i])+".pdf")
+        plt.legend()
+        plt.show()
+        plt.close()
+        
+        #Residum2
+        plt.axhline(0)
+        plt.errorbar(maxima[0], np.exp(d2*np.array(maxima[0])+b)-maxima[1], emax, fmt="x",markersize=4, capsize=3)
         plt.legend()
         plt.show()
         plt.close()
@@ -85,6 +103,15 @@ for i in range(len(R)):
         plt.title("Entladung des Kondensators über den Schwingkreis - log \n R = " +str(R[i]) + " $\Omega$")
         plt.errorbar(maxima[0],np.log(maxima[1]),yerr=np.log(emax), fmt="x",markersize=4, capsize=3)
         plt.plot(t[:offsetkorr[i]], -d*t[:offsetkorr[i]]+b, label="Regressionsgerade")
+        #plt.savefig("Images/C_"+str(R[i])+".pdf")
+        plt.legend()
+        plt.show()
+        plt.close()
+        
+        #Residumplot:
+        plt.title("Residumplot - log \n R = " +str(R[i]) + " $\Omega$")
+        plt.errorbar(maxima[0],-d*np.array(maxima[0])+b-np.log(np.array(maxima[1])),yerr=np.log(emax), fmt="x",markersize=4, capsize=3)
+        plt.axhline(0)
         #plt.savefig("Images/C_"+str(R[i])+".pdf")
         plt.legend()
         plt.show()
