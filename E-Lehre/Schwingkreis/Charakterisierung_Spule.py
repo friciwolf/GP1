@@ -76,7 +76,7 @@ def analyse_Schwingung(file,R):
     #Abweichung angenommen werden kann
     U_std[:]=0.0027
     #Auflösungsfehler
-    A_err = 10*2**(-11)
+    A_err = 20*2**(-11)/np.sqrt(12)
     print(A_err)
     if (A_err > U_std[0]):
         U_std[:] = A_err
