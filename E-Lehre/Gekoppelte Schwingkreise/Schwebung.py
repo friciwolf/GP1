@@ -30,7 +30,7 @@ t = data.messung(1).datenreihe('t').werte
 
 ind_max = find_peaks_cwt(U1,np.arange(1,20))
 ind_max = ind_max[:20]
-ind_max = ind_max[5:]
+ind_max = ind_max[3:]
 
 w_array,A = analyse.fourier_fft(t,U1)
 ind_w1=analyse.peak(w_array,A,np.argmax(w_array>950),np.argmax(w_array>1020))
