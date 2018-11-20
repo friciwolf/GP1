@@ -24,7 +24,7 @@ def calc_mean_distance(ind,v):
     dis = dis/(len(ind)-1)
     return dis
 
-data = cassy.CassyDaten('Schwebung/Schwebung_1_250n.lab')
+data = cassy.CassyDaten('Schwebung_1_250n.lab')
 U1 = data.messung(1).datenreihe('U_B1').werte
 t = data.messung(1).datenreihe('t').werte
 
@@ -32,15 +32,23 @@ ind_max = find_peaks_cwt(U1,np.arange(1,20))
 ind_max = ind_max[:20]
 ind_max = ind_max[5:]
 
-
 w_array,A = analyse.fourier_fft(t,U1)
-ind_w = find_peaks_cwt(A,np.arange(1,20))
-axvline(t[ind_w[0]], color="RED", linestyle='dashed', linewidth=1)
+ind_w1=analyse.peak(w_array,A,np.argmax(w_array>950),np.argmax(w_array>1020))
+ind_w2=analyse.peak(w_array,A,np.argmax(w_array>1100),np.argmax(w_array>1160))
 
+#axvline(t[ind_w[0]], color="RED", linestyle='dashed', linewidth=1)
 
-figure()
-plot(w_array,A)
+plot(w_array,A/max(A))
+plt.axvline(x=w_array[int(ind_w1)], color="darkred", linestyle = "--") 
+plt.text(w_array[int(ind_w1)],0.7,'{}'.format(w_array[int(ind_w1)]))
+plt.axvline(x=w_array[int(ind_w2)], color="darkred", linestyle = "--") 
+plt.text(w_array[int(ind_w2)],0.5,'{}'.format(w_array[int(ind_w2)]))
 xlim(0,4000)
+plt.savefig('Images/Schwebung_FFT')
+err1=w_array[int(np.ceil(ind_w1))]-w_array[int(np.floor(ind_w1))]
+err2=w_array[int(np.ceil(ind_w2))]-w_array[int(np.floor(ind_w2))]
+print('f+={} +- {}'.format(w_array[int(ind_w1)],err1))
+print('f-={} +- {}'.format(w_array[int(ind_w2)],err2))
 
 figure()
 #Rohdaten
