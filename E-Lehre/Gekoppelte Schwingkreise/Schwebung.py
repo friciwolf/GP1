@@ -54,7 +54,7 @@ f_m = w_array[int(ind_w2)]
 f_sch = 1/2*(f_m-f_p)
 f_k = 1/2*(f_m+f_p)
 
-sigma = np.sqrt(1/2*(err1+err2))
+sigma = np.sqrt(1/4*(err1**2+err2**2))
 print('f_sch={} +- {}'.format(f_sch,sigma))
 print('f_k={} +- {}'.format(f_k,sigma))
 
