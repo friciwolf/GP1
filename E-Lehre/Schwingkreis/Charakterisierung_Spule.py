@@ -12,6 +12,11 @@ from scipy.signal import find_peaks_cwt
 import numpy as np
 from pylab import *
 
+L_fin = []
+C_fin = []
+R_L_fin = []
+d_fin = []
+
 close('all')
 
 '''
@@ -128,3 +133,21 @@ def analyse_Schwingung(file,R):
     axhline(0, color="RED", linestyle='dashed', linewidth=1)
 
 analyse_Schwingung("Schwingkreis/Cassy/5.1_Messung_1.lab",5.1)
+    d_fin.append(y[2])
+    d_fin.append(y[3])
+    L_fin.append(L)
+    L_fin.append(L_err)
+    R_L_fin.append(R_L)
+    R_L_fin.append(R_L_err)
+    C_fin.append(2.2e-6)
+    C_fin.append(0.01e-6)
+
+def analyse_Grenzfall():
+    R_ap = 2* np.sqrt(L_fin[0]/C_fin[0])
+    R_ap_err = R_ap *np.sqrt((L_fin[1]/(2*L_fin[0]))**2+(C_fin[1]/(2*C_fin[0]))**2)
+    R_R_ap_err = np.sqrt(R_ap_err**2 + R_L_fin[1]**2)
+    
+    print("Aperiodischer Grenzfall bei", R_ap-R_L_fin[0], "+-",R_R_ap_err ," Ohm")
+
+analyse_Schwingung("5.1_Messung_1.lab", 5.1)
+analyse_Grenzfall()
