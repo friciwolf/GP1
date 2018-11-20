@@ -132,7 +132,7 @@ def analyse_Schwingung(file,R):
     errorbar(t[ind_max],y[0]*np.exp(-y[2]*t[ind_max])-U[ind_max],yerr = 0.0043,fmt='.')
     axhline(0, color="RED", linestyle='dashed', linewidth=1)
 
-analyse_Schwingung("Schwingkreis/Cassy/5.1_Messung_1.lab",5.1)
+def analyse_Schwingung("Schwingkreis/Cassy/5.1_Messung_1.lab",5.1):
     d_fin.append(y[2])
     d_fin.append(y[3])
     L_fin.append(L)
