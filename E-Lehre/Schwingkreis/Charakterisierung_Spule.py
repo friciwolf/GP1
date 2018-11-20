@@ -19,6 +19,9 @@ Dieses Programm soll den Schwingkreis analysieren
 sowie die verwendete Spule charakterisieren. Die Kabelwerte
 könnten aus den gekoppelten Schwingungen bestimmt werden und 
 müssten von R_Rest noch abgezogen werden um R_L zu erhalten
+
+delta aus Einhüllende
+freq aus Peaks
 '''
 
 def c_open(file):
@@ -52,15 +55,33 @@ def analyse_Schwingung(file,R):
     
     #Frequenz berechnen
     ind_max = find_peaks_cwt(U,np.arange(1,50))
-    ind_max = ind_max[:16]
+    ind_max = ind_max[:12]
+    ind_max = ind_max[1:]
     dis = calc_mean_distance(ind_max,t)
+    
+    hist(U[1000:])
+    title("Offset-Korrektur")
+    off_set = np.mean(U[1000:])
+    print(off_set)
+     
+    U=U-off_set
+    fig = figure()
     
     t_err = 2*(t[1]-t[0])
     freq = 1/dis
     freq_err = (freq/dis)*t_err
     
+    U_std = np.ones(len(U))
+    #wert der aus den Rauschmessung bei Berechnung des Widerstands als std. 
+    #Abweichung angenommen werden kann
+    U_std[:]=0.0027
+    #Auflösungsfehler
+    A_err = 20*2**(-11)/np.sqrt(12)
+    print(A_err)
+    if (A_err > U_std[0]):
+        U_std[:] = A_err
     
-    y = analyse.exp_einhuellende(t,U,0.01*U)
+    y = analyse.exp_einhuellende(t,U,U_std)
     
     subplot(2,1,1)
     title("Schwingkreis mit Widerstand "+str(R)+"$\Omega$")
@@ -100,5 +121,10 @@ def analyse_Schwingung(file,R):
     print("Induktivität: ",L,"+-",L_err,"H")
     print("R_Rest: ",R_L,"+-",R_L_err,"Ohm")
     print("Herstellerwerte: L = 0.009 R_L = 2.5")
+    
+    #Residuengraf
+    fig = figure()
+    errorbar(t[ind_max],y[0]*np.exp(-y[2]*t[ind_max])-U[ind_max],yerr = 0.0043,fmt='.')
+    axhline(0, color="RED", linestyle='dashed', linewidth=1)
 
-analyse_Schwingung("5.1_Messung_1.lab",5.1)
+analyse_Schwingung("Schwingkreis/Cassy/5.1_Messung_1.lab",5.1)

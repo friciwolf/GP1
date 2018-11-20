@@ -53,6 +53,27 @@ for n in (Gegen, Gleich):
     U2 = data.messung(1).datenreihe('U_B2').werte
     t = data.messung(1).datenreihe('t').werte
     
+    '''
+    an dieser Stelle müsste eine offsetkorrektur stehen, welche aber zumindest im gegensinnigen Fall
+    auf Grund fehlender Daten keinen sinn macht. Außerdem ändert sich das Ergebnis nur marginal, hier
+    trotzdem mal ein Vorschlag:
+    
+    figure()
+    
+    subplot(2,1,1)   
+    hist(U1[1000:])
+    title("Offset-Korrektur U1 "+n[3])
+    off_set1 = np.mean(U1[1000:])
+    print(off_set1)
+    
+    subplot(2,1,2)
+    hist(U2[1000:])
+    title("Offset-Korrektur U2 "+n[3])
+    off_set2 = np.mean(U2[1000:])
+    print(off_set2)
+    '''
+    
+    
     #Rohdatenplot
     subplot(2,1,1)
     plot(t,U1)
