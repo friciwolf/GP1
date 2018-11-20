@@ -44,8 +44,12 @@ def round_good(m,s,err):
         i+=1
     return np.round([m,s,err],i)
 
+freq_array=[]
+errfreq_array=[]
+
 Gegen=['gegen',20,3000]
 Gleich=['gleich',30,4500]
+
 for n in (Gegen, Gleich):
     #Daten einlesen
     data = cassy.CassyDaten(n[0]+'.koppl.eisen.lab')
@@ -53,26 +57,25 @@ for n in (Gegen, Gleich):
     U2 = data.messung(1).datenreihe('U_B2').werte
     t = data.messung(1).datenreihe('t').werte
     
-    '''
-    an dieser Stelle müsste eine offsetkorrektur stehen, welche aber zumindest im gegensinnigen Fall
-    auf Grund fehlender Daten keinen sinn macht. Außerdem ändert sich das Ergebnis nur marginal, hier
-    trotzdem mal ein Vorschlag:
-    
-    figure()
-    
-    subplot(2,1,1)   
-    hist(U1[1000:])
-    title("Offset-Korrektur U1 "+n[3])
-    off_set1 = np.mean(U1[1000:])
-    print(off_set1)
-    
-    subplot(2,1,2)
-    hist(U2[1000:])
-    title("Offset-Korrektur U2 "+n[3])
-    off_set2 = np.mean(U2[1000:])
-    print(off_set2)
-    '''
-    
+    ''' 
+    An dieser Stelle müsste eine Offsetkorrektur stehen, welche aber zumindest im gegensinnigen Fall 
+    auf Grund fehlender Daten keinen Sinn ergibt. Außerdem ändert sich das Ergebnis nur marginal 
+    [für eine Frequenzbestimmung ist eine Konstante ja egal], hier trotzdem mal ein Vorschlag: 
+     
+    figure() 
+     
+    subplot(2,1,1)    
+    hist(U1[1000:]) 
+    title("Offset-Korrektur U1 "+n[3]) 
+    off_set1 = np.mean(U1[1000:]) 
+    print(off_set1) 
+     
+    subplot(2,1,2) 
+    hist(U2[1000:]) 
+    title("Offset-Korrektur U2 "+n[3]) 
+    off_set2 = np.mean(U2[1000:]) 
+    print(off_set2) 
+    ''' 
     
     #Rohdatenplot
     subplot(2,1,1)
@@ -92,7 +95,7 @@ for n in (Gegen, Gleich):
     grid()
     
     subplots_adjust(hspace = 0.5)
-    fig.savefig('Images/Rohdaten_'+n[0]+'sinnig.pdf')
+    savefig('Images/Rohdaten_'+n[0]+'sinnig.pdf')
     plt.figure()
     
     #FFT + Plot
@@ -176,5 +179,14 @@ for n in (Gegen, Gleich):
     #gewichteter Mittelwert/Fehler
     x,freq_mean,freq_std=round_good(0.0,*analyse.gewichtetes_mittel(np.array([freq1,freq2]),np.array([freq1_err,freq2_err])))
     print("mittlere Frequenz aus Peaks",freq_mean,"+-",freq_std,'\n\n')
+    
 
+    mean, std=analyse.gewichtetes_mittel(np.array([w_mean,freq_mean]),np.array([w_std,freq_std]))
+    freq_array.append(mean)
+    errfreq_array.append(std)
 
+k=(freq_array[0]**2-freq_array[1]**2)/(freq_array[0]**2+freq_array[1]**2)
+k_err=(2*(freq_array[0]/(freq_array[0]**2+freq_array[1]**2)-freq_array[0]*(freq_array[0]**2-freq_array[1]**2)/(freq_array[0]**2+freq_array[1]**2)**2)*errfreq_array[0])**2
+k_err+=(-2*(freq_array[1]/(freq_array[0]**2+freq_array[1]**2)-freq_array[1]*(freq_array[0]**2-freq_array[1]**2)/(freq_array[0]**2+freq_array[1]**2)**2)*errfreq_array[1])**2
+k_err=np.sqrt(k_err)
+print('Kopplungsgrad:',k,'+-',k_err)
