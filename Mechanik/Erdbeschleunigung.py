@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 
+import numpy as np
+import praktikum.analyse as analyse
+import praktikum.cassy as cassy
 import Rauschmessung
 
 offsetM=Rauschmessung.mM
@@ -40,6 +43,7 @@ for i in range(1,4):
                 start=i
     if count%2==1:
         count-=1
+        ende-=1
         
     #Periodendauer berechnen
     errt=(t[-1]-t[0])/len(t)
