@@ -23,7 +23,7 @@ offset1=Rauschmessung_gekoppelt.mM
 offset2=Rauschmessung_gekoppelt.mSt
 
 g = Erdbeschleunigung.g
-err_g = Erdbeschleunigung.errg_sys + Erdbeschleunigung.errg_stat #TODO: Richtig?
+err_g = np.sqrt((Erdbeschleunigung.errg_sys)**2 + (Erdbeschleunigung.errg_stat)**2) #TODO: Richtig?
 
 bis = 8000
 name = ["schwebung","gleichsinnig","gegensinnig"]
@@ -38,7 +38,6 @@ for i in range(1,5):
     #Daten einlesen
     data = cassy.CassyDaten("gekoppelt/pos_"+str(i)+"/schweb_pos_"+str(i)+".lab")
     t1 = data.messung(1).datenreihe("t").werte
-    print(len(t1))
     t[0] = t1[:bis]
     U1_1 = data.messung(1).datenreihe("U_A1").werte-(offset1+(i-1)*0.05) #TODO: Systematik im offset?
     U1[0] = U1_1[:bis]
@@ -67,40 +66,47 @@ for i in range(1,5):
         U2[2] = U3_2[:bis]
         t[2] = t3[:bis]
     
+    print(len(t1))
         
     #figure()
     #gs = gridspec.GridSpec(file_count, 1)
     for j in range(0,file_count):
-        figure()
+        plt.figure()
         gs = gridspec.GridSpec(2, 1)
         ax1 = plt.subplot(gs[0, 0])
         plt.plot(t[j],U1[j],color='black')
         plt.title("Messung "+str(i)+": "+name[j])
         plt.ylabel(u"U1/V")
         plt.setp(ax1.get_xticklabels(), visible=False)
-        grid()
+        plt.grid()
         
         ax2 = plt.subplot(gs[1, 0],sharex = ax1)
         plt.plot(t[j],U2[j],color='red')
         plt.ylabel(u"U2/V")
         plt.xlabel(u"t/s")
         ax2.yaxis.tick_right()
-        grid()
+        plt.grid()
         plt.subplots_adjust(hspace=.0)
         
         plt.savefig("Images/Messung "+str(i)+"_"+name[j]+".jpg")
         
         #Fourier analyse
         w,A = analyse.fourier_fft(t[j],U1[j])
-        ind_w1=analyse.peak(w,A,np.argmax(w>0.5),np.argmax(w>0.6))
-        ind_w2=analyse.peak(w,A,np.argmax(w>0.7),np.argmax(w>0.8))
+        ind_w1=analyse.peak(w,A,w[np.argmax(w>0.5)],w[np.argmax(w>0.6)])
+        ind_w2=analyse.peak(w,A,w[np.argmax(w>0.7)],w[np.argmax(w>0.8)])
         
-        figure()
+        range1=[(0.6,0.63),(0.6,0.63),(0.6,0.63),(0.5,0.64)]
+        range2=[(0.6,0.63),(0.63,0.64),(0.64,0.7),(0.69,0.8)]
+        ind_w1=list(A).index(max(A[np.argmax(w>range1[i-1][0]):np.argmax(w>range1[i-1][1])]),np.argmax(w>range1[i-1][0]))
+        ind_w2=list(A).index(max(A[np.argmax(w>range2[i-1][0]):np.argmax(w>range2[i-1][1])]),np.argmax(w>range2[i-1][0]))
+        
+        plt.figure()
+        plt.title('Fourieranalyse von Messung '+str(i)+": "+name[j])
         plt.plot(w,A/max(A))
         plt.ylabel(u"rel. Häufigkeit")
         plt.xlabel(u"w/Hz")
         plt.axvline(x=w[int(ind_w1)], color="darkred", linestyle = "--") 
         plt.text(w[int(ind_w1)],0.7,'max_1:{} Hz'.format(np.round(w[int(ind_w1)],4)))
         plt.axvline(x=w[int(ind_w2)], color="darkred", linestyle = "--") 
-        plt.text(w[int(ind_w2)],0.7,'max_2:{} Hz'.format(np.round(w[int(ind_w1)],4)))
-        xlim(0,1.3)
+        plt.text(w[int(ind_w2)],0.6,'max_2:{} Hz'.format(np.round(w[int(ind_w2)],4)))
+        plt.xlim(0,1.3)
