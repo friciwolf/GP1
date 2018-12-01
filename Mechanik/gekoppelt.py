@@ -89,3 +89,18 @@ for i in range(1,5):
         plt.subplots_adjust(hspace=.0)
         
         plt.savefig("Images/Messung "+str(i)+"_"+name[j]+".jpg")
+        
+        #Fourier analyse
+        w,A = analyse.fourier_fft(t[j],U1[j])
+        ind_w1=analyse.peak(w,A,np.argmax(w>0.5),np.argmax(w>0.6))
+        ind_w2=analyse.peak(w,A,np.argmax(w>0.7),np.argmax(w>0.8))
+        
+        figure()
+        plt.plot(w,A/max(A))
+        plt.ylabel(u"rel. Häufigkeit")
+        plt.xlabel(u"w/Hz")
+        plt.axvline(x=w[int(ind_w1)], color="darkred", linestyle = "--") 
+        plt.text(w[int(ind_w1)],0.7,'max_1:{} Hz'.format(np.round(w[int(ind_w1)],4)))
+        plt.axvline(x=w[int(ind_w2)], color="darkred", linestyle = "--") 
+        plt.text(w[int(ind_w2)],0.7,'max_2:{} Hz'.format(np.round(w[int(ind_w1)],4)))
+        xlim(0,1.3)
