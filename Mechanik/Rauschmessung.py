@@ -47,7 +47,7 @@ if __name__ == "__main__":
     
 #------------------------------------------------------------
 #Umgebungstemperatur
-    print("Temperaturverteilung")
+    print("Pendel mit Pendelkörper")
     print('m='+str(mM)+u' V, std='+str(sM)+u' V, err='+str(errM)+u' V')
     
     #Histogramm
@@ -74,7 +74,7 @@ if __name__ == "__main__":
 #------------------------------------------------------------
 #Umgebungsdruck
     print("==="*20)
-    print("Druckverteilung")
+    print("Pendelstange")
     print('m='+str(mSt)+' V, std='+str(sSt)+' V, err='+str(errSt)+' V')
     
     #Histogramm
