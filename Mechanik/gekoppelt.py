@@ -68,16 +68,24 @@ for i in range(1,5):
         t[2] = t3[:bis]
     
         
-    figure()
-    gs = gridspec.GridSpec(file_count, 1)
+    #figure()
+    #gs = gridspec.GridSpec(file_count, 1)
     for j in range(0,file_count):
-
-        ax = plt.subplot(gs[j, 0])
+        figure()
+        gs = gridspec.GridSpec(2, 1)
+        ax1 = plt.subplot(gs[0, 0])
         plt.plot(t[j],U1[j],color='black')
-        plt.plot(t[j],U2[j],color='red')
         plt.title("Messung "+str(i)+": "+name[j])
-        plt.ylabel(u"U/V")
-        plt.xlabel(u"t/s")
-
+        plt.ylabel(u"U1/V")
+        plt.setp(ax1.get_xticklabels(), visible=False)
         grid()
-    plt.subplots_adjust(hspace = 0.1*file_count)
+        
+        ax2 = plt.subplot(gs[1, 0],sharex = ax1)
+        plt.plot(t[j],U2[j],color='red')
+        plt.ylabel(u"U2/V")
+        plt.xlabel(u"t/s")
+        ax2.yaxis.tick_right()
+        grid()
+        plt.subplots_adjust(hspace=.0)
+        
+        plt.savefig("Images/Messung "+str(i)+"_"+name[j]+".jpg")
