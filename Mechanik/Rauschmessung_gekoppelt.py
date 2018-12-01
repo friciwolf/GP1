@@ -110,7 +110,7 @@ if __name__ == "__main__":
 
     plt.ylabel('Relatives Vorkommen')
 
-    plt.savefig("Auswertung/Rauschmessung_stange_1_histo.jpg")
+    plt.savefig("Images/Rauschmessung_stange_1_histo.jpg")
 
     plt.axvline(np.mean(M),color='red',linestyle='--')
 
@@ -130,7 +130,7 @@ if __name__ == "__main__":
 
     plt.plot(t,np.array([np.mean(M)]*len(t)),color='darkorange')
 
-    plt.savefig("Auswertung/Rauschmessung_stange_1.jpg")
+    plt.savefig("Images/Rauschmessung_stange_1.jpg")
 
     plt.figure()
 
@@ -164,7 +164,7 @@ if __name__ == "__main__":
 
     plt.ylabel('Relatives Vorkommen')
 
-    plt.savefig("Auswertung/Rauschmessung_stange_2_hist.jpg")
+    plt.savefig("Images/Rauschmessung_stange_2_hist.jpg")
 
     plt.axvline(np.mean(St),color='red',linestyle='--')
 
@@ -184,4 +184,4 @@ if __name__ == "__main__":
 
     plt.plot(t,np.array([np.mean(St)]*len(t)),color='darkorange')
 
-    plt.savefig("Auswertung/Rauschmessung_stange_2.jpg")
+    plt.savefig("Images/Rauschmessung_stange_2.jpg")
