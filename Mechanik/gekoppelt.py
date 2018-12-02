@@ -23,16 +23,24 @@ offset1=Rauschmessung_gekoppelt.mM
 offset2=Rauschmessung_gekoppelt.mSt
 
 g = Erdbeschleunigung.g
-err_g = np.sqrt((Erdbeschleunigung.errg_sys)**2 + (Erdbeschleunigung.errg_stat)**2) #TODO: Richtig?
+errg = np.sqrt((Erdbeschleunigung.errg_sys)**2 + (Erdbeschleunigung.errg_stat)**2) #als Systematischer
+l_s=0.68
+errl_s=0.001 #in m
+m=1.0725+0.0872+0.1528
+errm=0.0001 #in kg
+l_F=np.array([16.5,16.5+12,16.5+12+12.4,16.5+12+12.4+12.5]) #in cm
+errl_F=np.ones(4)*errl_s # in m
 
 bis = 8000
 name = ["Schwebung","Gleichsinnig","Gegensinnig"]
+
 w_plus=[[0,0,0],[0,0,0],[0,0],[0]];w_minus=[[0,0,0],[0,0,0],[0,0],[0]]
-ks=[];errks=[]
 errw=[[0,0],0,0,0]
-l_F=[]
+ks=[];errks=[]
 
 for i in range(1,5):
+    plt.close('all')
+    
     #Anzahl der Dateien
     path, dirs, files = next(os.walk("gekoppelt/pos_"+str(i)))
     file_count = len(files)
@@ -143,4 +151,39 @@ for i in range(1,5):
         ks.append(k)
         errks.append(errk)
         
+#Plot k gegen l
+plt.figure()
+plt.errorbar(l_F,ks,yerr=errks,xerr=errl_F,fmt='ko')
+plt.xlabel('Abstand der Feder von der Pendelachse $l_F$ in cm')
+plt.ylabel('Kopplungsgrad $k$')
+plt.title('Abhängigkeit des Kopplungsgrades vom Drehachsenabstand')
+plt.grid()
+plt.savefig('Images/Gekoppelt_Kopplung')
 
+ks=np.array(ks)
+errx=np.array(errks/k**2)
+erry=m*g*l_s/(l_F/100)**2*np.sqrt((errm/m)**2+(errg/g)**2+(errl_s/l_s)**2+(2*errl_F/(l_F/100))**2)
+
+D,errD,b,errb,chiq,corr=analyse.lineare_regression_xy(1/ks-1,m*g*l_s/(l_F/100)**2,errx,erry)
+print('Federkonstante:(',D,'+-',errD,')N/m, Chi²/f=',chiq/2)
+#TODO: D hier ungleich D aus 'Federkonstante.py', Chi² zu groß
+
+#Regressionsplot
+plt.figure()
+plt.errorbar(1/ks-1,m*g*l_s/(l_F/100)**2,yerr=erry,xerr=errx,fmt='ko')
+steps=np.arange(min(1/ks-1),max(1/ks-1),0.001)
+plt.plot(steps,D*steps+b,color='red')
+plt.ylabel('$m*g*l_s/l_F^2$ in N/m')
+plt.xlabel('$1/k-1$')
+plt.title('Regression zur Berechnung von D')
+plt.grid()
+plt.savefig('Images/Gekoppelt_Federkonstante')
+
+#Residuum
+plt.figure()
+plt.errorbar(1/ks-1,m*g*l_s/(l_F/100)**2-(D*(1/ks-1)+b),yerr=np.sqrt(erry**2+errx**2),fmt='ko')
+plt.ylabel('$\\frac{mgl_s}{l_F^2}$ in N/m')
+plt.xlabel('$1/k-1$')
+plt.title('Residuum zur Berechnung von D')
+plt.grid()
+plt.savefig('Images/Gekoppelt_Federkonstante_Residuum')
