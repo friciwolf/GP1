@@ -67,6 +67,9 @@ ls=1.0
 #Gegensinnige Schwingung bei lF=0.527 m
 #---------------------------------------------------
 t, U1, U2 = c_open("527cm/Gegensinnig.lab")
+U1 = np.array(U1) - np.average(U1)
+U2 = np.array(U2) - np.average(U2)
+
 peaks1 = lok_max(t,U1)
 peaks2 = lok_max(t,U2)
 
@@ -94,6 +97,9 @@ wsf.append(scipy.pi*2/T)
 #Gleichsinnige Schwingung bei lF=0.527 m
 #---------------------------------------------------
 t, U1, U2 = c_open("527cm/Gleichsinnig.lab")
+U1 = np.array(U1) - np.average(U1)
+U2 = np.array(U2) - np.average(U2)
+
 peaks1 = lok_max(t,U1)
 peaks2 = lok_max(t,U2)
 
@@ -122,6 +128,9 @@ ws.append(scipy.pi*2/T)
 #Gegensinnige Schwingung bei lF=0.781 m
 #---------------------------------------------------
 t, U1, U2 = c_open("781cm/Gegensinnig.lab")
+U1 = np.array(U1) - np.average(U1)
+U2 = np.array(U2) - np.average(U2)
+
 peaks1 = lok_max(t,U1)
 peaks2 = lok_max(t,U2)
 
@@ -149,6 +158,9 @@ wsf.append(scipy.pi*2/T)
 #Gleichsinnige Schwingung bei lF=0.781 m
 #---------------------------------------------------
 t, U1, U2 = c_open("781cm/Gleichsinnig.lab")
+U1 = np.array(U1) - np.average(U1)
+U2 = np.array(U2) - np.average(U2)
+
 peaks1 = lok_max(t,U1)
 peaks2 = lok_max(t,U2)
 
@@ -177,6 +189,9 @@ ws.append(scipy.pi*2/T)
 #---------------------------------------------------
 
 t, U1, U2 = c_open("527cm/Schwebung.lab")
+U1 = np.array(U1) - np.average(U1)
+U2 = np.array(U2) - np.average(U2)
+
 peaks1 = lok_max(t,U1)
 peaks2 = lok_max(t,U2)
 
