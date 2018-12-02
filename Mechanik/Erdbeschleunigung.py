@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 
+import numpy as np
+import praktikum.analyse as analyse
+import praktikum.cassy as cassy
 import Rauschmessung
 
 offsetM=Rauschmessung.mM
@@ -21,7 +24,7 @@ for i in range(1,4):
     
     if __name__=='__main__':
         #Rohdatenplot bis Stange zu gedämpft
-        bis=np.argmax(t>100)
+        bis=-1#np.argmax(t>100)
         plt.plot(t[:bis],M[:bis], color='black')
         plt.plot(t[:bis],St[:bis],color='red')
         plt.title('Schwingung mit körperloser Frequenz {}'.format(i))
@@ -35,7 +38,8 @@ for i in range(1,4):
     for i,volt in enumerate(M):
         if volt!=M[-1] and ((volt<=0 and M[i+1]>0) or (volt>=0 and M[i+1]<0)):
             count+=1
-            ende=i
+            if count%2==1:
+                ende=i
             if count==1:
                 start=i
     if count%2==1:
