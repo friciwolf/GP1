@@ -26,7 +26,11 @@ g = Erdbeschleunigung.g
 err_g = np.sqrt((Erdbeschleunigung.errg_sys)**2 + (Erdbeschleunigung.errg_stat)**2) #TODO: Richtig?
 
 bis = 8000
-name = ["schwebung","gleichsinnig","gegensinnig"]
+name = ["Schwebung","Gleichsinnig","Gegensinnig"]
+w_plus=[[0,0,0],[0,0,0],[0,0],[0]];w_minus=[[0,0,0],[0,0,0],[0,0],[0]]
+ks=[];errks=[]
+errw=[[0,0],0,0,0]
+l_F=[]
 
 for i in range(1,5):
     #Anzahl der Dateien
@@ -90,7 +94,7 @@ for i in range(1,5):
         
         plt.savefig("Images/Messung "+str(i)+"_"+name[j]+".jpg")
         
-        #Fourier analyse
+        #Fourieranalyse
         w,A = analyse.fourier_fft(t[j],U1[j])
         ind_w1=analyse.peak(w,A,w[np.argmax(w>0.5)],w[np.argmax(w>0.6)])
         ind_w2=analyse.peak(w,A,w[np.argmax(w>0.7)],w[np.argmax(w>0.8)])
@@ -110,3 +114,33 @@ for i in range(1,5):
         plt.axvline(x=w[int(ind_w2)], color="darkred", linestyle = "--") 
         plt.text(w[int(ind_w2)],0.6,'max_2:{} Hz'.format(np.round(w[int(ind_w2)],4)))
         plt.xlim(0,1.3)
+        
+        w_plus[i-1][j]=w[ind_w1] #Schweb, gleich, gegen für j=0,1,2
+        w_minus[i-1][j]=w[ind_w2] #Kopplung: i=1 schwach, i=4 stark    
+        
+        if i==1 and j>0:
+            errw[i-1][j-1]=(max(w)-min(w))/(len(w)-1)
+    #Bestimmung des Kopplungsgrades in pos_1 aus gleich und gegen
+    if i==1:
+        k=(w_minus[i-1][2]**2-w_plus[i-1][1]**2)/(w_minus[i-1][2]**2+w_plus[i-1][1]**2)
+        errk=(2*(w_minus[i-1][2]/(w_minus[i-1][2]**2+w_plus[i-1][1]**2)-w_minus[i-1][2]*(w_minus[i-1][2]**2-w_plus[i-1][1]**2)/(w_minus[i-1][2]**2+w_plus[i-1][1]**2)**2)*errw[i-1][2-1])**2
+        errk+=(-2*(w_plus[i-1][1]/(w_minus[i-1][2]**2+w_plus[i-1][1]**2)-w_plus[i-1][1]*(w_minus[i-1][2]**2-w_plus[i-1][1]**2)/(w_minus[i-1][2]**2+w_plus[i-1][1]**2)**2)*errw[i-1][1-1])**2
+        errk=np.sqrt(errk)
+        x,k,errk=Rauschmessung.round_good(0,k,errk)
+        print(str(i),'Kopplungsgrad:',k,'+-',errk)
+        ks.append(k)
+        errks.append(errk)
+
+    #Bestimmung des Kopplungsgrades in pos_2-4 aus Schwebung
+    if i>1:
+        errw[i-1]=(max(w)-min(w))/(len(w)-1)
+        k=(w_minus[i-1][0]**2-w_plus[i-1][0]**2)/(w_minus[i-1][0]**2+w_plus[i-1][0]**2)
+        errk=(2*(w_minus[i-1][0]/(w_minus[i-1][0]**2+w_plus[i-1][0]**2)-w_minus[i-1][0]*(w_minus[i-1][0]**2-w_plus[i-1][0]**2)/(w_minus[i-1][0]**2+w_plus[i-1][0]**2)**2)*errw[i-1])**2
+        errk+=(-2*(w_plus[i-1][0]/(w_minus[i-1][0]**2+w_plus[i-1][0]**2)-w_plus[i-1][0]*(w_minus[i-1][0]**2-w_plus[i-1][0]**2)/(w_minus[i-1][0]**2+w_plus[i-1][0]**2)**2)*errw[i-1])**2
+        errk=np.sqrt(errk)
+        x,k,errk=Rauschmessung.round_good(0,k,errk)
+        print(str(i),'Kopplungsgrad:',k,'+-',errk)
+        ks.append(k)
+        errks.append(errk)
+        
+
