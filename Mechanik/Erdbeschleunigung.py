@@ -24,32 +24,42 @@ for i in range(1,4):
     
     if __name__=='__main__':
         #Rohdatenplot bis Stange zu gedämpft
-        bis=-1#np.argmax(t>100)
-        plt.plot(t[:bis],M[:bis], color='black')
-        plt.plot(t[:bis],St[:bis],color='red')
+        von=0
+        bis=-1#np.argmax(t>=300)
+        plt.plot(t[von:bis],M[von:bis], color='black')
+        #plt.plot(t[von:bis],St[von:bis],color='red')
         plt.title('Schwingung mit körperloser Frequenz {}'.format(i))
         plt.grid()
         plt.savefig('Images/Erdbeschleunigung_Roh_'+str(i)+'.jpg')
-        if i!=3:
-            plt.figure()
     
     #Nullstellen zählen
     count=0
-    for i,volt in enumerate(M):
-        if volt!=M[-1] and ((volt<=0 and M[i+1]>0) or (volt>=0 and M[i+1]<0)):
+    for j,volt in enumerate(M):
+        if j!=len(M)-1 and ((volt<=0 and M[j+1]>0) or (volt>=0 and M[j+1]<0)):
             count+=1
-            if count%2==1:
-                ende=i
             if count==1:
-                start=i
+                a=(t[j+1]-t[j])/(M[j+1]-M[j]) #Die Zeiten sind die Nullstellen der Geraden durch die beiden Punkten um die Nullstelle
+                start=-M[j]/a+t[j]
+            if count%2==1:
+                ende=-M[j]/a+t[j]
+            #plt.plot(t[j],volt,'bo',color='lightblue')
     if count%2==1:
         count-=1
+    else:
+        count-=2
+    if i==2: #Bei der zweiten Messung werden 2 Nullstellen doppelt gezählt, weil die Spannung springt
+        count-=4
         
+    print(count)
     #Periodendauer berechnen
-    errt=(t[-1]-t[0])/len(t)
-    T.append(2*(t[ende]-t[start])/count)
-    errT.append(2*np.sqrt(2)*errt/count) #TODO: Richtig?
-
+    errt=(t[-1]-t[0])/(len(t)-1)
+    T.append(2*(ende-start)/count)
+    errT.append(2*np.sqrt(2)*errt/count)
+    if __name__=='__main__':    
+        if i!=3:
+            plt.figure()
+            
+#T=[(399.707-1.14905)/(242-1),(159.5+0.035-0.7550)/(97-1),(159.34+0.00625-0.4410)/(97-1)] #Auszählung der Peaks per Hand
 T,errT=analyse.gewichtetes_mittel(np.array(T),np.array(errT))
 
 #Frequenz und Erdbeschleunigung + Fehler
@@ -58,10 +68,12 @@ errf=f*errT/T
 print('\nFrequenz: f=({1} +- {2}) Hz'.format(*Rauschmessung.round_good(0,f,errf)))
 
 g=4*np.pi**2*f**2*l*(1+r**2/l**2/2)
-errg_stat=np.sqrt(((g/l-4*np.pi**2*f**2*r**2/l**2)*errl_stat)**2+(2*g/f*errf)**2) #TODO: vlt.genauer?
+errg_stat=np.sqrt(((g/l-4*np.pi**2*f**2*r**2/l**2)*errl_stat)**2+(2*g/f*errf)**2)
 errg_sys=(g/l-4*np.pi**2*f**2*r**2/l**2)*errl_sys
 if errg_sys>errg_stat: 
    g,errg_stat,errg_sys=Rauschmessung.round_good(g,errg_stat,errg_sys)
 else: 
    g,errg_sys,errg_stat=Rauschmessung.round_good(g,errg_sys,errg_stat)
 print('Erdbeschleunigung: g=({} +- {} +- {})m/s²'.format(g,errg_stat,errg_sys))
+#TODO: Fehler auf Frequenz durch ungenügende Gleichheit und damit Unabhängigkeit?
+#TODO: Fehler aus der Rauschmessung irgendwo benötigt?
