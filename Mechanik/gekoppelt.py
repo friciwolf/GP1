@@ -4,6 +4,7 @@ Created on Sat Dec  1 14:31:28 2018
 
 @author: Christine Falter
 """
+
 import Rauschmessung
 import Rauschmessung_gekoppelt
 import Erdbeschleunigung
@@ -22,18 +23,24 @@ offset1=Rauschmessung_gekoppelt.mM
 offset2=Rauschmessung_gekoppelt.mSt
 
 g = Erdbeschleunigung.g
-err_g = np.sqrt((Erdbeschleunigung.errg_sys)**2 + (Erdbeschleunigung.errg_stat)**2) #TODO: Richtig?
+errg = np.sqrt((Erdbeschleunigung.errg_sys)**2 + (Erdbeschleunigung.errg_stat)**2) #als Systematischer
+l_s=0.68
+errl_s=0.001 #in m
+m=1.0725+0.0872+0.1528
+errm=0.0001 #in kg
+l_F=np.array([16.5,16.5+12,16.5+12+12.4,16.5+12+12.4+12.5]) #in cm
+errl_F=np.ones(4)*errl_s # in m
 
 bis = 8000
 name = ["Schwebung","Gleichsinnig","Gegensinnig"]
-w_plus=[[0,0,0],[0,0,0],[0,0],[0]];w_minus=[[0,0,0],[0,0,0],[0,0],[0]]
-ks=[];errks=[]
-errw=[[0,0],0,0,0]
-l_F=[1/0.165**2,1/(0.165+0.12)**2,1/(0.165+0.12+0.124)**2,1/(0.165+0.12+0.124+0.125)**2]
 
-T=[[0,0,0],[0,0,0],[0,0],[0]]
+w_plus=[[0,0,0],[0,0,0],[0,0],[0]];w_minus=[[0,0,0],[0,0,0],[0,0],[0]]
+errw=[[0,0],0,0,0]
+ks=[];errks=[]
 
 for i in range(1,5):
+    plt.close('all')
+    
     #Anzahl der Dateien
     path, dirs, files = next(os.walk("gekoppelt/pos_"+str(i)))
     file_count = len(files)
@@ -94,7 +101,8 @@ for i in range(1,5):
         plt.subplots_adjust(hspace=.0)
         
         plt.savefig("Images/Messung "+str(i)+"_"+name[j]+".jpg")
-            #Nullstellen zählen
+        
+        #Nullstellen zählen
         count=0
         M=U1[j]
         for k,volt in enumerate(M):
@@ -117,7 +125,7 @@ for i in range(1,5):
         errt=(t[-1]-t[0])/(len(t)-1)
         T[i-1][j]=(2*(ende-start)/count)
         #errT.append(2*np.sqrt(2)*errt/count)
-    
+        
         #Fourieranalyse
         w,A = analyse.fourier_fft(t[j],U1[j])
         ind_w1=analyse.peak(w,A,w[np.argmax(w>0.5)],w[np.argmax(w>0.6)])
@@ -138,16 +146,13 @@ for i in range(1,5):
         plt.axvline(x=w[int(ind_w2)], color="darkred", linestyle = "--") 
         plt.text(w[int(ind_w2)],0.6,'max_2:{} Hz'.format(np.round(w[int(ind_w2)],4)))
         plt.xlim(0,1.3)
-        plt.savefig("Images/Position "+str(i)+"_"+name[j]+"Fourier.jpg")
         
         w_plus[i-1][j]=w[ind_w1] #Schweb, gleich, gegen für j=0,1,2
         w_minus[i-1][j]=w[ind_w2] #Kopplung: i=1 schwach, i=4 stark    
         
         if i==1 and j>0:
             errw[i-1][j-1]=(max(w)-min(w))/(len(w)-1)
-
     #Bestimmung des Kopplungsgrades in pos_1 aus gleich und gegen
-
     if i==1:
         k=(w_minus[i-1][2]**2-w_plus[i-1][1]**2)/(w_minus[i-1][2]**2+w_plus[i-1][1]**2)
         errk=(2*(w_minus[i-1][2]/(w_minus[i-1][2]**2+w_plus[i-1][1]**2)-w_minus[i-1][2]*(w_minus[i-1][2]**2-w_plus[i-1][1]**2)/(w_minus[i-1][2]**2+w_plus[i-1][1]**2)**2)*errw[i-1][2-1])**2
@@ -159,7 +164,7 @@ for i in range(1,5):
         errks.append(errk)
 
     #Bestimmung des Kopplungsgrades in pos_2-4 aus Schwebung
-    if i>1:
+    if i>1: #TODO: Bei i=2 auch gleich und gegen auswerten?
         errw[i-1]=(max(w)-min(w))/(len(w)-1)
         k=(w_minus[i-1][0]**2-w_plus[i-1][0]**2)/(w_minus[i-1][0]**2+w_plus[i-1][0]**2)
         errk=(2*(w_minus[i-1][0]/(w_minus[i-1][0]**2+w_plus[i-1][0]**2)-w_minus[i-1][0]*(w_minus[i-1][0]**2-w_plus[i-1][0]**2)/(w_minus[i-1][0]**2+w_plus[i-1][0]**2)**2)*errw[i-1])**2
@@ -170,22 +175,41 @@ for i in range(1,5):
         ks.append(k)
         errks.append(errk)
         
-    
-#plt.close('all')
+#Plot k gegen l
 plt.figure()
-ks = np.array(ks)
-errks = np.array(errks)
-ks = ks[1:]
-errks = errks [1:]
-ks = 1/ks
-errys = errks*ks**2
-l_F = np.array(l_F)
-l_F = l_F[1:]
-plt.errorbar(l_F,ks-1,yerr = errys, fmt = '.')
-plt.ylabel('1/k')
-plt.xlabel('1/l_F**2 in 1/m**2')
-a,ea,b,eb,chiq,corr = analyse.lineare_regression(l_F,ks-1,errks)
-plt.plot(l_F,a*l_F+b)
-print("a: ",a)
-print("ea: ",ea)
-print("chiq: ",chiq)
+plt.errorbar(l_F,ks,yerr=errks,xerr=errl_F,fmt='ko')
+plt.xlabel('Abstand der Feder von der Pendelachse $l_F$ in cm')
+plt.ylabel('Kopplungsgrad $k$')
+plt.title('Abhängigkeit des Kopplungsgrades vom Drehachsenabstand')
+plt.grid()
+plt.savefig('Images/Gekoppelt_Kopplung')
+
+ks=np.array(ks)
+errx=np.array(errks/ks**2)
+#erry=m*g*l_s/(l_F/100)**2*np.sqrt((errm/m)**2+(errg/g)**2+(errl_s/l_s)**2+(2*errl_F/(l_F/100))**2)
+#TODO: Sind das wirklich statistische?
+erry=m*g*l_s/(l_F/100)**2*2*errl_F/(l_F/100)
+
+D,errD,b,errb,chiq,corr=analyse.lineare_regression_xy(1/ks-1,m*g*l_s/(l_F/100)**2,errx,erry)
+print('Federkonstante:(',D,'+-',errD,')N/m, Chi²/f=',chiq/2)
+#TODO: Chi² zu klein
+
+#Regressionsplot
+plt.figure()
+plt.errorbar(1/ks-1,m*g*l_s/(l_F/100)**2,yerr=erry,xerr=errx,fmt='ko')
+steps=np.arange(min(1/ks-1),max(1/ks-1),0.001)
+plt.plot(steps,D*steps+b,color='red')
+plt.ylabel('$m*g*l_s/l_F^2$ in N/m')
+plt.xlabel('$1/k-1$')
+plt.title('Regression zur Berechnung von D')
+plt.grid()
+plt.savefig('Images/Gekoppelt_Federkonstante')
+
+#Residuum
+plt.figure()
+plt.errorbar(1/ks-1,m*g*l_s/(l_F/100)**2-(D*(1/ks-1)+b),yerr=np.sqrt(erry**2+errx**2),fmt='ko')
+plt.ylabel('$\\frac{mgl_s}{l_F^2}$ in N/m')
+plt.xlabel('$1/k-1$')
+plt.title('Residuum zur Berechnung von D')
+plt.grid()
+plt.savefig('Images/Gekoppelt_Federkonstante_Residuum')
