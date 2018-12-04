@@ -87,7 +87,7 @@ plt.plot(t, U2)
 scatter(peaks2[0], peaks2[1], color="r")
 plt.savefig("images/527_gegen.png")
 plt.show()
- 
+plt.close()
 
 T1 = calc_T(peaks1)
 T2 = calc_T(peaks2)
@@ -118,7 +118,7 @@ plt.plot(t, U2)
 scatter(peaks2[0], peaks2[1], color="r")
 plt.savefig("images/527_gleich.png")
 plt.show()
- 
+plt.close()
 
 T1 = calc_T(peaks1)
 T2 = calc_T(peaks2)
@@ -150,7 +150,7 @@ plt.plot(t, U2)
 scatter(peaks2[0], peaks2[1], color="r")
 plt.savefig("images/781_gegen.png")
 plt.show()
- 
+plt.close()
 
 T1 = calc_T(peaks1)
 T2 = calc_T(peaks2)
@@ -181,7 +181,7 @@ plt.plot(t, U2)
 scatter(peaks2[0], peaks2[1], color="r")
 plt.savefig("images/781_gleich.png")
 plt.show()
- 
+plt.close()
 
 T1 = calc_T(peaks1)
 T2 = calc_T(peaks2)
@@ -213,7 +213,7 @@ plt.plot(t, U2)
 scatter(peaks2[0], peaks2[1], color="r")
 plt.savefig("images/2786_gegen.png")
 plt.show()
- 
+plt.close()
 
 T1 = calc_T(peaks1)
 T2 = calc_T(peaks2)
@@ -244,7 +244,7 @@ plt.plot(t, U2)
 scatter(peaks2[0], peaks2[1], color="r")
 plt.savefig("images/2786_gleich1A.png")
 plt.show()
- 
+plt.close()
 
 T1 = calc_T(peaks1)
 T2 = calc_T(peaks2)
@@ -279,7 +279,7 @@ plt.plot(t, U2)
 scatter(peaks2[0], peaks2[1], color="r")
 plt.savefig("images/2786_gleich1B.png")
 plt.show()
- 
+plt.close()
 
 T1 = calc_T(peaks1)
 T2 = calc_T(peaks2)
@@ -313,7 +313,7 @@ plt.plot(t, U2)
 scatter(peaks2[0], peaks2[1], color="r")
 plt.savefig("images/527_schwe.png")
 plt.show()
- 
+plt.close()
 
 omega_fft1, A1 = anal.fourier_fft(t, U1)
 omega_fft2, A2 = anal.fourier_fft(t, U2)
@@ -346,7 +346,7 @@ plt.plot(t, U2)
 scatter(peaks2[0], peaks2[1], color="r")
 plt.savefig("images/781_schwe.png")
 plt.show()
- 
+plt.close()
 
 omega_fft1, A1 = anal.fourier_fft(t, U1)
 omega_fft2, A2 = anal.fourier_fft(t, U2)
@@ -377,9 +377,9 @@ plt.ylabel("U2 / V")
 plt.xlabel("t / s")
 plt.plot(t, U2)
 scatter(peaks2[0], peaks2[1], color="r")
-plt.savefig("images/2786_schwe.png")
+plt.savefig("images/_schwe.png")
 plt.show()
- 
+plt.close()
 
 omega_fft1, A1 = anal.fourier_fft(t, U1)
 omega_fft2, A2 = anal.fourier_fft(t, U2)
