@@ -188,6 +188,106 @@ T2 = calc_T(peaks2)
 T = (T1+T2)*0.5
 ws.append(scipy.pi*2/T)
 
+
+#---------------------------------------------------
+#Gegensinnige Schwingung bei lF=0.2786m
+#---------------------------------------------------
+t, U1, U2 = c_open("2786cm/Gegensinnig1.lab")
+U1 = np.array(U1) - np.average(U1)
+U2 = np.array(U2) - np.average(U2)
+
+peaks1 = lok_max(t,U1)
+peaks2 = lok_max(t,U2)
+
+subplot(2,1,1)
+plt.title("Gegensinnige Schwingung l_F=27.86cm")
+plt.ylabel("U1 / V")
+plt.xlabel("t / s")
+plt.plot(t, U1)
+scatter(peaks1[0], peaks1[1], color="r")
+
+subplot(2,1,2)
+plt.ylabel("U2 / V")
+plt.xlabel("t / s")
+plt.plot(t, U2)
+scatter(peaks2[0], peaks2[1], color="r")
+plt.savefig("images/2786_gegen.png")
+plt.show()
+plt.close()
+
+T1 = calc_T(peaks1)
+T2 = calc_T(peaks2)
+T = (T1+T2)*0.5
+wsf.append(scipy.pi*2/T)
+
+#---------------------------------------------------
+#Gleichsinnige Schwingung bei lF=0.2786m - 1A
+#---------------------------------------------------
+t, U1, U2 = c_open("2786cm/Gleichsinnig1A.lab")
+U1 = np.array(U1) - np.average(U1)
+U2 = np.array(U2) - np.average(U2)
+
+peaks1 = lok_max(t,U1)
+peaks2 = lok_max(t,U2)
+
+subplot(2,1,1)
+plt.title("Gleichsinnige Schwingung l_F=27.86cm (1A)")
+plt.ylabel("U1 / V")
+plt.xlabel("t / s")
+plt.plot(t, U1)
+scatter(peaks1[0], peaks1[1], color="r")
+
+subplot(2,1,2)
+plt.ylabel("U2 / V")
+plt.xlabel("t / s")
+plt.plot(t, U2)
+scatter(peaks2[0], peaks2[1], color="r")
+plt.savefig("images/2786_gleich1A.png")
+plt.show()
+plt.close()
+
+T1 = calc_T(peaks1)
+T2 = calc_T(peaks2)
+T11 = (T1+T2)*0.5
+
+#---------------------------------------------------
+#Gleichsinnige Schwingung bei lF=0.2786m - 1B
+#---------------------------------------------------
+t, U1, U2 = c_open("2786cm/Gleichsinnig1B.lab")
+
+U1 = U1[:-1]
+U2 = U2[:-1]
+t = t[:-1]
+
+U1 = np.array(U1) - np.average(U1)
+U2 = np.array(U2) - np.average(U2)
+
+peaks1 = lok_max(t,U1)
+peaks2 = lok_max(t,U2)
+
+subplot(2,1,1)
+plt.title("Gleichsinnige Schwingung l_F=27.86cm (1B)")
+plt.ylabel("U1 / V")
+plt.xlabel("t / s")
+plt.plot(t, U1)
+scatter(peaks1[0], peaks1[1], color="r")
+
+subplot(2,1,2)
+plt.ylabel("U2 / V")
+plt.xlabel("t / s")
+plt.plot(t, U2)
+scatter(peaks2[0], peaks2[1], color="r")
+plt.savefig("images/2786_gleich1B.png")
+plt.show()
+plt.close()
+
+T1 = calc_T(peaks1)
+T2 = calc_T(peaks2)
+T22 = (T1+T2)*0.5
+T = (T11+T22)*0.5
+ws.append(scipy.pi*2/T)
+
+
 #---------------------------------------------------
 #Schwebung bei lF=0.527 m 
 #---------------------------------------------------
@@ -222,13 +322,79 @@ plt.plot(omega_fft2, A2)
 plt.show()
 
 #---------------------------------------------------
+#Schwebung bei lF=0.781 m 
+#---------------------------------------------------
+
+t, U1, U2 = c_open("781cm/Schwebung.lab")
+U1 = np.array(U1) - np.average(U1)
+U2 = np.array(U2) - np.average(U2)
+
+peaks1 = lok_max(t,U1)
+peaks2 = lok_max(t,U2)
+
+subplot(2,1,1)
+plt.title("Schwebung bei l_F=78.1cm")
+plt.ylabel("U1 / V")
+plt.xlabel("t / s")
+plt.plot(t, U1)
+scatter(peaks1[0], peaks1[1], color="r")
+
+subplot(2,1,2)
+plt.ylabel("U2 / V")
+plt.xlabel("t / s")
+plt.plot(t, U2)
+scatter(peaks2[0], peaks2[1], color="r")
+plt.savefig("images/781_schwe.png")
+plt.show()
+plt.close()
+
+omega_fft1, A1 = anal.fourier_fft(t, U1)
+omega_fft2, A2 = anal.fourier_fft(t, U2)
+plt.plot(omega_fft1, A1)
+plt.plot(omega_fft2, A2)
+plt.show()
+
+#---------------------------------------------------
+#Schwebung bei lF=0.2786 m 
+#---------------------------------------------------
+
+t, U1, U2 = c_open("2786cm/Schwebung.lab")
+U1 = np.array(U1) - np.average(U1)
+U2 = np.array(U2) - np.average(U2)
+
+peaks1 = lok_max(t,U1)
+peaks2 = lok_max(t,U2)
+
+subplot(2,1,1)
+plt.title("Schwebung bei l_F=27.86cm")
+plt.ylabel("U1 / V")
+plt.xlabel("t / s")
+plt.plot(t, U1)
+scatter(peaks1[0], peaks1[1], color="r")
+
+subplot(2,1,2)
+plt.ylabel("U2 / V")
+plt.xlabel("t / s")
+plt.plot(t, U2)
+scatter(peaks2[0], peaks2[1], color="r")
+plt.savefig("images/2786_schwe.png")
+plt.show()
+plt.close()
+
+omega_fft1, A1 = anal.fourier_fft(t, U1)
+omega_fft2, A2 = anal.fourier_fft(t, U2)
+plt.plot(omega_fft1, A1)
+plt.plot(omega_fft2, A2)
+plt.show()
+
+#---------------------------------------------------
 #Kappa Berechnen
 #---------------------------------------------------
 wsf = np.array(wsf)
 ws = np.array(ws)
 kappa = np.array((wsf**2-ws**2)/(wsf**2+ws**2))
 #TODO: Fehler; hier 0.1 nur zufällig!
-m,em,b,eb,chiq,corr = anal.lineare_regression(np.array([0.527,0.781])**-2, np.array(kappa)**(-1), 0.1*np.ones(len(kappa)))
+m,em,b,eb,chiq,corr = anal.lineare_regression(np.array([0.527,0.781,0.2786])**-2, np.array(kappa)**(-1), 0.1*np.ones(len(kappa)))
 print(b)
 print(M*ls*9.81/m)
 print(0.5*9.81*(0.0654/(0.38-0.27)+0.0678/(0.387-0.270)))
