@@ -31,7 +31,7 @@ plt.savefig('Images/Federkonstante_Regression.jpg')
 plt.figure()
 
 #Residuum
-plt.errorbar(x,m*g-(D*x+b),yerr=np.sqrt((errm*g)**2+errx**2),capsize=0.5,fmt='ko')
+plt.errorbar(x,m*g-(D*x+b),yerr=np.sqrt((errm*g)**2+D**2*errx**2),capsize=0.5,fmt='ko')
 plt.title('Residuenplot')
 plt.xlabel('x in m')
 plt.ylabel('m*g-(Dx+b)') 
