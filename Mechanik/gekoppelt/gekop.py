@@ -62,6 +62,10 @@ W = []
 kappa = []
 M = 1.0733
 ls=1.0
+lF = np.array([0.527,0.781,0.2786])
+st = 0.02
+sTs = []
+sTsf = []
 
 #---------------------------------------------------
 #Gegensinnige Schwingung bei lF=0.527 m
@@ -94,6 +98,10 @@ T2 = calc_T(peaks2)
 T = (T1+T2)*0.5
 wsf.append(scipy.pi*2/T)
 
+sT1 = np.sqrt(2)*st/len(peaks1)
+sT2 = np.sqrt(2)*st/len(peaks2)
+sTsf.append(0.5*np.sqrt(sT1**2+sT2**2))
+
 #---------------------------------------------------
 #Gleichsinnige Schwingung bei lF=0.527 m
 #---------------------------------------------------
@@ -124,6 +132,10 @@ T1 = calc_T(peaks1)
 T2 = calc_T(peaks2)
 T = (T1+T2)*0.5
 ws.append(scipy.pi*2/T)
+
+sT1 = np.sqrt(2)*st/len(peaks1)
+sT2 = np.sqrt(2)*st/len(peaks2)
+sTs.append(0.5*np.sqrt(sT1**2+sT2**2))
 
 
 #---------------------------------------------------
@@ -157,6 +169,10 @@ T2 = calc_T(peaks2)
 T = (T1+T2)*0.5
 wsf.append(scipy.pi*2/T)
 
+sT1 = np.sqrt(2)*st/len(peaks1)
+sT2 = np.sqrt(2)*st/len(peaks2)
+sTsf.append(0.5*np.sqrt(sT1**2+sT2**2))
+
 #---------------------------------------------------
 #Gleichsinnige Schwingung bei lF=0.781 m
 #---------------------------------------------------
@@ -188,6 +204,9 @@ T2 = calc_T(peaks2)
 T = (T1+T2)*0.5
 ws.append(scipy.pi*2/T)
 
+sT1 = np.sqrt(2)*st/len(peaks1)
+sT2 = np.sqrt(2)*st/len(peaks2)
+sTs.append(0.5*np.sqrt(sT1**2+sT2**2))
 
 #---------------------------------------------------
 #Gegensinnige Schwingung bei lF=0.2786m
@@ -220,6 +239,10 @@ T2 = calc_T(peaks2)
 T = (T1+T2)*0.5
 wsf.append(scipy.pi*2/T)
 
+sT1 = np.sqrt(2)*st/len(peaks1)
+sT2 = np.sqrt(2)*st/len(peaks2)
+sTsf.append(0.5*np.sqrt(sT1**2+sT2**2))
+
 #---------------------------------------------------
 #Gleichsinnige Schwingung bei lF=0.2786m - 1A
 #---------------------------------------------------
@@ -249,6 +272,10 @@ plt.close()
 T1 = calc_T(peaks1)
 T2 = calc_T(peaks2)
 T11 = (T1+T2)*0.5
+
+sT1 = np.sqrt(2)*st/len(peaks1)
+sT2 = np.sqrt(2)*st/len(peaks2)
+sT11 = 0.5*np.sqrt(sT1**2+sT2**2)
 
 #---------------------------------------------------
 #Gleichsinnige Schwingung bei lF=0.2786m - 1B
@@ -286,6 +313,11 @@ T2 = calc_T(peaks2)
 T22 = (T1+T2)*0.5
 T = (T11+T22)*0.5
 ws.append(scipy.pi*2/T)
+
+sT1 = np.sqrt(2)*st/len(peaks1)
+sT2 = np.sqrt(2)*st/len(peaks2)
+sT22 = 0.5*np.sqrt(sT1**2+sT2**2)
+sTs.append(0.5*np.sqrt(sT11**2+sT22**2))
 
 
 #---------------------------------------------------
@@ -404,9 +436,31 @@ plt.show()
 #---------------------------------------------------
 wsf = np.array(wsf)
 ws = np.array(ws)
+sTs = np.array(sTs)
+sTsf = np.array(sTsf)
 kappa = np.array((wsf**2-ws**2)/(wsf**2+ws**2))
-#TODO: Fehler; hier 0.1 nur zufällig!
-m,em,b,eb,chiq,corr = anal.lineare_regression(np.array([0.527,0.781,0.2786])**-2, np.array(kappa)**(-1), 0.1*np.ones(len(kappa)))
+print(kappa)
+
+skappa = 4*np.power(ws*wsf, 3)*(scipy.pi*2)**(-1)*np.power(ws**2+wsf**2, -2)*np.sqrt((sTs/ws)**2+(sTsf/wsf)**2)
+
+print(skappa)
+m,em,b,eb,chiq,corr = anal.lineare_regression(lF**-2, np.array(kappa)**(-1), skappa)
 print(b)
+print(eb)
+plt.errorbar(lF**-2, kappa**-1, skappa/(kappa)**2,fmt="x",markersize=4, capsize=3)
+plt.plot(np.arange(min(lF**-2)-0.2, max(lF**-2)+0.2, 0.1), np.arange(min(lF**-2)-0.2, max(lF**-2)+0.2, 0.1)*m+b)
+plt.title("Die lineare Regression bzgl. $\kappa^{-1}$")
+plt.xlabel("$l_F^{-2}$")
+plt.ylabel("$\kappa^{-1}$ / $m^{-2}$")
+plt.show()
+
+plt.title("Residuenplot")
+plt.errorbar(lF**-2, kappa**-1-lF**-2*m+b, skappa/(kappa)**2,fmt="x",markersize=4, capsize=3)
+plt.axhline(0)
+plt.xlabel("$l_F^{-2}$")
+plt.ylabel("$\kappa^{-1}$ / $m^{-2}$")
+
 print(M*ls*9.81/m)
+
+
 print(0.5*9.81*(0.0654/(0.38-0.27)+0.0678/(0.387-0.270)))
