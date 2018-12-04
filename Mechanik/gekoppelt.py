@@ -129,7 +129,7 @@ for i in range(1,5): #Läuft durch Positionen (pos_i)
         w_minus[i-1][j]=w[ind_w2] #Kopplung: i=1 schwach, i=4 stark    
         
         if i==1 and j>0: #Fehler für pos_1-Auswertung
-            errw[i-1][j-1]=(max(w)-min(w))/(len(w)-1)/np.sqrt(12)
+            errw[i-1][j-1]=(max(w)-min(w))/(len(w)-1)/np.sqrt(12) #sqrt(12), da Gleichverteilung
             
     #Bestimmung des Kopplungsgrades in pos_1 aus gleich und gegen
     if i==1:
@@ -144,7 +144,7 @@ for i in range(1,5): #Läuft durch Positionen (pos_i)
 
     #Bestimmung des Kopplungsgrades in pos_2-4 aus Schwebung
     if i>1: 
-        errw[i-1]=(max(w)-min(w))/(len(w)-1)/np.sqrt(12)
+        errw[i-1]=(max(w)-min(w))/(len(w)-1)/np.sqrt(12) #s.o.
         k=(w_minus[i-1][0]**2-w_plus[i-1][0]**2)/(w_minus[i-1][0]**2+w_plus[i-1][0]**2)
         errk=(2*(w_minus[i-1][0]/(w_minus[i-1][0]**2+w_plus[i-1][0]**2)-w_minus[i-1][0]*(w_minus[i-1][0]**2-w_plus[i-1][0]**2)/(w_minus[i-1][0]**2+w_plus[i-1][0]**2)**2)*errw[i-1])**2
         errk+=(-2*(w_plus[i-1][0]/(w_minus[i-1][0]**2+w_plus[i-1][0]**2)-w_plus[i-1][0]*(w_minus[i-1][0]**2-w_plus[i-1][0]**2)/(w_minus[i-1][0]**2+w_plus[i-1][0]**2)**2)*errw[i-1])**2
@@ -189,7 +189,7 @@ plt.errorbar(1/ks-1,m*g*l_s/(l_F/100)**2-(D*(1/ks-1)+b),yerr=np.sqrt(erry**2+D**
 plt.ylabel('$\\frac{mgl_s}{l_F^2}$ in N/m')
 plt.xlabel('$1/k-1$')
 plt.title('Residuum zur Berechnung von D')
-plt.plot(1/ks-1,0*np.ones(len(x)),'-.r')
+plt.plot(1/ks-1,0*np.ones(len(1/ks-1)),'-.r')
 plt.grid()
 plt.savefig('Images/Gekoppelt_Federkonstante_Residuum')
 
