@@ -20,10 +20,10 @@ somega = [] #Array der Omega-Fehler der Messungen mit der Stange
 lp = 0.67817 #Pendellänge in m
 slp = 0.001 #Ableseunsicherheit des Maßbands - größte Unsicherheit
 rp = 0.04 #Radius des Pendelkörpers in m
-srp = 0.01 /np.sqrt(12)
+srp = 0.01
 dt = 0.02
-sslp = 0.7 *pow(10, -3) #Kalibrierungssicherheit (systematisch)
-ssrp = 0.01/np.sqrt(12)
+sslp = (0.3+0.2*1) *pow(10, -3) #Kalibrierungssicherheit (systematisch)
+
 def lok_max(t, U):
     """
     Berechnet die lokalen Maxima einer Schwingung
@@ -221,5 +221,5 @@ print("somega", somega_aver*2*g/omega_aver)
 print("sl", (omega_aver**2-0.5*(rp/lp)**2)*slp)
 print("sr", srp * omega_aver**2*(rp/lp))
 sg = np.sqrt((somega_aver*2*g/omega_aver)**2+((omega_aver**2-0.5*(rp/lp)**2)*slp)**2+(srp * omega_aver**2*(rp/lp))**2)
-ssg = np.sqrt(((omega_aver**2-0.5*(rp/lp)**2)*sslp)**2+(ssrp * omega_aver**2*(rp/lp))**2)
+ssg = np.sqrt(((omega_aver**2-0.5*(rp/lp)**2)*sslp)**2)
 print("g =", g, "+-", sg, "+-", ssg)
