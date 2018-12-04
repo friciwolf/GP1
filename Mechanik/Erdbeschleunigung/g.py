@@ -16,8 +16,14 @@ import scipy.constants
 #Definitionen
 #---------------------------------------------------
 omega = [] #Array der Omega-Werte der Messungen mit der Stange
+somega = [] #Array der Omega-Fehler der Messungen mit der Stange
 lp = 0.67817 #Pendellänge in m
+slp = 0.001 #Ableseunsicherheit des Maßbands - größte Unsicherheit
 rp = 0.04 #Radius des Pendelkörpers in m
+srp = 0.01 /np.sqrt(12)
+dt = 0.02
+sslp = 0.7 *pow(10, -3) #Kalibrierungssicherheit (systematisch)
+ssrp = 0.01/np.sqrt(12)
 def lok_max(t, U):
     """
     Berechnet die lokalen Maxima einer Schwingung
@@ -79,15 +85,20 @@ plt.show()
 
 #T und omega:
 T1 = 0.0
+dT1 = 0.0
 T2 = 0.0
+dT2 = 0.0
 for i in range(len(peaks1[0])-1):
     T1 += (peaks1[0][i+1]-peaks1[0][i])/(len(peaks1[0])-1)
 for i in range(len(peaks2[0])-1):
     T2 += (peaks2[0][i+1]-peaks2[0][i])/(len(peaks2[0])-1)
+dT1 = np.sqrt(2) * dt /len(peaks1[0]) #TODO: check
+dT2 = np.sqrt(2) * dt /len(peaks2[0]) #TODO: check
 print("Schwingung der Stangen:")
 print("Die Periodendauer, die Frequenz und die Kreisfrequenz betragen somit:")
-print("T1=",T1, "s,", "f1 =", 1/T1, "Hz,", "w1 =", scipy.pi*2/T1, "Hz")
-print("T2=",T2, "s,", "f2 =", 1/T2, "Hz,", "w2 =", scipy.pi*2/T2, "Hz")
+print("T1=",T1, "+-", dT1, "s,", "f1 =", 1/T1,"+-",1/(T1**2)*dT1, "Hz,", "w1 =", scipy.pi*2/T1,"+-" ,scipy.pi*2/(T1**2)*dT1 ,"Hz")
+print("T2=",T2, "+-", dT2, "s,", "f2 =", 1/T2,"+-",1/(T2**2)*dT2, "Hz,", "w2 =", scipy.pi*2/T2,"+-" ,scipy.pi*2/(T2**2)*dT2 ,"Hz")
+#print("T2=",T2, "s,", "f2 =", 1/T2, "Hz,", "w2 =", scipy.pi*2/T2, "Hz")
 print("relativer Unterschied:", (T1-T2)/T2)
 
 
@@ -118,11 +129,14 @@ plt.show()
 
 #T und omega:
 T = 0.0
+dT = 0.0
 for i in range(len(peaks[0])-1):
     T += (peaks[0][i+1]-peaks[0][i])/(len(peaks[0])-1)
+dT = np.sqrt(2) * dt /len(peaks1[0])
 print("Schwingung der Stange 1:")
 print("Die Periodendauer, die Frequenz und die Kreisfrequenz betragen somit:")
-print("T=",T, "s,", "f =", 1/T, "Hz,", "w =", scipy.pi*2/T, "Hz")
+#print("T=",T, "s,", "f =", 1/T, "Hz,", "w =", scipy.pi*2/T, "Hz")
+print("T=",T, "+-", dT, "s,", "f =", 1/T,"+-",1/(T**2)*dT, "Hz,", "w1 =", scipy.pi*2/T,"+-" ,scipy.pi*2/(T**2)*dT ,"Hz")
 
 #---------------------------------------------------
 #Schwingung der Stange 1 mit der Masse darauf
@@ -152,12 +166,16 @@ plt.show()
 
 #T und omega:
 T = 0.0
+dT = 0.0
 for i in range(len(peaks[0])-1):
     T += (peaks[0][i+1]-peaks[0][i])/(len(peaks[0])-1)
+dT = np.sqrt(2) * dt /len(peaks1[0])
 print("Schwingung der Stange 1 mit der Masse:")
 print("Die Periodendauer, die Frequenz und die Kreisfrequenz betragen somit:")
-print("T=",T, "s,", "f =", 1/T, "Hz,", "w =", scipy.pi*2/T, "Hz")
+#print("T=",T, "s,", "f =", 1/T, "Hz,", "w =", scipy.pi*2/T, "Hz")
+print("T=",T, "+-", dT, "s,", "f =", 1/T,"+-",1/(T**2)*dT, "Hz,", "w1 =", scipy.pi*2/T,"+-" ,scipy.pi*2/(T**2)*dT ,"Hz")
 omega.append(scipy.pi*2/T)
+somega.append(scipy.pi*2/(T**2)*dT)
 #---------------------------------------------------
 #Schwingung der Stange 2 mit der Masse darauf - beste Messung
 #---------------------------------------------------
@@ -184,13 +202,24 @@ plt.show()
 
 #T und omega:
 T = 0.0
+sT = 0.0
 for i in range(len(peaks[0])-1):
     T += (peaks[0][i+1]-peaks[0][i])/(len(peaks[0])-1)
+dT = np.sqrt(2) * dt /len(peaks1[0])
 print("Schwingung der Stange 2 mit der Masse: - beste Resultat")
 print("Die Periodendauer, die Frequenz und die Kreisfrequenz betragen somit:")
-print("T=",T, "s,", "f =", 1/T, "Hz,", "w =", scipy.pi*2/T, "Hz")
+#print("T=",T, "s,", "f =", 1/T, "Hz,", "w =", scipy.pi*2/T, "Hz")
+print("T=",T, "+-", dT, "s,", "f =", 1/T,"+-",1/(T**2)*dT, "Hz,", "w1 =", scipy.pi*2/T,"+-" ,scipy.pi*2/(T**2)*dT ,"Hz")
 omega.append(scipy.pi*2/T)
+somega.append(scipy.pi*2/(T**2)*dT)
 
-omega_average = np.mean(omega)
-g = omega_average**2 * lp * (1+0.5*(rp/lp)**2)
-print("g =", g)
+#TODO gew. Mittel
+omega_aver = (omega[0]/(somega[0])**2+omega[1]/(somega[1])**2)/(np.power(somega[0], -2)+np.power(somega[1], -2))
+somega_aver = 1.0/(np.power(somega[0], -2)+np.power(somega[1], -2))
+g = omega_aver**2 * lp * (1+0.5*(rp/lp)**2)
+print("somega", somega_aver*2*g/omega_aver)
+print("sl", (omega_aver**2-0.5*(rp/lp)**2)*slp)
+print("sr", srp * omega_aver**2*(rp/lp))
+sg = np.sqrt((somega_aver*2*g/omega_aver)**2+((omega_aver**2-0.5*(rp/lp)**2)*slp)**2+(srp * omega_aver**2*(rp/lp))**2)
+ssg = np.sqrt(((omega_aver**2-0.5*(rp/lp)**2)*sslp)**2+(ssrp * omega_aver**2*(rp/lp))**2)
+print("g =", g, "+-", sg, "+-", ssg)
