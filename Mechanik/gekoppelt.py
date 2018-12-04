@@ -54,7 +54,7 @@ for i in range(1,5): #Läuft durch Positionen (pos_i)
     data = cassy.CassyDaten("gekoppelt/pos_"+str(i)+"/schweb_pos_"+str(i)+".lab")
     t1 = data.messung(1).datenreihe("t").werte
     t[0] = t1[:bis]
-    U1_1 = data.messung(1).datenreihe("U_A1").werte-(offset1+(i-1)*0.05) #scheinbar systematiscgher Offset
+    U1_1 = data.messung(1).datenreihe("U_A1").werte-(offset1+(i-1)*0.05) #scheinbar systematischer Offset
     U1[0] = U1_1[:bis]
     U1_2 = data.messung(1).datenreihe("U_B1").werte-offset2 #Pendel2
     U2[0] = U1_2[:bis]
@@ -189,6 +189,7 @@ plt.errorbar(1/ks-1,m*g*l_s/(l_F/100)**2-(D*(1/ks-1)+b),yerr=np.sqrt(erry**2+D**
 plt.ylabel('$\\frac{mgl_s}{l_F^2}$ in N/m')
 plt.xlabel('$1/k-1$')
 plt.title('Residuum zur Berechnung von D')
+plt.plot(1/ks-1,0*np.ones(len(x)),'-.r')
 plt.grid()
 plt.savefig('Images/Gekoppelt_Federkonstante_Residuum')
 
