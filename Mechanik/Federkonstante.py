@@ -12,7 +12,7 @@ errx=np.array(np.ones(len(m))*0.001) #m
 
 g=Erdbeschleunigung.g
 errg=np.sqrt(Erdbeschleunigung.errg_stat**2+Erdbeschleunigung.errg_sys**2) #nur noch systematisch
-errD_sys=0.0 #0, da konstante Verschiebung von g? #TODO: 
+errD_sys=0.0 # ausgewertet in IPython -> keine signifikante Änderung
 
 #Lineare Regression
 D,errD_stat,b,errb,chiq,corr=analyse.lineare_regression_xy(x,m*g,errx,errm*g) #Chi² zu klein
@@ -31,9 +31,9 @@ plt.savefig('Images/Federkonstante_Regression.jpg')
 plt.figure()
 
 #Residuum
-plt.errorbar(x,m*g-(D*x+b),yerr=np.sqrt((errm*g)**2+errx**2),capsize=0.5,fmt='ko')
+plt.errorbar(x,m*g-(D*x+b),yerr=np.sqrt((errm*g)**2+D**2*errx**2),capsize=0.5,fmt='ko')
 plt.title('Residuenplot')
 plt.xlabel('x in m')
-plt.ylabel('m*g-(Dx+b)') #Gast mag große Bilder
+plt.ylabel('m*g-(Dx+b)') 
 plt.plot(x,0*np.ones(len(x)),'-.r')
 plt.savefig('Images/Federkonstante_Residuum.jpg')

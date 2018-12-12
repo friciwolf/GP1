@@ -25,9 +25,9 @@ for i in range(1,4):
     if __name__=='__main__':
         #Rohdatenplot bis Stange zu gedämpft
         von=0
-        bis=-1#np.argmax(t>=300)
+        bis=-1#np.argmax(t>=100)
         plt.plot(t[von:bis],M[von:bis], color='black')
-        #plt.plot(t[von:bis],St[von:bis],color='red')
+        plt.plot(t[von:bis],St[von:bis],color='red')
         plt.title('Schwingung mit körperloser Frequenz {}'.format(i))
         plt.grid()
         plt.savefig('Images/Erdbeschleunigung_Roh_'+str(i)+'.jpg')
@@ -50,16 +50,19 @@ for i in range(1,4):
     if i==2: #Bei der zweiten Messung werden 2 Nullstellen doppelt gezählt, weil die Spannung springt
         count-=4
         
-    print(count)
+    print('Nullstellenzahl:',count)
+    
     #Periodendauer berechnen
     errt=(t[-1]-t[0])/(len(t)-1)
     T.append(2*(ende-start)/count)
     errT.append(2*np.sqrt(2)*errt/count)
+    
     if __name__=='__main__':    
         if i!=3:
             plt.figure()
             
 #T=[(399.707-1.14905)/(242-1),(159.5+0.035-0.7550)/(97-1),(159.34+0.00625-0.4410)/(97-1)] #Auszählung der Peaks per Hand
+print(T,'\n',errT)
 T,errT=analyse.gewichtetes_mittel(np.array(T),np.array(errT))
 
 #Frequenz und Erdbeschleunigung + Fehler
@@ -75,5 +78,3 @@ if errg_sys>errg_stat:
 else: 
    g,errg_sys,errg_stat=Rauschmessung.round_good(g,errg_sys,errg_stat)
 print('Erdbeschleunigung: g=({} +- {} +- {})m/s²'.format(g,errg_stat,errg_sys))
-#TODO: Fehler auf Frequenz durch ungenügende Gleichheit und damit Unabhängigkeit?
-#TODO: Fehler aus der Rauschmessung irgendwo benötigt?

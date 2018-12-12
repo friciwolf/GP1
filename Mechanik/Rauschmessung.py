@@ -3,7 +3,7 @@
 """
 Created on Sat Oct 27 17:24:44 2018
 
-@author: Mate, Patrick
+@author: Christine, Patrick
 """
 import matplotlib.pyplot as plt
 import numpy as np
@@ -46,7 +46,7 @@ mSt,sSt,errSt=round_good(np.average(St),np.std(St),np.std(St)/np.sqrt(len(St)))
 if __name__ == "__main__": 
     
 #------------------------------------------------------------
-#Umgebungstemperatur
+#Pendel mit Masse
     print("Pendel mit Pendelkörper")
     print('m='+str(mM)+u' V, std='+str(sM)+u' V, err='+str(errM)+u' V')
     
@@ -65,14 +65,14 @@ if __name__ == "__main__":
     #Datenplot
     plt.plot(t, M)
     plt.title(u"Rauschmessung der Ruhelage des Pendels mit Körper")
-    plt.ylabel(u"T/°C")
+    plt.ylabel(u"U/V")
     plt.xlabel('Zeit/s')
     plt.plot(t,np.array([np.mean(M)]*len(t)),color='darkorange')
     plt.savefig("Images/Rauschmessung_mitMasse.jpg")
     plt.figure()
 
 #------------------------------------------------------------
-#Umgebungsdruck
+#Pendelstange
     print("==="*20)
     print("Pendelstange")
     print('m='+str(mSt)+' V, std='+str(sSt)+' V, err='+str(errSt)+' V')
