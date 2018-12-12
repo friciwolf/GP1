@@ -351,7 +351,7 @@ omega_fft1, A1 = anal.fourier_fft(t, U1)
 omega_fft2, A2 = anal.fourier_fft(t, U2)
 plt.title("Fouriertransformierte der Schwebungen bei  $l_F$=52.7cm")
 plt.ylabel("Häufigkeit")
-plt.xlabel("$\omega$ / Hz")
+plt.xlabel("f / Hz")
 plt.xlim(0.4,0.8)
 plt.plot(omega_fft1, A1)
 plt.plot(omega_fft2, A2)
@@ -386,9 +386,9 @@ plt.close()
 
 omega_fft1, A1 = anal.fourier_fft(t, U1)
 omega_fft2, A2 = anal.fourier_fft(t, U2)
-plt.title("Fouriertransformierte der Schwebungen bei  $l_F$=27.86cm")
+plt.title("Fouriertransformierte der Schwebungen bei  $l_F$=78.1cm")
 plt.ylabel("Häufigkeit")
-plt.xlabel("$\omega$ / Hz")
+plt.xlabel("f / Hz")
 plt.xlim(0.4,0.8)
 plt.plot(omega_fft1, A1)
 plt.plot(omega_fft2, A2)
@@ -417,7 +417,7 @@ plt.ylabel("$U_2$ / V")
 plt.xlabel("t / s")
 plt.plot(t, U2)
 scatter(peaks2[0], peaks2[1], color="r")
-plt.savefig("images/_schwe.png")
+plt.savefig("images/2786_schwe.png")
 plt.show()
 plt.close()
 
@@ -425,17 +425,19 @@ omega_fft1, A1 = anal.fourier_fft(t, U1)
 omega_fft2, A2 = anal.fourier_fft(t, U2)
 plt.title("Fouriertransformierte der Schwebungen bei  $l_F$=27.86cm")
 plt.ylabel("Häufigkeit")
-plt.xlabel("$\omega$ / Hz")
+plt.xlabel("f / Hz")
 plt.xlim(0.4,0.8)
 plt.plot(omega_fft1, A1)
 plt.plot(omega_fft2, A2)
 plt.show()
 
 #---------------------------------------------------
-#Kappa Berechnen
+#Kappa Berechnen - über die Periodendauer T
 #---------------------------------------------------
 wsf = np.array(wsf)
 ws = np.array(ws)
+print(wsf)
+print(ws)
 sTs = np.array(sTs)
 sTsf = np.array(sTsf)
 kappa = np.array((wsf**2-ws**2)/(wsf**2+ws**2))
@@ -444,7 +446,7 @@ print(kappa)
 skappa = 4*np.power(ws*wsf, 3)*(scipy.pi*2)**(-1)*np.power(ws**2+wsf**2, -2)*np.sqrt((sTs/ws)**2+(sTsf/wsf)**2)
 
 print(skappa)
-m,em,b,eb,chiq,corr = anal.lineare_regression(lF**-2, np.array(kappa)**(-1), skappa)
+m,em,b,eb,chiq,corr = anal.lineare_regression(lF**-2, np.array(kappa)**(-1)-1, skappa)
 print(b)
 print(eb)
 plt.errorbar(lF**-2, kappa**-1, skappa/(kappa)**2,fmt="x",markersize=4, capsize=3)
@@ -452,15 +454,79 @@ plt.plot(np.arange(min(lF**-2)-0.2, max(lF**-2)+0.2, 0.1), np.arange(min(lF**-2)
 plt.title("Die lineare Regression bzgl. $\kappa^{-1}$")
 plt.xlabel("$l_F^{-2}$")
 plt.ylabel("$\kappa^{-1}$ / $m^{-2}$")
+plt.savefig("images/D_linreg.png")
 plt.show()
 
 plt.title("Residuenplot")
-plt.errorbar(lF**-2, kappa**-1-lF**-2*m+b, skappa/(kappa)**2,fmt="x",markersize=4, capsize=3)
+plt.errorbar(lF**-2, kappa**-1-lF**-2*m-b, skappa/(kappa)**2,fmt="x",markersize=4, capsize=3)
 plt.axhline(0)
 plt.xlabel("$l_F^{-2}$")
 plt.ylabel("$\kappa^{-1}$ / $m^{-2}$")
+plt.savefig("images/D_residum.png")
+plt.show()
+
+print(M*ls*9.81/m)
+
+#---------------------------------------------------
+#Kappa Berechnen - über die FFT
+#---------------------------------------------------
+print("fft:")
+omegasf_fft = np.array([0.6043956044, 0.6715506716, 0.5524356])*2*scipy.pi
+omegas_fft = np.array([0.5311355311, 0.5311355311, 0.5310706873])*2*scipy.pi
+print(wsf)
+print(omegasf_fft)
+print(ws)
+print(omegas_fft)
+
+somegasf_fft = 0.0061*np.ones(len(omegasf_fft))
+somegas_fft = 0.0061*np.ones(len(omegasf_fft))
+print("kappa")
+print(kappa)
+kappa = np.array((omegasf_fft**2-omegas_fft**2)/(omegasf_fft**2+omegas_fft**2))
+print(kappa)
+print(skappa)
+skappa = 4*omegasf_fft*omegas_fft/(omegasf_fft**2+omegas_fft**2)**2 * np.sqrt((omegasf_fft*somegas_fft)**2+(omegas_fft*somegasf_fft)**2)
+
+print(skappa)
+m,em,b,eb,chiq,corr = anal.lineare_regression(lF**-2, np.array(kappa)**(-1)-1, skappa)
+print(b)
+print(eb)
+plt.errorbar(lF**-2, kappa**-1, skappa/(kappa)**2,fmt="x",markersize=4, capsize=3)
+plt.plot(np.arange(min(lF**-2)-0.2, max(lF**-2)+0.2, 0.1), np.arange(min(lF**-2)-0.2, max(lF**-2)+0.2, 0.1)*m+b)
+plt.title("Die lineare Regression bzgl. $\kappa^{-1}$")
+plt.xlabel("$l_F^{-2}$")
+plt.ylabel("$\kappa^{-1}$ / $m^{-2}$")
+plt.savefig("images/Dfft_linreg.png")
+plt.show()
+
+plt.title("Residuenplot")
+plt.errorbar(lF**-2, kappa**-1-lF**-2*m-b, skappa/(kappa)**2,fmt="x",markersize=4, capsize=3)
+plt.axhline(0)
+plt.xlabel("$l_F^{-2}$")
+plt.ylabel("$\kappa^{-1}$ / $m^{-2}$")
+plt.savefig("images/Dfft_residum.png")
+plt.show()
 
 print(M*ls*9.81/m)
 
 
-print(0.5*9.81*(0.0654/(0.38-0.27)+0.0678/(0.387-0.270)))
+L0 = 0.270
+sL = 0.001
+sL0sys = 0.0003+0.0002*0.270
+l1 = 0.380
+sL1sys = 0.0003+0.0002*0.380
+l2 = 0.387
+sL2sys = 0.0003+0.0002*0.387
+m1 = 0.0654
+m2 = 0.0678
+sm = 0.00005
+
+D1 = 9.81*(0.0654/(0.38-0.27))
+sD1 = D1 * np.sqrt((sm/m)**2+(sL/(l1-L0))**2+(sL/(l1-L0))**2)
+sD1s = D1 * np.sqrt((sm/m)**2+(sL0sys/(l1-L0))**2+(sL1sys/(l1-L0))**2)
+D2 = 9.81*(0.0678/(0.387-0.270))
+sD2 = D2 * np.sqrt((sm/m)**2+(sL/(l2-L0))**2+(sL/(l2-L0))**2)
+sD2s = D2 * np.sqrt((sm/m)**2+(sL0sys/(l2-L0))**2+(sL2sys/(l2-L0))**2)
+print((D1/sD1**2+D2/sD2**2)/(sD1**-2+sD2**-2))
+print(1/(sD1**-2+sD2**-2))
+print(1/(sD1s**-2+sD2s**-2))
