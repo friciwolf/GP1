@@ -101,6 +101,8 @@ print("T2=",T2, "+-", dT2, "s,", "f2 =", 1/T2,"+-",1/(T2**2)*dT2, "Hz,", "w2 =",
 #print("T2=",T2, "s,", "f2 =", 1/T2, "Hz,", "w2 =", scipy.pi*2/T2, "Hz")
 print("relativer Unterschied:", (T1-T2)/T2)
 
+omega.append(scipy.pi*4/(T1+T2))
+somega.append(0.5*np.sqrt(scipy.pi*2/(T1**2)*dT1**2+scipy.pi*2/(T2**2)*dT2**2))
 
 #---------------------------------------------------
 #Alleinige Schwingung der Stange 1
@@ -174,8 +176,8 @@ print("Schwingung der Stange 1 mit der Masse:")
 print("Die Periodendauer, die Frequenz und die Kreisfrequenz betragen somit:")
 #print("T=",T, "s,", "f =", 1/T, "Hz,", "w =", scipy.pi*2/T, "Hz")
 print("T=",T, "+-", dT, "s,", "f =", 1/T,"+-",1/(T**2)*dT, "Hz,", "w1 =", scipy.pi*2/T,"+-" ,scipy.pi*2/(T**2)*dT ,"Hz")
-omega.append(scipy.pi*2/T)
-somega.append(scipy.pi*2/(T**2)*dT)
+#omega.append(scipy.pi*2/T)
+#somega.append(scipy.pi*2/(T**2)*dT)
 #---------------------------------------------------
 #Schwingung der Stange 2 mit der Masse darauf - beste Messung
 #---------------------------------------------------
@@ -213,9 +215,11 @@ print("T=",T, "+-", dT, "s,", "f =", 1/T,"+-",1/(T**2)*dT, "Hz,", "w1 =", scipy.
 omega.append(scipy.pi*2/T)
 somega.append(scipy.pi*2/(T**2)*dT)
 
-#TODO gew. Mittel
 omega_aver = (omega[0]/(somega[0])**2+omega[1]/(somega[1])**2)/(np.power(somega[0], -2)+np.power(somega[1], -2))
+#omega_aver = omega[0]
+print(omega_aver)
 somega_aver = 1.0/(np.power(somega[0], -2)+np.power(somega[1], -2))
+#somega_aver = somega[0]
 g = omega_aver**2 * lp * (1+0.5*(rp/lp)**2)
 print("somega", somega_aver*2*g/omega_aver)
 print("sl", (omega_aver**2-0.5*(rp/lp)**2)*slp)
