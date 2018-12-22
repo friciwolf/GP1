@@ -35,7 +35,7 @@ ts=[]
 Ts=[]
 T_errs=[]
 
-dig=0.1
+dig=0.1/np.sqrt(12)
 
 for i,n in enumerate(dateien):
     data = cassy.CassyDaten("Temperatur"+n+".lab")
@@ -84,7 +84,9 @@ for i,n in enumerate(dateien):
 #Versuch einer linearen Regression - sollen wir soetwas machen oder irgendwie die Temperaturen bei den einzelnen Versuchen feststellen?
 #t1=17:05,t2=18:31, t3=19:45
 zeiten=np.array([0,86,160]) #min
-c,c_err,b,b_err,chiq,corr=analyse.lineare_regression(zeiten,np.array(Ts),np.array(T_errs))
+Ts=np.log(np.array(Ts))
+T_errs=np.array(T_errs)/np.array(Ts)
+c,c_err,b,b_err,chiq,corr=analyse.lineare_regression(zeiten,Ts,T_errs)
 print('\nErwärmung: {2}°C/min'.format(*round_good(0,0,c)))
 
 x=np.arange(min(zeiten),max(zeiten),0.1)
@@ -93,3 +95,4 @@ plt.plot(x,c*x+b,color='red')
 plt.xlabel('t/min')
 plt.ylabel(u'T/°C')
 plt.title('Temperaturverlauf während der Versuchsreihe')
+print(u'Chi² =',chiq)
