@@ -42,18 +42,11 @@ for i,n in enumerate(dateien):
     t = data.messung(1).datenreihe("t").werte
     T = data.messung(1).datenreihe("&J_A11").werte
 
-    #----------------------------#
-    #Auswertung der Rauschmessung#
-    #----------------------------#
-    
     #Mittelwerte, Standardabweichungen und Fehler
     mT,sT,errT=round_good(np.average(T),np.std(T),np.std(T)/np.sqrt(len(T)))
     
     if __name__ == "__main__": 
-        
-    #------------------------------------------------------------
-    
-        print("Temperatur",i+1)
+        print("Temperatur "+names[i])
         print('m='+str(mT)+u' °C, std='+str(sT)+u' °C, err='+str(errT)+u' °C')
         
         #Histogramm
@@ -64,7 +57,7 @@ for i,n in enumerate(dateien):
         plt.title(u"Histogramm der Temperatur {}\n $\sigma$=".format(names[i]) + str(sT)+"$^{\circ}C$, $\mu$="+str(mT)+ "$^{\circ}C$, $\sigma_{\mu} = $"+str(errT)+"$^{\circ}C$")
         plt.xlabel(u"T/°C")
         plt.ylabel('Relatives Vorkommen')
-        plt.savefig("Images/Temperatur{}.jpg".format(n))
+        plt.savefig("Images/Temperatur {}.pdf".format(names[i]))
         plt.axvline(np.mean(T),color='red',linestyle='--')
         plt.figure()
         
@@ -74,25 +67,39 @@ for i,n in enumerate(dateien):
         plt.ylabel(u"T/°C")
         plt.xlabel('Zeit/s')
         plt.plot(t,np.array([np.mean(T)]*len(t)),color='darkorange')
-        plt.savefig("Images/Rauschmessung{}.jpg".format(n))
+        plt.savefig("Images/Rauschmessung {}.pdf".format(names[i]))
         plt.figure()
     
     ts.append(t)
     Ts.append(mT)
     T_errs.append(max(errT,dig))
 
-#Versuch einer linearen Regression - sollen wir soetwas machen oder irgendwie die Temperaturen bei den einzelnen Versuchen feststellen?
+#Versuch einer linearen Regression (Vorschlag)
 #t1=17:05,t2=18:31, t3=19:45
 zeiten=np.array([0,86,160]) #min
 Ts=np.log(np.array(Ts))
 T_errs=np.array(T_errs)/np.array(Ts)
 c,c_err,b,b_err,chiq,corr=analyse.lineare_regression(zeiten,Ts,T_errs)
-print('\nErwärmung: {2}°C/min'.format(*round_good(0,0,c)))
 
-x=np.arange(min(zeiten),max(zeiten),0.1)
-plt.errorbar(zeiten, Ts,yerr=T_errs,fmt='bo') #eher exponentiell?
-plt.plot(x,c*x+b,color='red')
-plt.xlabel('t/min')
-plt.ylabel(u'T/°C')
-plt.title('Temperaturverlauf während der Versuchsreihe')
-print(u'Chi² =',chiq)
+#Plot
+if __name__=='__main__':
+    #print('\nErwärmung: {2}°C/min'.format(*round_good(0,0,c)))
+    
+    x=np.arange(min(zeiten),max(zeiten),0.1)
+    plt.errorbar(zeiten, Ts,yerr=T_errs,fmt='ko') #eher exponentiell...
+    plt.plot(x,c*x+b,color='red')
+    plt.xlabel('t/min')
+    plt.ylabel(u'log(T/°C)')
+    plt.title('Temperaturverlauf während der Versuchsreihe')
+    plt.savefig('Images/Temperatur_Verlauf.pdf')
+    plt.figure()
+    print(u'Chi² =',chiq)
+    
+#Residuum
+    plt.title('Residuenplot')
+    plt.plot(x,np.zeros(len(x)),'r--')
+    plt.errorbar(zeiten,Ts-(c*zeiten+b),yerr=np.sqrt(T_errs**2),fmt='ko',capsize=3)
+    #plt.text(,'Chi²={}'.format(chiq))
+    plt.xlabel(r'R/$\Omega$')
+    plt.ylabel('L-(k*R+L0) /cm')
+    plt.savefig('Images/Temperatur_Residuum.pdf')
