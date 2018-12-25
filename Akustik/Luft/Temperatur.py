@@ -103,3 +103,9 @@ if __name__=='__main__':
     plt.xlabel(r'R/$\Omega$')
     plt.ylabel('L-(k*R+L0) /cm')
     plt.savefig('Images/Temperatur_Residuum.pdf')
+    
+def Temperatur(t):
+    '''
+    t=0 ist 17:05
+    '''
+    return np.exp(c*t+b)
