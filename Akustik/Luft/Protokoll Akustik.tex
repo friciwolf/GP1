@@ -36,21 +36,53 @@
 	
 	\section{Grundlagen} %TODO: Als eigenes?
 	
+	Die Wellenlänge $\lambda$ und die Frequenz $f$ beschreiben eine Schallwelle mit der Geschwindigkeit
+	
 	\begin{equation}
-		v_{Schall}=\lambda*f=\frac{\Delta s}{\Delta t}
+		v_{Schall}=\lambda*f=\frac{\Delta s}{\Delta t}.
+		\label{e1}
 	\end{equation}
 	
-	\begin{equation}
-		L=\frac{\lambda}{2} 
-	\end{equation}	
+	Für stehende Wellen auf der Länge $L$ mit zwei festen Enden gilt
 	
-	%Billd stehende Welle
+	\begin{equation}
+		L=n*\frac{\lambda}{2}
+	\end{equation}
+	oder umgeformt
+	\begin{equation}
+	v_{Schall}=\frac{2L}{n}*f
+	\label{e3} 
+	\end{equation}	
+	mit der Ordnung n.
+	
+	%Bild stehende Welle
 	
 	\section{Versuche}
 	
 	\subsection{Messung von Laufzeit und Laufstrecke eines Signals}
 	\subsubsection{Aufbau und Durchführung}
+	Ein Piezo-Hochtöner wird auf einer Geraden mit einem darauf verschiebbaren Mikrophon fest angebracht. Für verschiedene Mikrophonpositionen wird die Zeitdifferenz zwischen Tonerzeugung und Tonempfang gemessen. Die Postionen des Mikrophons werden über einen Wegaufnehmer bestimmt.
+	Dafür wird dieser zuerst kalibriert, indem mit einem Maßband der Güteklasse II der Abstand vom Wegaufnehmer in Bezug zum gemessenen Widerstand gesetzt wird. 
+	
 	\subsubsection{Auswertung}
+	
+	Die Messpunkte Widerstand R gegen Position L des Mikrophons kann man in Abb.\ref{Kalib_Reg} erkennen. Mit diesen wurde eine lineare Regression $L=k*R+L_0$ durchgeführt, die ebenfalls dargestellt ist. Als Fehler gehen hierbei die Ablese- beziehungsweise Digitalisierungslimitierungen ein: $L_{err}=0.1/2 cm$ und $R_{err}=0.005k\Ohm/\sqrt{12}$ ein. Der konstante systematische Fehler des Maßbandes spielt keine Rolle, da später nur die Steigung des Graphen, sowie Längendifferenzen wichtig werden.
+	
+	\begin{figure}
+	\begin{center}
+		\includegraphics[scale=0.9]{Images/Kalibrierung_Regression.pdf}
+		\caption{Regressionsgerade der Kalibrierung}             
+		\label{Kalib_Reg}               
+	\end{center}            
+	\end{figure}            
+                         
+	\begin{figure}
+	\begin{center}
+		\includegraphics[scale=0.9]{Images/Kalibrierung_Residuum.pdf}
+		\caption{Residuenplot der Kalibrationsgeraden}
+		\label{Kalib_Res}
+	\end{center}
+	\end{figure}
 	
 	\subsection{Messung von Resonanzfrequenzen einer stehenden Welle}
 	\subsubsection{Aufbau und Durchführung}
