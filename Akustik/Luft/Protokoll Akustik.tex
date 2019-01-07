@@ -141,7 +141,49 @@
 
 	\section{Ergebnisse}
 	\subsection{Temperaturauswertung}
+		Die theoretische Schallgeschwindigkeit in Luft kann in Abhängigkeit von der Temperatur (in K) hergeleitet werden:
+	\begin{equation}
+	v_{theo}=\sqrt{\frac{R*\kappa}{M_{Mol}}*T}
+	\label{v(T)}
+	\end{equation}
+	, wobei die allgemeine Gaskonstante $R=8.3145 \frac{J}{mol*K}$, der Adiabatenexponent für Luft $\kappa=\frac{7}{5}$ und deren molare Masse $M_{Mol}=28.984*10^{-3} \frac{kg}{mol}$ bereits ziemlich genau bekannt sind.
+	Nun soll die Temperatur in Abhängigkeit von der Zeit bestimmt werden.\\
+	Zu Beginn der Versuchsreihe um 17:05 Uhr wurde die Temperatur gemessen, ebenso wie zwischen den Experimenten und am Ende. Ungefähre Zeiten (die Endzeiten), wann die Experimente genau stattfanden, finden sich in Abb.\ref{Temp_Zeiten}. Da keine eigentliche Messung (ohne Vorbereitung) länger als 15 Minuten dauerte, wird der statistische Fehler auf die Zeit zu $\sigma_t=15min$ abgeschätzt. Der Digitalisierungsfehler der Temperatur ist $\sigma_T=\SI{0.1}{\celsius}/\sqrt{12}$.\\
+	17:05 Uhr wird als Zeitnullpunkt festgesetzt. Es wird in Minuten gezählt. Die Daten der drei Messungen sind in Abb.\ref{Temp_vorn} bis Abb.\ref{Temp_hinten} zu finden. Darin wurde bereits der Mittelwert eingezeichnet. Die Histogramme der Temperaturverteilungen zu den verschiedenen Zeiten sind von Abb.\ref{Temp_vorn_hist}
+ 	bis Abb.\ref{Temp_hinten_hist} dargestellt. Man kann sehen, dass sie gaußverteilt sind und deren Mittelwerte, Standardabweichungen und systematischen Fehler berechnen. So findet man schließlich drei Messpaare mitsamt Fehler:
+ 	
+ 	\begin{center}
+ 	\begin{tabular}{c|c|c}
+ 		$t/min$ & $T/\SI{}{\celsius}$ & $\sigma_T/\SI{}{\celsius}$\\
+ 		\hline
+ 		0 & 22.7811 & 0.0031\\
+ 		\hline 
+ 		86 & 23.7975 & 0.0029\\
+ 		\hline
+ 		160 & 23.9467 & 0.0029\\
+ 	\end{tabular}
+ 	\end{center}
+ 	
+ 	Ausprobiert wurden nun sowohl eine lineare Regression als auch die Anpassung einer Exponentialfunktion durch vorheriges logarrithmieren, wobei letzteres etwas besser funktionierte. Es ergibt sich der Zusammenhang
+ 	\begin{equation}
+ 	T(t)=e^{c*t+b} *\SI{1}{\celsius}
+ 	\label{T(t)}
+ 	\end{equation}
+	mit $c=(31.6\pm8.1)*10^{-5}\SI{}{\frac{1}{\minute}}$ und $b=3.1312\pm0.0085$ (vgl. Abb.\ref{Temp_Fit}).
+	In Abb.\ref{Temp_Res} findet sich noch das Residuum dazu, das allerdings bei drei Messpaaren nur soweit aussagekräftig ist, alsdass die Punkte ungefähr eine Standardabweichung von der Regression entfernt liegen. Das bestätigt auch der $X^2$-Wert, der mit $X^2\approx2.26$ bei einem Freiheitsgrad nicht unwahrscheinlich ist (vgl. entsprechende Tabellen).
+	
+	%Fehlerfortpflanzung
+	
+	
+	\begin{figure}
+	\begin{center}
+		\includegraphics[scale=0.9]{Images/Messreihenendzeiten.png}
+		\caption{Zeiten, zu denen die Experimente stattfanden}
+		\label{Temp_Zeiten}
+	\end{center}
+	\end{figure}
 	%\section{Anhang} ?
+	
 	
 	\begin{figure}
 	\begin{center}
