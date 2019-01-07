@@ -95,7 +95,7 @@ if __name__=='__main__':
     plt.title('Temperaturverlauf während der Versuchsreihe')
     plt.savefig('Images/Temperatur_Verlauf.pdf')
     plt.figure()
-    print(u'Chi² =',chiq)
+    print(u'Chi²/f =',chiq,'/1')
     
 #Residuum
     plt.title('Residuenplot')
@@ -113,3 +113,13 @@ def Temperatur(t):
     returns: Temperatur an diesem Zeitpunkt
     '''
     return np.exp(c*t+b)
+
+def Temperatur_mit_Fehlern(t):
+    '''
+    t=0 ist 17:05
+    input: Zeit in Minuten ab t0
+    returns: Temperatur an diesem Zeitpunkt und Fehler (T,T_estat,T_esys)
+    '''
+    T_estat2=max(np.abs(np.exp(Ts)-Temperatur(zeiten)))**2+(c*np.exp(c*t+b)*0.5)**2 #Halbe Minute Zeitdigitalisierungsfehler
+    T_esys=np.sqrt(t**2*np.exp(c*t+b)**2*c_err**2+np.exp(c*t+b)**2*b_err**2)
+    return np.exp(c*t+b),np.sqrt(T_estat2),T_esys
