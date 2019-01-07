@@ -14,7 +14,7 @@ def sort(eins,zwei='none',drei='none'):
     Sortiert ein Array oder eine Liste aufsteigend
     Optional: Sortiert ein zweites Array oder eine zweite Liste so, dass zusammengehörige Werte
     noch an gleichen Stellen stehen
-    return: array, (array)
+    return: array, (array), (array)
     '''
     if len(eins)!=len(zwei) or len(eins)!=len(drei):
         raise ValueError('Arrays must have the same lenghth')
@@ -48,7 +48,7 @@ L_Rohr=42.1 #cm
 L_Rohr_estat=0.05 #cm
 L_Rohr_esys=0.0003+0.0002*1 #Güteklasse II:a+b*L mit a=0.3mm, b=0.2mm/m, L= auf ganzen Meter gerundete zu messende Länge
 f=1607.4 #????! #Hz
-f_err=0.1 #Hz
+f_err=0.1 #Hz #TODO: V2.1B
 
 
 #Daten einlesen
@@ -71,8 +71,8 @@ mitte=int(len(L)/2)
 min1=np.argmax(U==min(U[:mitte]))
 min2=np.argmax(U==min(U[mitte:]))
 
-lamb=2*(L[min2]-L[min1]) #cm
-lamb_err=0.5 #cm #großzügig abgeschätzt
+lamb=2*(L[min2]-L[min1]) #cm #Lambda
+lamb_err=0.25 #cm #Ablesefehler großzügig abgeschätzt
 lamb_esys=(L_esys[min1]+L_esys[min2])/2 #TODO: So?
 
 #Rohdatenplot
@@ -85,7 +85,7 @@ plt.axvline(L[min1],linestyle='--',color='lightgreen')
 plt.text(L[min1+1],1.3,'Knoten bei {:.2f} cm'.format(round(L[min1],2)))
 plt.axvline(L[min2],linestyle='--',color='lightgreen')
 plt.text(L[min2+1],1.3,'Knoten bei {:.2f} cm'.format(round(L[min2],2)))
-plt.savefig('Images/VC_Roh')
+plt.savefig('Images/VC_Roh.pdf')
 
 #Geschwindigkeit
 v=lamb*f
@@ -95,6 +95,14 @@ v,v_esys,v_estat=Temperatur.round_good(v,v_esys,v_estat)
 print('\nv_Schall=({} +- {} +- {}) cm/s'.format(v,v_estat,v_esys))
 
 #Theoretische Geschwindigkeit
-T=Temperatur.Temperatur(157)
-print('Theoretische Geschwindigkeit bei T={}°C: {}m/s'.format(T,331.6+0.6*T))
+T,T_estat,T_esys=Temperatur.Temperatur_mit_Fehlern(157)
+#v_theo=331.6+0.6*T
+v_theo=v_0T_0*np.sqrt(T+273.15) #T in K
+v_theo_estat=v_theo*0.5/(T+273.15)*T_estat
+v_theo_esys=v_theo*0.5/(T+273.15)*T_esys
+
+T,T_estat,T_esys=Temperatur.round_good(T,T_estat,T_esys)
+v_theo,v_theo_estat,v_theo_esys=Temperatur.round_good(v_theo,v_theo_estat,v_theo_esys)
+print('Theoretische Geschwindigkeit bei T=({} +- {} +- {})°C: ({} +- {} +- {})m/s'.format(T,T_estat,T_esys,v_theo,v_theo_estat,v_theo_esys))
+
 
