@@ -60,67 +60,49 @@
 	
 	\section{Versuche}
 	
-	\subsection{Kalibration des Wegaufnehmers}
+	\subsection{Messung von Laufzeit und Laufstrecke eines Signals}
 	\subsubsection{Aufbau und Durchführung}
-	
-	Um die stehende Welle im Rohr in den späteren Teilen zu untersuchen, wurde der Wegaufnehmer gegenüber eines Messbandes Klasse II kalibriert. Ziel dieses Teilversuches ist damit, einen funktionalen Zusammenhang zwischen den am Wegaufnehmer (der wie ein Schiebewiderstand charakterisieren lässt) gemessenen Widerstand und die Längenverschiebung L. Dazu wurde der {\color{red} {Schiebekopf}} auf die 0.5 cm - Marke des Messbandes gelegt und der Widerstand mithilfe eines Teststroms gemessen. Dies wurde in 5-cm Schritten wiederholt, wovon die Rohdaten sich in der folgenden Tabelle zusammenfassen lassen:
-	
-	\begin{center}
-
-	\begin{tabular}{|c|c|c|c|c|c|c|}
-		\hline 
-		Abstand s in cm & 0.5 & 5.5 & 10.5 & 15.5 & 20.5 & 25.5 \\ 
-		\hline 
-		Widerstand R in $\Omega$ & 1.685 & 1.375, & 1.06 & 0.755, & 0.44 & 0.125 \\ 
-		\hline 
-	\end{tabular} 
-	\end{center}
-
-	Diese mit dem Ergebnis der linearen Regression wurden auch in der \ref{Kalib_Reg} graphisch dargestellt.
-	
-	\begin{figure}
-		\begin{center}
-			\includegraphics[scale=0.9]{Images/Kalibrierung_Regression.pdf}
-			\caption{Regressionsgerade der Kalibrierung}             
-			\label{Kalib_Reg}               
-		\end{center}            
-	\end{figure} 
+	Ein Piezo-Hochtöner wird auf einer Geraden mit einem darauf verschiebbaren Mikrophon fest angebracht. Für verschiedene Mikrophonpositionen wird die Zeitdifferenz zwischen Tonerzeugung und Tonempfang gemessen. Die Postionen des Mikrophons werden über einen Wegaufnehmer bestimmt.
+	Dafür wird dieser zuerst kalibriert, indem mit einem Maßband der Güteklasse II der Abstand vom Wegaufnehmer in Bezug zum gemessenen Widerstand gesetzt wird. 
 	
 	\subsubsection{Auswertung}
 	
 	Die Messpunkte Widerstand R gegen Position L des Mikrophons kann man in Abb.\ref{Kalib_Reg} erkennen. Mit diesen wurde eine lineare Regression $L=k*R+L_0$ durchgeführt, die ebenfalls dargestellt ist. Als Fehler gehen hierbei die Ablese- beziehungsweise Digitalisierungslimitierungen ein: $L_{err}=0.1cm/2$ und $R_{err}=0.005k\Omega/\sqrt{12}$ ein. Der konstante systematische Fehler des Maßbandes spielt keine Rolle, da später nur die Steigung des Graphen, sowie Längendifferenzen wichtig werden.
-	           
-	Das Ergebnis der Regression beträgt $(16.040\pm0.042)cm/k\Omega*R+(2.957\pm0.044)cm$ mit einem $\chi^2/f \approx 2.704/4 \approx 0.676$. Der Residuenplot dazu ist in Abb.\ref{Kalib_Res} dargestellt. Man erkennt, dass alle Fehler $\sqrt{k^2*R_{err}^2+L_{err}^2}$ etwa im Rahmen einer Standardabweichung um die Funktion gestreut sind.                     
+	
 	\begin{figure}
-		\begin{center}
-			\includegraphics[scale=0.9]{Images/Kalibrierung_Residuum.pdf}
-			\caption{Residuenplot der Kalibrationsgeraden}
-			\label{Kalib_Res}
-		\end{center}
+	\begin{center}
+		\includegraphics[scale=0.9]{Images/Kalibrierung_Regression.pdf}
+		\caption{Regressionsgerade der Kalibrierung}             
+		\label{Kalib_Reg}               
+	\end{center}            
+	\end{figure}            
+    Das Ergebnis der Regression beträgt $(16.040\pm0.042)cm/k\Omega*R+(2.957\pm0.044)cm$ mit einem $X^2/f \approx 2.704/4 \approx 0.676$. Der Residuenplot dazu ist in Abb.\ref{Kalib_Res} dargestellt. Man erkennt, dass alle Fehler $\sqrt{k^2*R_{err}^2+L_{err}^2}$ etwa im Rahmen einer Standardabweichung um die Funktion gestreut sind.                     
+	\begin{figure}
+	\begin{center}
+		\includegraphics[scale=0.9]{Images/Kalibrierung_Residuum.pdf}
+		\caption{Residuenplot der Kalibrationsgeraden}
+		\label{Kalib_Res}
+	\end{center}
 	\end{figure}
 	\\ \\
 	In der ersten Versuchsreihe wurden die Laufzeiten und -wege wie in Abb.\ref{Va_Reg} aufgenommen. Hier hilft der zweite Teil von Formel \ref{e1}, um die Geschwindigkeit des Schalls in Luft mit einer linearen Regression $s(t)=v_{Schall}*t+s_0$ zu bestimmen. 
 	
 	\begin{figure}
-		\begin{center}
-			\includegraphics[scale=0.9]{Images/VA_Regression.pdf}
-			\caption{Regression zur Ermittlung der Schallgeschwindigkeit}
-			\label{Va_Reg}
-		\end{center}
+	\begin{center}
+		\includegraphics[scale=0.9]{Images/VA_Regression.pdf}
+		\caption{Regression zur Ermittlung der Schallgeschwindigkeit}
+		\label{Va_Reg}
+	\end{center}
 	\end{figure}	
 	Das Residuum kann man in Abb.\ref{Va_Res} sehen. Die Werte liegen gestreut um die Gerade, so wie es auch sein sollte, allerdings 
 	\begin{figure}
-		\begin{center}
-			\includegraphics[scale=0.9]{Images/VA_Residuum.pdf}
-			\caption{Residuum der Geradenanpassung}
-			\label{Va_Res}
-		\end{center}
+	\begin{center}
+		\includegraphics[scale=0.9]{Images/VA_Residuum.pdf}
+		\caption{Residuum der Geradenanpassung}
+		\label{Va_Res}
+	\end{center}
 	\end{figure}	
-	
-	\subsection{Messung von Laufzeit und Laufstrecke eines Signals}
-	\subsubsection{Aufbau und Durchführung}
-	Ein Piezo-Hochtöner wird auf einer Geraden mit einem darauf verschiebbaren Mikrophon fest angebracht. Für verschiedene Mikrophonpositionen wird die Zeitdifferenz zwischen Tonerzeugung und Tonempfang gemessen. Die Postionen des Mikrophons werden über einen Wegaufnehmer bestimmt.
-	Dafür wird dieser zuerst kalibriert, indem mit einem Maßband der Güteklasse II der Abstand vom Wegaufnehmer in Bezug zum gemessenen Widerstand gesetzt wird.
+
 
 	
 	\subsection{Messung von Resonanzfrequenzen einer stehenden Welle}
@@ -134,7 +116,7 @@
 	
 	\begin{figure}
 	\begin{center}
-		\includegraphics[scale=0.9]{Images/VC_Roh.png}
+		\includegraphics[scale=0.9]{Images/VC_Roh.pdf}
 		\caption{Schallamplitude bei bestimmten Positionen}
 		\label{Vc_Roh}
 	\end{center}
