@@ -12,9 +12,10 @@ dt=[]
 dt_err=[]
 R_err=float(Kalibrierung.R_err[0])
 dt_errdig=0.00000025 #s
+v_0T_0=np.sqrt(8.3145*7/5/28.984*10**3)
 
 ns=[]
-
+#Daten einlesen
 for i in range(1,7):
     data = cassy.CassyDaten('V2.1A.lab')
     R_i = np.array(data.messung(i).datenreihe('R_B1').werte)
@@ -32,19 +33,25 @@ for i in range(1,7):
     
     R.append(mR)
     dt.append(mdt)
-    dt_err.append(max(sdt/len(dt),dt_errdig))
+    dt_err.append(max(sdt/(len(dt_i)-1),dt_errdig))
     ns.append(len(dt_i))
 
 #Lineare Regression    
 dt=np.array(dt)
-dt[-1]=0.0006205
+dt[-1]=0.0006200#6205
 dt_err[-1]=dt_errdig
 dt_err=np.array(dt_err)
 L,L_estat,L_esys=Kalibrierung.Länge(np.array(R),R_err*np.ones(len(R)))
 v,v_err,s0,s0_err,chiq,corr=analyse.lineare_regression_xy(dt,L,dt_err,L_estat)
-x,v,v_err=Temperatur.round_good(chiq,v,v_err)
+
+#systematischer Fehler durch Verschiebemethode
+vplus,v_errplus,s0plus,s0_errplus,chiqplus,corr=analyse.lineare_regression_xy(dt,L+L_esys,dt_err,L_estat)
+vmin,v_errmin,s0min,s0_errmin,chiqmin,corr=analyse.lineare_regression_xy(dt,L-L_esys,dt_err,L_estat)
+v_esys=(abs(vplus-v)+abs(vmin-v))/2
+
+v_esys,v,v_err=Temperatur.round_good(v_esys,v,v_err)
 chiq,s0,s0_err=Temperatur.round_good(chiq,s0,s0_err)
-print('v_Schall=({} +- {})cm/s\nAbstand von der Quelle:({} +- {})cm\nChi²/f={}/{}'.format(v,v_err,s0,s0_err,chiq,len(dt)-2)) #dL/dt #cm/s
+print('\nv_Schall=({} +- {} +- {})cm/s\nAbstand von der Quelle:({} +- {})cm\nChi²/f={}/{}'.format(v,v_err,v_esys,s0,s0_err,chiq,len(dt)-2)) #dL/dt #cm/s
 
 #Plot
 plt.title('Laufzeit gegen Laufstrecke')
@@ -64,5 +71,13 @@ plt.xlabel(r'$\Delta$t/s')
 plt.ylabel('L-(v*dt+s0)/cm')
 plt.savefig('Images/VA_Residuum.pdf')
 
-T=Temperatur.Temperatur(82)
-print('Theoretische Geschwindigkeit bei T={}°C: {}m/s'.format(T,331.6+0.6*T))
+#Theoretische Geschwindigkeit
+T,T_estat,T_esys=Temperatur.Temperatur_mit_Fehlern(82)
+#v_theo=331.6+0.6*T
+v_theo=v_0T_0*np.sqrt(T+273.15) #T in K
+v_theo_estat=v_theo*0.5/(T+273.15)*T_estat
+v_theo_esys=v_theo*0.5/(T+273.15)*T_esys
+
+T,T_estat,T_esys=Temperatur.round_good(T,T_estat,T_esys)
+v_theo,v_theo_estat,v_theo_esys=Temperatur.round_good(v_theo,v_theo_estat,v_theo_esys)
+print('Theoretische Geschwindigkeit bei T=({} +- {} +- {})°C: ({} +- {} +- {})m/s'.format(T,T_estat,T_esys,v_theo,v_theo_estat,v_theo_esys))
