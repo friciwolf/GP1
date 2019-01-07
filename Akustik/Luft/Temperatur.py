@@ -25,12 +25,14 @@ def round_good(m,s,err): #für obere Abschätzung der Fehler
     test=list('{:.20f}'.format(err))
     while test[i]=='0':
         i+=1
-    return np.round([m,s,err],i)
+    komma=test.index('.')
+    return np.round([m,s,err],i-komma+1)
 
 plt.close('all')
 
 dateien=['messung_vorher','_mitte','_ende']
 names=['vor den Messungen','in der Mitte','nach den Messungen']
+dnames=['vor_den_Messungen','in_der_Mitte','nach_den_Messungen']
 ts=[]
 Ts=[]
 T_errs=[]
@@ -57,7 +59,7 @@ for i,n in enumerate(dateien):
         plt.title(u"Histogramm der Temperatur {}\n $\sigma$=".format(names[i]) + str(sT)+"$^{\circ}C$, $\mu$="+str(mT)+ "$^{\circ}C$, $\sigma_{\mu} = $"+str(errT)+"$^{\circ}C$")
         plt.xlabel(u"T/°C")
         plt.ylabel('Relatives Vorkommen')
-        plt.savefig("Images/Temperatur {}.pdf".format(names[i]))
+        plt.savefig("Images/Temperatur_{}.pdf".format(dnames[i]))
         plt.axvline(np.mean(T),color='red',linestyle='--')
         plt.figure()
         
@@ -67,7 +69,7 @@ for i,n in enumerate(dateien):
         plt.ylabel(u"T/°C")
         plt.xlabel('Zeit/s')
         plt.plot(t,np.array([np.mean(T)]*len(t)),color='darkorange')
-        plt.savefig("Images/Rauschmessung {}.pdf".format(names[i]))
+        plt.savefig("Images/Rauschmessung_{}.pdf".format(dnames[i]))
         plt.figure()
     
     ts.append(t)
@@ -107,5 +109,7 @@ if __name__=='__main__':
 def Temperatur(t):
     '''
     t=0 ist 17:05
+    input: Zeit in Minuten ab t0
+    returns: Temperatur an diesem Zeitpunkt
     '''
     return np.exp(c*t+b)
