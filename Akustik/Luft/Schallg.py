@@ -70,7 +70,8 @@ R2 = []
 sig_D2 = []
 for i in range(len(s)):
     s2.append(np.average(s[i])) #falls benötigt
-    sig_D2.append(np.std(D[i]))
+    sig_D2.append(np.std(D[i])/np.sqrt(15))
+    #sig_D2.append(0.00000025/np.sqrt(12))
     D2.append(np.average(D[i]))
     R2.append(np.average(R[i]))
 sig_D2 = np.array(sig_D2)
