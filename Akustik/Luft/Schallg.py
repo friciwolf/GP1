@@ -61,6 +61,7 @@ plt.show()
 ##############################
 s, D, R = c_open("V2.1A.lab", 6)
 sig_R = 0.005/np.sqrt(12)
+sig_s = 0.1/2
 #plt.plot(s,D)
 #plt.show()
 s2 = []
@@ -75,31 +76,34 @@ for i in range(len(s)):
 sig_D2 = np.array(sig_D2)
 s2 = (R2-b-np.mean(R_k)+np.mean(s_k)*a)/a #Umrechnung der Widerstände in Länge
 sig_s2 = sig_R*np.ones(len(R2))/a
-sig_sys_s2 = np.sqrt((R2/a**2)*ea**2) #sys. Fehler auf R?
+sig_sys_s2 = np.sqrt((R2/a**2)*ea**2) #ist der sys. Fehler auf R bekannt?
 plt.plot(D2,s2, label="Rohdaten")
 plt.ylabel("s / cm")
 plt.xlabel("t / s")
 plt.title("Messung der Schallgeschwindigkeit")
 a,ea, b, eb,  chiq, corr = anal.lineare_regression_xy(np.array(D2[:-1]),np.array(s2[:-1]), sig_D2[:-1], sig_s2[:-1])
+print(eb)
 print(a, "*t+", b)
 plt.plot(np.arange(min(D2), max(D2), 0.0001), np.arange(min(D2), max(D2), 0.0001)*a+b, label=str(a)+"*t+"+str(b))
-plt.errorbar(D2, np.array(s2), np.sqrt((np.ones(len(s2))*0.1/np.sqrt(12))**2+(a*sig_D2)**2), fmt="o",capsize=5, markersize=5)
+plt.errorbar(D2, np.array(s2), sig_s*np.ones(len(s2)), np.ones(len(D2))*sig_D2, fmt="o", markersize=5)
 plt.legend()
+plt.savefig("Images/Schallg.pdf")
 plt.show()
 
-plt.errorbar(D2[:-1], np.array(s2[:-1])-a*np.array(D2[:-1])-b, np.sqrt((np.ones(len(s2[:-1]))*0.1/np.sqrt(12))**2+(a*sig_D2[:-1])**2), fmt="o",capsize=5, markersize=5)
+plt.errorbar(D2[:-1], np.array(s2[:-1])-a*np.array(D2[:-1])-b, np.sqrt((np.ones(len(s2[:-1]))*sig_s)**2+(a*sig_D2[:-1])**2), fmt="o",capsize=5, markersize=5)
 #plt.errorbar(D2[-1], np.array(s2[-1])-a*np.array(D2[-1])-b, np.sqrt((0.1/np.sqrt(12))**2+(a*sig_D2[-1])**2), fmt="o",capsize=5, markersize=5, color="r") #nehme inh raus, der Punkt ist anhand der Daten zu unsicher
 plt.axhline(0)
 plt.title("Residumplot")    
 plt.xlabel("t / s")
 plt.ylabel("s /cm")
+plt.savefig("Images/Schallg_res.pdf")
 plt.show()
 print("chiq/Ndf = ", chiq/(len(D2[:-1])-2))
 print("a = ", a, "+-", ea)
 #für den sys. Fehler (Verschiebemethode):
-a,ea, b, eb,  chiq, corr = anal.lineare_regression_xy(np.array(D2[:-1]),np.array(s2[:-1])-sig_sys_s2[:-1], sig_D2[:-1], sig_sys_s2[:-1])
+a,ea, b, eb1,  chiq, corr = anal.lineare_regression_xy(np.array(D2[:-1]),np.array(s2[:-1])-sig_sys_s2[:-1], sig_D2[:-1], sig_sys_s2[:-1])
 a1 = a
-a,ea, b, eb,  chiq, corr = anal.lineare_regression_xy(np.array(D2[:-1]),np.array(s2[:-1])+sig_sys_s2[:-1], sig_D2[:-1], sig_sys_s2[:-1])
+a,ea, b, eb2,  chiq, corr = anal.lineare_regression_xy(np.array(D2[:-1]),np.array(s2[:-1])+sig_sys_s2[:-1], sig_D2[:-1], sig_sys_s2[:-1])
 a2 = a
 sa = 0.5*(np.abs(a-a1)+np.abs(a-a2))
 print("+-", sa)
