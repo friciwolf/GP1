@@ -37,7 +37,7 @@ def find_max(x,y):
     ymax = 0.0
     index = 0
     for i in range(len(y)):
-        if y[i] > ymax and x[i]!=430 and x[i]!=400:
+        if y[i] > ymax and x[i]!=430 and x[i]!=400: #Ignoriere 2 falsche Frequenzmaxima
             index = i
             ymax = y[i]
     return x[index], y[index]
@@ -112,8 +112,8 @@ plt.plot(np.arange(0.5, 6.5, 0.01), a*np.arange(0.5, 6.5, 0.01)+b, label="f = "+
 plt.title("Resonanzfrequenzen")
 plt.xlabel("Ordnung n")
 plt.ylabel("Frequenz / Hz")
-plt.savefig("Images/Resonanzfreq_linreg")
 plt.legend()
+plt.savefig("Images/Resonanzfreq_linreg")
 plt.show()
 
 plt.errorbar(n, f_max-n*a-b, s_f, fmt="o",capsize=5, markersize=5)
