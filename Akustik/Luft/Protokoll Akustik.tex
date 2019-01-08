@@ -167,7 +167,7 @@ Aus dem y-Achsenabschnitt kann man auch die Postion der Schallquelle ablesen, di
 	
 	\subsubsection{Auswertung}
 	
-	Die Rohdaten sind in der Abbildung \ref{Resfreq} dargestellt. Da die Peaks der einzelnen Resonanzkurven bei dieser Methode ziemlich unscharf erscheinen, wurden sie durch vier verschiedene Methoden bestimmt, indem sie zuerst mithilfe der Praktikumsbibliothek identifiziert wurden. Mithilfe der so gewonnenen Information wurde in einem Bereich um diese Maximalstellen lokal auch der Maximalwert gesucht, wobei Punkte deutlich außerhalb der Resonanzkurve ignoriert wurden. Als dritte Methode wurde diese Stelle einfach aus dem Diagramm abgelesen und bei der vierten Methode eine Lorentzkurve mithilfe von Matlab auf die Daten bei der Resonanzstelle gefittet. Der so erhaltene Mittelwert und die Hälfte (vier Methoden) der Standardabweichung wurden als Ergebnis bzw. Fehler genommen. Die Ergebnisse dieser Versuche wurden in der Abbildung \ref{Resfreq_teil} und in der Tabelle zusammengefasst.\\
+	Die Rohdaten sind in der Abbildung \ref{Resfreq} dargestellt. Da die Peaks der einzelnen Resonanzkurven bei dieser Methode ziemlich unscharf erscheinen, wurden sie durch vier verschiedene Methoden bestimmt, dessen Mittelwert und die Hälfte (vier Methoden) der Standardabweichung als Ergebnis bzw. Fehler genommen wurde. Die Ergebnisse dieser Versuche wurden in der Abbildung \ref{Resfreq_teil} und in der Tabelle zusammengefasst.\\
 	\begin{center}
 	\begin{tabular}{cc}
 		\includegraphics[scale=0.4]{Images/teilspektrum_0.pdf}& \includegraphics[scale=0.4]{Images/teilspektrum_1.pdf}\\
@@ -217,26 +217,26 @@ Aus dem y-Achsenabschnitt kann man auch die Postion der Schallquelle ablesen, di
 
 	Diese lieferte ein Ergebnis mit der Rohrlänge L = (42.1 $\pm$0.05)cm und der Steigung $a$ von 
 	\begin{equation}
-		v = 2L*a = (336.21 \pm 0.43 \pm 0.56) m/s; \, \, \, \chi^2/Ndf \approx 0.433/2 \approx 0.216
+		v_{Schall} = 2L*a = (336.21 \pm 0.43 \pm 0.56) m/s; \, \, \, \chi^2/Ndf \approx 0.22
 	\end{equation}
 	
-	wobei der statischtische Fehler mit dem Gaußschen Fehlerfortpflanzung und der Systematische mithilfe der Verschiebemethode berechnet wurden. Dieses Ergebnis liegt aber deutlich unterhalb des theoretischen Werts, was sowohl an dem möglichen fehlerhaften Aufbau des Experiments (z.B. Mikrofonende lag innerhalb des Rohrs), als auch an den zu großen Unsicherheiten und Ungenauigkeiten in der erhaltenen Datenmenge zurückgeführt werden kann.
+	wobei der statistische Fehler mit dem Gaußschen Fehlerfortpflanzung und der Systematische mithilfe der Verschiebemethode berechnet wurden. Dieses Ergebnis liegt aber deutlich unterhalb des theoretischen Werts, was sowohl an dem möglichen fehlerhaften Aufbau des Experiments (z.B. Mikrofonende lag innerhalb des Rohrs), als auch an den zu großen Unsicherheiten und Ungenauigkeiten in der erhaltenen Datenmenge zurückgeführt werden kann.
 	
 	\subsection{Messung der Wellenlänge einer stehenden Welle}
 	\subsubsection{Aufbau und Durchführung}
-	Bei festgehaltener Frequenz, wobei eine Resonanzfrequenz höherer Ordnung gewählt wurde, um in dem durch das Mikrofon erreichbaren Rohranteil wenigstens eine Wellenlänge zu haben, wird durch Verschieben des Mikrophons und dem manuellen Aufnehmen einzelner Messpunkte in einem Messbereich von $0k\Omega$ bis $10k\Omega$ die stehende Welle abgetastet, um die Wellenlänge durch den Abstand der Knoten ermitteln zu können. Als Frequenz wird $f=????Hz$ gewählt, deren Fehler $\sigma_f$ aus dem zweiten Versuch bekannt sind.
+	Bei festgehaltener Frequenz, wobei eine Resonanzfrequenz höherer Ordnung gewählt wurde, um in dem durch das Mikrofon erreichbaren Rohranteil wenigstens eine Wellenlänge zu haben, wird durch Verschieben des Mikrophons und dem manuellen Aufnehmen einzelner Messpunkte in einem Messbereich von $0k\Omega$ bis $10k\Omega$ die stehende Welle abgetastet, um die Wellenlänge durch den Abstand der Knoten ermitteln zu können. Als Frequenz wird $f=1608.38Hz$ gewählt, deren Fehler $\sigma_f=0.30$ aus dem zweiten Versuch bekannt ist.
 	\subsubsection{Auswertung}
 	
-	Die Messergebnisse kann man in Abb.\ref{Vc_Roh} betrachten, wobei wieder mit dem Wegaufnehmer umgerechnet wurde. Daraus kann man mit dem ersten Teil von Formel \ref{e1} leicht die Geschwindigkeit berechnen. Man kann die Wellenlänge als doppelter Abstand zweier Knoten ablesen (vgl. Abb.?). Man erhält: $min_1=12.34cm$ und $min_2=23.09cm$.\\ 
-	 Als Fehler der Ablesung wird $\sigma_{\lambda stat}=0.25cm$ abgeschätzt. Als systematischer Fehler der Längenmessung erhält man aus $\sigma_{Lsys}$ mit der Verknüpfung $\sigma_{\lambda sys} = \frac{\sigma_{\lambda stat}(min1)+\sigma_{\lambda stat}(min2)}{2}=0.039cm$\\
-	 Die Fehler auf $v_{Schall}$ pflanzen sich damit wie folgt fort: $\sigma_{vstat}=v*\sqrt{(\frac{\sigma_{\lambda stat}}{\lambda})^2+(\frac{\sigma_f}{f})^2}$, 
-	 $\sigma_{vsys}=f*\sigma_{\lambda sys}$.
-	 Das Ergebnis ist dann $v_{Schall}=(345.49 \pm 4.02 \pm 0.62)\frac{m}{s}$
-
+	Die Messergebnisse kann man in Abb.\ref{Vc_Roh} betrachten, wobei wieder mit dem Wegaufnehmer umgerechnet wurde. Daraus kann man mit dem ersten Teil von Formel \ref{e1} leicht die Geschwindigkeit berechnen. Man kann die Wellenlänge als doppelter Abstand zweier Knoten ablesen (vgl. Abb.\ref{Vc_Roh}). Man erhält: $min_1=12.34cm$ und $min_2=23.09cm$.\\ 
+	Als Fehler der Ablesung wird $\sigma_{\lambda stat}=0.25cm$ abgeschätzt. Als systematischer Fehler der Längenmessung erhält man aus $\sigma_{Lsys}$ mit der Verknüpfung $\sigma_{\lambda sys} = \frac{\sigma_{\lambda stat}(min1)+\sigma_{\lambda stat}(min2)}{2}=0.039cm$\\
+	Die Fehler auf $v_{Schall}$ pflanzen sich damit wie folgt fort: $\sigma_{vstat}=v*\sqrt{(\frac{\sigma_{\lambda stat}}{\lambda})^2+(\frac{\sigma_f}{f})^2}$, 
+	$\sigma_{vsys}=f*\sigma_{\lambda sys}$.
+	Das Ergebnis ist dann $v_{Schall}=(345.70 \pm 4.02 \pm 0.62)\frac{m}{s}$
+	
 	\begin{figure}
 	\begin{center}
-		\includegraphics[scale=0.9]{Images/VC_Roh.pdf}
-		\caption{Schallamplitude bei bestimmten Positionen}
+		\includegraphics[scale=0.65]{Images/Zoom_vollst.png}
+		\caption{Schallamplitude bei bestimmten Positionen mit Zooms in die Knoten}
 		\label{Vc_Roh}
 	\end{center}
 	\end{figure}
@@ -355,12 +355,14 @@ Aus dem y-Achsenabschnitt kann man auch die Postion der Schallquelle ablesen, di
 
 	\subsection{Vergleich der Messergebnisse mit theoretischen Werten}
 
-	Für das erste Experiment erhält man $t=82min$. Es ergibt sich eine Temperatur von $T=(23.50 \pm 0.11 \pm 0.46)\SI{}{\celsius}$ und mit Formel (\ref{v(T)}) folgt und der Fehlerfortpflanzung eben genannter Fehler: $v_{theo}=(345.17 \pm 0.07 \pm 0.27)\frac{m}{s}$
+	Für das erste Experiment erhält man $t=82min$. Es ergibt sich eine Temperatur von $T=(23.50 \pm 0.11 \pm 0.46)\SI{}{\celsius}$ und mit Formel (\ref{v(T)}) folgt und der Fehlerfortpflanzung eben genannter Fehler: $v_{theo}=(345.17 \pm 0.07 \pm 0.27)\frac{m}{s}$. Der gemessene Wert betrug $v_{Schall} = (344.5319\pm0.5837\pm0.0190) \frac{m}{s}$. Erfreulicherweise stimmen die Werte innerhalb eines Fehlers gut miteinander überein.\\
 
-	Das zweite Experiment endete um $t=?$
+	Das zweite Experiment endete um $t=147min$ bzw. $t=172min$ (In der Datei mit "zuweit" war das Mikrophon nicht ganz am Ende des Rohres und sie lieferte schlechtere Ergebnisse, deswegen wurde sie aus der Auswertung heraussortiert). Das ergibt bei $T=(23.99 \pm 0.11 \pm 0.64)\SI{}{\celsius}$ $v_{theo}=(345.45 \pm 0.07 \pm 0.37)\frac{m}{s}$, bzw. bei $T=(24.18 \pm 0.12 \pm 0.72)\SI{}{\celsius}$ $v_{theo}=(345.56 \pm 0.07 \pm 0.42)\frac{m}{s}$. Gemessen wurde $v_{Schall} = (336.21 \pm 0.43 \pm 0.56) m/s$. Diese Werte lassen sich nur schwer vereinbaren und es scheint, als wäre diese Messung weniger glücklich verlaufen.\\
 
 	Die Endzeit des dritten Experimentes betrug $t=157min$
-	Die theoretische Geschwindigkeit bei $T=(24.07 \pm 0.11 \pm 0.67)\SI{}{\celsius}$ beträgt $v_{theo}=(345.49 \pm 0.07 \pm 0.39)\frac{m}{s}$
+	Die theoretische Geschwindigkeit bei $T=(24.07 \pm 0.11 \pm 0.67)\SI{}{\celsius}$ beträgt $v_{theo}=(345.49 \pm 0.07 \pm 0.39)\frac{m}{s}$. Hier wurde  $v_{Schall}=(345.70 \pm 4.02 \pm 0.62)\frac{m}{s}$ gemessen. Hier scheint der Fehler viel zu groß abgeschätzt worden zu sein, da die Werte bereits sehr nah beieinander liegen, allerdings war das bei der eher unsicheren Ablesung und Messung nicht besser möglich.
+	
+	\subsection{Diskussion der Ergebnisse}
 	
 	
 	
