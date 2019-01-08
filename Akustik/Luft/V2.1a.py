@@ -16,7 +16,7 @@ v_0T_0=np.sqrt(8.3145*7/5/28.984*10**3)
 
 ns=[]
 #Daten einlesen
-for i in range(1,7):
+for i in range(1,6):
     data = cassy.CassyDaten('V2.1A.lab')
     R_i = np.array(data.messung(i).datenreihe('R_B1').werte)
     dt_i = list(data.messung(i).datenreihe('&Dt_A1').werte)
@@ -38,8 +38,8 @@ for i in range(1,7):
 
 #Lineare Regression    
 dt=np.array(dt)
-dt[-1]=0.0006200#6205
-dt_err[-1]=dt_errdig
+#dt[-1]=0.0006200#6205
+#dt_err[-1]=dt_errdig
 dt_err=np.array(dt_err)
 L,L_estat,L_esys=Kalibrierung.Länge(np.array(R),R_err*np.ones(len(R)))
 v,v_err,s0,s0_err,chiq,corr=analyse.lineare_regression_xy(dt,L,dt_err,L_estat)
