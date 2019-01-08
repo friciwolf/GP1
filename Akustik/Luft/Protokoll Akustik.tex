@@ -59,44 +59,44 @@
 	%Bild stehende Welle
 	
 	\section{Versuche}
+	
 	\subsection{Kalibration des Wegaufnehmers}
 	\subsubsection{Aufbau und Durchführung}
-	
-	Um die stehende Welle im Rohr in den späteren Teilen zu untersuchen, wurde der Wegaufnehmer gegenüber eines Messbandes Klasse II kalibriert. Ziel dieses Teilversuches ist damit, einen funktionalen Zusammenhang zwischen den am Wegaufnehmer (der wie ein Schiebewiderstand charakterisieren lässt) gemessenen Widerstand und die Längenverschiebung L. Dazu wurde der Schiebekopf auf die 0.5 cm - Marke des Messbandes gelegt und der Widerstand mithilfe eines Teststroms gemessen. Dies wurde in 5-cm Schritten wiederholt, wovon die Rohdaten sich in der folgenden Tabelle zusammenfassen lassen:
-	
+
+	Um die Position des Mikrophons in allen späteren Versuchen genau bestimmen zu können, wird der Wegaufnehmer gegenüber einem Messband der Güteklasse II kalibriert. Ziel dieses Teilversuches ist damit, einen funktionalen Zusammenhang zwischen den am Wegaufnehmer gemessenen Widerstand ,der sich wie ein Schiebewiderstand charakterisieren lässt, und der Längenverschiebung L zu finden. Dazu wurde der {\color{red} {Schiebekopf}} auf die 0.5 cm - Marke des Messbandes gelegt und der Widerstand mithilfe eines Teststroms gemessen. Dies wurde in 5-cm Schritten wiederholt, wobei sich die Rohdaten in der folgenden Tabelle zusammenfassen lassen:
+
 	\begin{center}
-		
-		\begin{tabular}{|c|c|c|c|c|c|c|}
-			\hline 
-			Abstand s in cm & 0.5 & 5.5 & 10.5 & 15.5 & 20.5 & 25.5 \\ 
-			\hline 
-			Widerstand R in $\Omega$ & 1.685 & 1.375, & 1.06 & 0.755, & 0.44 & 0.125 \\ 
-			\hline 
-		\end{tabular} 
+	\begin{tabular}{|c|c|c|c|c|c|c|}
+		\hline 
+		Abstand s in cm & 0.5 & 5.5 & 10.5 & 15.5 & 20.5 & 25.5 \\ 
+		\hline 
+		Widerstand R in $k\Omega$ & 1.685 & 1.375, & 1.06 & 0.755, & 0.44 & 0.125 \\ 
+		\hline 
+	\end{tabular} 
 	\end{center}
-	
+
 	\subsubsection{Auswertung}
-	
-	Die Messpunkte Widerstand R gegen Position L des Mikrophons kann man in Abb.\ref{Kalib_Reg} erkennen. Mit diesen wurde eine lineare Regression $L=k*R+L_0$ durchgeführt, die ebenfalls dargestellt ist. Als Fehler gehen hierbei die Ablese- beziehungsweise Digitalisierungslimitierungen ein: $L_{err}=0.1cm/2$ und $R_{err}=0.005k\Omega/\sqrt{12}$ ein. Der konstante systematische Fehler des Maßbandes spielt keine Rolle, da später nur die Steigung des Graphen, sowie Längendifferenzen wichtig werden.      
-	
-	Das Ergebnis der Regression beträgt $(16.040\pm0.042)cm/k\Omega*R+(2.957\pm0.044)cm$ mit einem $X^2/f \approx 2.704/4 \approx 0.676$. Der Residuenplot dazu ist in Abb.\ref{Kalib_Res} dargestellt. Man erkennt, dass alle Fehler $\sqrt{k^2*R_{err}^2+L_{err}^2}$ etwa im Rahmen einer Standardabweichung um die Funktion gestreut sind.\\   
-	
+
+	Die Messpunkte des Widerstands R gegen die Position L des Mikrophons kann man in Abb.\ref{Kalib_Reg} erkennen. Mit diesen wurde eine lineare Regression $L=k*R+L_0$ durchgeführt, die ebenfalls dargestellt ist. Als Fehler gehen hierbei die Ablese- beziehungsweise Digitalisierungslimitierungen ein: $L_{err}=0.1cm/2$ und $R_{err}=0.005k\Omega/\sqrt{12}$ ein. Der konstante systematische Fehler des Maßbandes spielt keine Rolle, da später nur die Steigung des Graphen, sowie Längendifferenzen wichtig werden.      
+
+	Das Ergebnis der Regression beträgt  $(16.040\pm0.042)cm/k\Omega*R+(2.957\pm0.044)cm$ {\color{red} {(Referenzierbar machen?)}} mit einem $X^2/f \approx 2.704/4 \approx 0.676$. Der Residuenplot dazu ist in Abb.\ref{Kalib_Res} dargestellt. Man erkennt, dass alle Fehler $\sqrt{k^2*R_{err}^2+L_{err}^2}$ etwa im Rahmen einer Standardabweichung um die Funktion gestreut sind.\\   
+
 	\begin{figure}
-		\begin{center}
-			\includegraphics[scale=0.9]{Images/Kalibrierung_Regression.pdf}
-			\caption{Regressionsgerade der Kalibrierung}             
-			\label{Kalib_Reg}               
-		\end{center}            
+	\begin{center}
+		\includegraphics[scale=0.9]{Images/Kalibrierung_Regression.pdf}
+		\caption{Regressionsgerade der Kalibrierung}             
+		\label{Kalib_Reg}               
+	\end{center}            
 	\end{figure} 
 
 	\begin{figure}
-		\begin{center}
-			\includegraphics[scale=0.9]{Images/Kalibrierung_Residuum.pdf}
-			\caption{Residuenplot der Kalibrationsgeraden}
-			\label{Kalib_Res}
-		\end{center}
+	\begin{center}
+		\includegraphics[scale=0.9]{Images/Kalibrierung_Residuum.pdf}
+		\caption{Residuenplot der Kalibrationsgeraden}
+		\label{Kalib_Res}
+	\end{center}
 	\end{figure}
-	
+
 	\subsection{Messung von Laufzeit und Laufstrecke eines Signals}
 	\subsubsection{Aufbau}
 	Ein Piezo-Hochtöner wird auf einer Geraden mit einem darauf verschiebbaren Mikrophon fest angebracht. Für verschiedene Mikrophonpositionen (die aus den zuvor bestimmten Kalibrationsdaten ermittelt wird) wird die Zeitdifferenz zwischen Tonerzeugung und Tonempfang mit dem Sensor Cassy gemessen. Dafür wurde das Messbereich auf $10 k\Omega$, $\Delta t = 2 ms$ gestellt und für jeden Abstand 15 Messungen durchgeführt.
