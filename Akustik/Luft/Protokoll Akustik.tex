@@ -63,7 +63,7 @@
 	\subsection{Kalibration des Wegaufnehmers}
 	\subsubsection{Aufbau und Durchführung}
 	
-	Um die stehende Welle im Rohr in den späteren Teilen zu untersuchen, wurde der Wegaufnehmer gegenüber eines Messbandes Klasse II kalibriert. Ziel dieses Teilversuches ist damit, einen funktionalen Zusammenhang zwischen den am Wegaufnehmer (der wie ein Schiebewiderstand charakterisieren lässt) gemessenen Widerstand und die Längenverschiebung L. Dazu wurde der {\color{red} {Schiebekopf}} auf die 0.5 cm - Marke des Messbandes gelegt und der Widerstand mithilfe eines Teststroms gemessen. Dies wurde in 5-cm Schritten wiederholt, wovon die Rohdaten sich in der folgenden Tabelle zusammenfassen lassen:
+	Um die stehende Welle im Rohr in den späteren Teilen zu untersuchen, wurde der Wegaufnehmer gegenüber eines Messbandes Klasse II kalibriert. Ziel dieses Teilversuches ist damit, einen funktionalen Zusammenhang zwischen den am Wegaufnehmer (der wie ein Schiebewiderstand charakterisieren lässt) gemessenen Widerstand und die Längenverschiebung L. Dazu wurde der Schiebekopf auf die 0.5 cm - Marke des Messbandes gelegt und der Widerstand mithilfe eines Teststroms gemessen. Dies wurde in 5-cm Schritten wiederholt, wovon die Rohdaten sich in der folgenden Tabelle zusammenfassen lassen:
 	
 	\begin{center}
 		
@@ -91,38 +91,62 @@
     \end{figure} 
     
 	\begin{figure}
-	\begin{center}
-		\includegraphics[scale=0.9]{Images/Kalibrierung_Residuum.pdf}
-		\caption{Residuenplot der Kalibrationsgeraden}
-		\label{Kalib_Res}
-	\end{center}
+		\begin{center}
+			\includegraphics[scale=0.9]{Images/Kalibrierung_Residuum.pdf}
+			\caption{Residuenplot der Kalibrationsgeraden}
+			\label{Kalib_Res}
+		\end{center}
 	\end{figure}
+
 	\subsection{Messung von Laufzeit und Laufstrecke eines Signals}
-	Ein Piezo-Hochtöner wird auf einer Geraden mit einem darauf verschiebbaren Mikrophon fest angebracht. Für verschiedene Mikrophonpositionen wird die Zeitdifferenz zwischen Tonerzeugung und Tonempfang gemessen. Die Postionen des Mikrophons werden über einen Wegaufnehmer bestimmt.
+	\subsubsection{Aufbau}
+	Ein Piezo-Hochtöner wird auf einer Geraden mit einem darauf verschiebbaren Mikrophon fest angebracht. Für verschiedene Mikrophonpositionen (die aus den zuvor bestimmten Kalibrationsdaten ermittelt wird) wird die Zeitdifferenz zwischen Tonerzeugung und Tonempfang mit dem Sensor Cassy gemessen.
 	
-	In der ersten Versuchsreihe wurden die Laufzeiten und -wege wie in Abb.\ref{Va_Reg} aufgenommen. Hier hilft der zweite Teil von Formel \ref{e1}, um die Geschwindigkeit des Schalls in Luft mit einer linearen Regression $s(t)=v_{Schall}*t+s_0$ zu bestimmen. 
+	\subsubsection{Durchführung}
+	In der ersten Versuchsreihe wurden die Laufzeiten und -wege wie in Abb.\ref{Va_Reg} aufgenommen. Hier hilft der zweite Teil von Formel \ref{e1}, um die Geschwindigkeit des Schalls in Luft mit einer linearen Regression $s(t)=v_{Schall}*t+s_0$ zu bestimmen. Als Unsicherheit der Abstandmessung wurde derselbe Wert wie bei der Kalibrierung genommen, der Fehler der Laufzeit wurde über die Standardabweichung der Messzeiten ermittelt. Da bei der Position 
+	$L = 25.7 cm$ letztere inkonsistent sind und zwischen zwei unterschiedlichen Werten schwanken, wurden diese aus der Bewertung ignoriert, und aus dem Residuenplot entfernt.\\
 	
 	\begin{figure}
-	\begin{center}
-		\includegraphics[scale=0.9]{Images/VA_Regression.pdf}
-		\caption{Regression zur Ermittlung der Schallgeschwindigkeit}
-		\label{Va_Reg}
-	\end{center}
+		\begin{center}
+			\includegraphics[scale=0.9]{Images/Schallg.pdf}
+			\caption{Regression zur Ermittlung der Schallgeschwindigkeit}
+			\label{Va_Reg}
+		\end{center}
 	\end{figure}	
-	Das Residuum kann man in Abb.\ref{Va_Res} sehen. Die Werte liegen gestreut um die Gerade, so wie es auch sein sollte, allerdings 
+	
 	\begin{figure}
-	\begin{center}
-		\includegraphics[scale=0.9]{Images/VA_Residuum.pdf}
-		\caption{Residuum der Geradenanpassung}
-		\label{Va_Res}
-	\end{center}
-	\end{figure}	
+		\begin{center}
+			\includegraphics[scale=0.9]{Images/Schallg_res.pdf}
+			\caption{Residuum der Geradenanpassung}
+			\label{Va_Res}
+		\end{center}
+	\end{figure}
 
-
+	Die lineare Regression liefert
+	
+	\begin{equation*}
+		 s = (-34453.19\pm58.37) cm/s\cdot t+ (47.06\pm0.06)cm
+	\end{equation*}
+	
+	mit einem $\chi^2/Ndf \approx 4.46$. Man kann auch aus dem Residuenplot entnehmen, dass die Daten ohne irgendeine Tendenz um die angepasste Gerade streuen und meist im $1\sigma$-Bereich liegen. Um den systematischen Fehler bzgl. der Steigung abzuschätzen, wurde die Verschiebemethode verwendet. Damit ergibt sich das gesamte Ergebnis auf
+	
+	\begin{equation*}
+		v = (34453.19\pm58.37\pm1.90) \frac{cm}{s}
+	\end{equation*}
+	
+	was knapp außerhalb des $1/sigma$-Bereichs des theoretischen Werts von
+	
+	\begin{equation*}
+		v = 331.5 \, \frac{m}{s} +\frac{0.6}{\SI{} {\celsius}} \cdot \SI{22.8}{\celsius} \frac{m}{s} \approx 345.18 \frac{m}{s}
+	\end{equation*}
+	
+	liegt.
 	
 	\subsection{Messung von Resonanzfrequenzen einer stehenden Welle}
 	\subsubsection{Aufbau und Durchführung}
+	Im diesem Teil untersucht man die Resonanzfrequenzen einer akkustischen Welle, indem man ihr Profil durch Variieren der Frequenz eines von einem Lautsprecher erzeugten Testklangs mithilfe eines Mikrofons aufnimmt. An der Resonanzstelle springt am Mikrofon abgegriffene Spannung hoch, dessen Maximalstellen mit \ref{e3} zur Bestimmung der Schallgeschwindigkeit dienen (Fall konstanter Länge $L$).\\
 	\subsubsection{Auswertung}
+	
 	
 	\subsection{Messung der Wellenlänge einer stehenden Welle}
 	\subsubsection{Aufbau und Durchführung}
@@ -174,7 +198,7 @@
 	
 	%Fehlerfortpflanzung
 	
-	
+	\/*
 	\begin{figure}
 	\begin{center}
 		\includegraphics[scale=0.9]{Images/Messreihenendzeiten.png}
@@ -183,6 +207,7 @@
 	\end{center}
 	\end{figure}
 	%\section{Anhang} ?
+	*/
 	
 	
 	\begin{figure}
