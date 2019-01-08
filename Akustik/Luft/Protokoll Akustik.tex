@@ -156,9 +156,14 @@ liegt.
 	
 	\subsection{Messung der Wellenlänge einer stehenden Welle}
 	\subsubsection{Aufbau und Durchführung}
+	Bei festgehaltener Frequenz, wobei eine Resonanzfrequenz höherer Ordnung gewählt wurde, um in dem durch das Mikrophon erreichbaren Rohranteil wenigstens eine Wellenlänge zu haben, wird durch Verschieben des Mikrophons und dem manuellen Aufnehmen einzelner Messpunkte in einem Messbereich von $0k\Omega$ bis $10k\Omega$ die stehende Welle abgetastet, um die Wellenlänge durch den Abstand der Knoten ermitteln zu können. Als Frequenz wird $f=????Hz$ gewählt, deren Fehler $\sigma_f$ aus dem zweiten Versuch bekannt sind.
 	\subsubsection{Auswertung}
 	
-	Die Messergebnisse kann man in Abb.\ref{Vc_Roh} betrachten.
+	Die Messergebnisse kann man in Abb.\ref{Vc_Roh} betrachten, wobei wieder mit dem Wegaufnehmer umgerechnet wurde. Daraus kann man mit dem ersten Teil von Formel \ref{e1} leicht die Geschwindigkeit berechnen. Man kann die Wellenlänge als doppelter Abstand zweier Knoten ablesen (vgl. Abb.?). Man erhält: $min_1=12.34cm$ und $min_2=23.09cm$.\\ 
+	 Als Fehler der Ablesung wird $\sigma_{\lambda stat}=0.25cm$ abgeschätzt. Als systematischer Fehler der Längenmessung erhält man aus $\sigma_{Lsys}$ mit der Verknüpfung $\sigma_{\lambda sys} = \frac{\sigma_{\lambda stat}(min1)+\sigma_{\lambda stat}(min2)}{2}=0.039cm$\\
+	 Die Fehler auf $v_{Schall}$ pflanzen sich damit wie folgt fort: $\sigma_{vstat}=v*\sqrt{(\frac{\sigma_{\lambda stat}}{\lambda})^2+(\frac{\sigma_f}{f})^2}$, 
+	 $\sigma_{vsys}=f*\sigma_{\lambda sys}$.
+	 Das Ergebnis ist dann $v_{Schall}=(345.49 \pm 4.02 \pm 0.62)\frac{m}{s}$
 
 	\begin{figure}
 	\begin{center}
