@@ -138,7 +138,7 @@ s = (-34453.19\pm58.37) cm/s\cdot t+ (47.06\pm0.06)cm
 mit einem $\chi^2/Ndf \approx 4.46$. Man kann auch aus dem Residuenplot entnehmen, dass die Daten ohne irgendeine Tendenz um die angepasste Gerade streuen und meist im $1\sigma$-Bereich liegen. Um den systematischen Fehler bzgl. der Steigung abzuschätzen, wurde die Verschiebemethode verwendet. Damit ergibt sich das gesamte Ergebnis auf
 
 \begin{equation*}
-v = (34453.19\pm58.37\pm1.90) \frac{cm}{s}
+	v = (34453.19\pm58.37\pm1.90) \frac{cm}{s}
 \end{equation*}
 
 was knapp außerhalb des $1\sigma$-Bereichs des theoretischen Werts von
@@ -153,12 +153,61 @@ liegt.
 	\subsection{Messung von Resonanzfrequenzen einer stehenden Welle}
 	\subsubsection{Aufbau und Durchführung}
 	Im diesem Teil untersucht man die Resonanzfrequenzen einer akkustischen Welle, indem man ihr Profil durch Variieren der Frequenz eines von einem Lautsprecher erzeugten Testklangs mithilfe eines Mikrofons aufnimmt. An der Resonanzstelle springt am Mikrofon abgegriffene Spannung hoch, dessen Maximalstellen mit \ref{e3} zur Bestimmung der Schallgeschwindigkeit dienen (Fall konstanter Länge $L$).\\
-	Vor dem Versuch wurde die Grundfrequenz $f=2v/L$ näherungsweise bestimmt, um die Lage der Resonanzfrequenzen abzuschätzen. Für die Messung wurde damit am Mikrophon ein Spannungsbereich von 1 V (Mittelung über 1000 ns)
+	Vor dem Versuch wurde die Grundfrequenz $f=2v/L$ näherungsweise bestimmt, um die Lage der Resonanzfrequenzen abzuschätzen. Für die Messung wurde  am Mikrofon ein Spannungsbereich von 1 V (Mittelung über 1000 ns), am Timerbox des Cassy-Sensors eine Torzeit von 1s mit einer Frequenz $fb1=5000$ Hz eingestellt.
+	
 	\subsubsection{Auswertung}
+	
+	Die Rohdaten sind in der Abbildung \ref{Resfreq} dargestellt. Da die Peaks der einzelnen Resonanzkurven bei dieser Methode ziemlich unscharf erscheinen, wurden für sie durch vier verschiedene Methoden bestimmt, dessen Mittelwert und die Hälfte (vier Methoden) der Standardabweichung als Ergebnis bzw. Fehler genommen wurde. Die Ergebnisse dieser Verusche wurden in der Abbildung \ref{Resfreq_teil} und in der Tabelle zusammengefasst.\\
+	\begin{center}
+	\begin{tabular}{cc}
+		\includegraphics[scale=0.4]{Images/teilspektrum_0.pdf}& \includegraphics[scale=0.4]{Images/teilspektrum_1.pdf}\\
+		\includegraphics[scale=0.4]{Images/teilspektrum_2.pdf}& \includegraphics[scale=0.4]{Images/teilspektrum_3.pdf}\\		 
+	\end{tabular} 
+	\begin{figure}[h]
+		\begin{center}
+			\includegraphics[scale=0.4]{Images/teilspektrum_4.pdf}
+			\caption{Gemessene Resonanzfrequenzen}
+			\label{Resfreq_teil}
+		\end{center}
+	\end{figure}
+	\end{center}
+ 
+	\begin{figure}
+		\begin{center}
+			\includegraphics[scale=0.9]{Images/Resonanzfreq.pdf}
+			\caption{Gemessenes Frequenzspektrum}
+			\label{Resfreq}
+		\end{center}
+	\end{figure}
+
+	\begin{tabular}{|c|c|c|c|c|c|}
+		\hline 
+		Ordnung n&1  &2  &4  &5 &6  \\ 
+		\hline 
+		Frequenz in Hz& 410.32$\pm$0.77 &809.53$\pm$0.55  &1608.38$\pm$0.30  &2007.34$\pm$0.46  &2415.89$\pm$0.09  \\ 
+		\hline 
+	\end{tabular}
+
+	\bigskip
+	Mit diesen Daten wurden dann eine lineare Regression durchgeführt (siehe Abbildung \ref{linreg_freq} und Abbildung \ref{linreg_res})
+	\begin{figure}
+		\begin{center}
+			\includegraphics[scale=0.9]{Images/Resonanzfreq_linreg.png}
+			\caption{Lineare Regression bzgl. des Frequenzspektrums}
+			\label{linreg_freq}
+		\end{center}
+	\end{figure}
+	\begin{figure}
+		\begin{center}
+			\includegraphics[scale=0.9]{Images/Resonanzfreq_res.png}
+			\caption{Residumplot der linearen Regression}
+			\label{linreg_res}
+		\end{center}
+	\end{figure}
 	
 	\subsection{Messung der Wellenlänge einer stehenden Welle}
 	\subsubsection{Aufbau und Durchführung}
-	Bei festgehaltener Frequenz, wobei eine Resonanzfrequenz höherer Ordnung gewählt wurde, um in dem durch das Mikrophon erreichbaren Rohranteil wenigstens eine Wellenlänge zu haben, wird durch Verschieben des Mikrophons und dem manuellen Aufnehmen einzelner Messpunkte in einem Messbereich von $0k\Omega$ bis $10k\Omega$ die stehende Welle abgetastet, um die Wellenlänge durch den Abstand der Knoten ermitteln zu können. Als Frequenz wird $f=????Hz$ gewählt, deren Fehler $\sigma_f$ aus dem zweiten Versuch bekannt sind.
+	Bei festgehaltener Frequenz, wobei eine Resonanzfrequenz höherer Ordnung gewählt wurde, um in dem durch das Mikrofon erreichbaren Rohranteil wenigstens eine Wellenlänge zu haben, wird durch Verschieben des Mikrophons und dem manuellen Aufnehmen einzelner Messpunkte in einem Messbereich von $0k\Omega$ bis $10k\Omega$ die stehende Welle abgetastet, um die Wellenlänge durch den Abstand der Knoten ermitteln zu können. Als Frequenz wird $f=????Hz$ gewählt, deren Fehler $\sigma_f$ aus dem zweiten Versuch bekannt sind.
 	\subsubsection{Auswertung}
 	
 	Die Messergebnisse kann man in Abb.\ref{Vc_Roh} betrachten, wobei wieder mit dem Wegaufnehmer umgerechnet wurde. Daraus kann man mit dem ersten Teil von Formel \ref{e1} leicht die Geschwindigkeit berechnen. Man kann die Wellenlänge als doppelter Abstand zweier Knoten ablesen (vgl. Abb.?). Man erhält: $min_1=12.34cm$ und $min_2=23.09cm$.\\ 
