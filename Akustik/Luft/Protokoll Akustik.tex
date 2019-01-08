@@ -135,7 +135,11 @@ Die lineare Regression liefert
 s = (-34453.19\pm58.37) cm/s\cdot t+ (47.06\pm0.06)cm
 \end{equation*}
 
-mit einem $\chi^2/Ndf \approx 4.46$. Man kann auch aus dem Residuenplot entnehmen, dass die Daten ohne irgendeine Tendenz um die angepasste Gerade streuen und meist im $1\sigma$-Bereich liegen. Um den systematischen Fehler bzgl. der Steigung abzuschätzen, wurde die Verschiebemethode verwendet. Damit ergibt sich das gesamte Ergebnis auf
+mit einem $\chi^2/Ndf \approx 4.46$. Man kann auch aus dem Residuenplot entnehmen, dass die Daten ohne irgendeine Tendenz um die angepasste Gerade streuen und meist im $1\sigma$-Bereich liegen. Um den systematischen Fehler bzgl. der Steigung abzuschätzen, wurden die einzelnen Datenpunkte einmal mit $+\sigma$ und einmal mit $-\sigma$ verschoben, und die lineare Regression wieder durchgefürt, wobei das Ergebnis
+\begin{equation}
+	\sigma = \frac{|R-R_+|+|R-R_-|}{2}
+\end{equation}
+eine Abschätzung des systematischen Fehlers ist (Verschiebemethode). Damit ergibt sich das gesamte Ergebnis auf
 
 \begin{equation*}
 	v = (34453.19\pm58.37\pm1.90) \frac{cm}{s}
