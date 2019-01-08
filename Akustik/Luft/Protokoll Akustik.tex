@@ -59,66 +59,92 @@
 	%Bild stehende Welle
 	
 	\section{Versuche}
-	
 	\subsection{Kalibration des Wegaufnehmers}
 	\subsubsection{Aufbau und Durchführung}
-
-	Um die Position des Mikrophons in allen späteren Versuchen genau bestimmen zu können, wird der Wegaufnehmer gegenüber einem Messband der Güteklasse II kalibriert. Ziel dieses Teilversuches ist damit, einen funktionalen Zusammenhang zwischen den am Wegaufnehmer gemessenen Widerstand ,der sich wie ein Schiebewiderstand charakterisieren lässt, und der Längenverschiebung L zu finden. Dazu wurde der {\color{red} {Schiebekopf}} auf die 0.5 cm - Marke des Messbandes gelegt und der Widerstand mithilfe eines Teststroms gemessen. Dies wurde in 5-cm Schritten wiederholt, wobei sich die Rohdaten in der folgenden Tabelle zusammenfassen lassen:
-
+	
+	Um die stehende Welle im Rohr in den späteren Teilen zu untersuchen, wurde der Wegaufnehmer gegenüber eines Messbandes Klasse II kalibriert. Ziel dieses Teilversuches ist damit, einen funktionalen Zusammenhang zwischen den am Wegaufnehmer (der wie ein Schiebewiderstand charakterisieren lässt) gemessenen Widerstand und die Längenverschiebung L. Dazu wurde der Schiebekopf auf die 0.5 cm - Marke des Messbandes gelegt und der Widerstand mithilfe eines Teststroms gemessen. Dies wurde in 5-cm Schritten wiederholt, wovon die Rohdaten sich in der folgenden Tabelle zusammenfassen lassen:
+	
 	\begin{center}
-	\begin{tabular}{|c|c|c|c|c|c|c|}
-		\hline 
-		Abstand s in cm & 0.5 & 5.5 & 10.5 & 15.5 & 20.5 & 25.5 \\ 
-		\hline 
-		Widerstand R in $k\Omega$ & 1.685 & 1.375, & 1.06 & 0.755, & 0.44 & 0.125 \\ 
-		\hline 
-	\end{tabular} 
+		
+		\begin{tabular}{|c|c|c|c|c|c|c|}
+			\hline 
+			Abstand s in cm & 0.5 & 5.5 & 10.5 & 15.5 & 20.5 & 25.5 \\ 
+			\hline 
+			Widerstand R in $\Omega$ & 1.685 & 1.375, & 1.06 & 0.755, & 0.44 & 0.125 \\ 
+			\hline 
+		\end{tabular} 
 	\end{center}
-
+	
 	\subsubsection{Auswertung}
-
-	Die Messpunkte des Widerstands R gegen die Position L des Mikrophons kann man in Abb.\ref{Kalib_Reg} erkennen. Mit diesen wurde eine lineare Regression $L=k*R+L_0$ durchgeführt, die ebenfalls dargestellt ist. Als Fehler gehen hierbei die Ablese- beziehungsweise Digitalisierungslimitierungen ein: $L_{err}=0.1cm/2$ und $R_{err}=0.005k\Omega/\sqrt{12}$ ein. Der konstante systematische Fehler des Maßbandes spielt keine Rolle, da später nur die Steigung des Graphen, sowie Längendifferenzen wichtig werden.      
-
-	Das Ergebnis der Regression beträgt  $(16.040\pm0.042)cm/k\Omega*R+(2.957\pm0.044)cm$ {\color{red} {(Referenzierbar machen?)}} mit einem $X^2/f \approx 2.704/4 \approx 0.676$. Der Residuenplot dazu ist in Abb.\ref{Kalib_Res} dargestellt. Man erkennt, dass alle Fehler $\sqrt{k^2*R_{err}^2+L_{err}^2}$ etwa im Rahmen einer Standardabweichung um die Funktion gestreut sind.\\   
-
+	
+	Die Messpunkte Widerstand R gegen Position L des Mikrophons kann man in Abb.\ref{Kalib_Reg} erkennen. Mit diesen wurde eine lineare Regression $L=k*R+L_0$ durchgeführt, die ebenfalls dargestellt ist. Als Fehler gehen hierbei die Ablese- beziehungsweise Digitalisierungslimitierungen ein: $L_{err}=0.1cm/2$ und $R_{err}=0.005k\Omega/\sqrt{12}$ ein. Der konstante systematische Fehler des Maßbandes spielt keine Rolle, da später nur die Steigung des Graphen, sowie Längendifferenzen wichtig werden.      
+	
+	Das Ergebnis der Regression beträgt $(16.040\pm0.042)cm/k\Omega*R+(2.957\pm0.044)cm$ mit einem $X^2/f \approx 2.704/4 \approx 0.676$. Der Residuenplot dazu ist in Abb.\ref{Kalib_Res} dargestellt. Man erkennt, dass alle Fehler $\sqrt{k^2*R_{err}^2+L_{err}^2}$ etwa im Rahmen einer Standardabweichung um die Funktion gestreut sind.\\   
+	
 	\begin{figure}
-	\begin{center}
-		\includegraphics[scale=0.9]{Images/Kalibrierung_Regression.pdf}
-		\caption{Regressionsgerade der Kalibrierung}             
-		\label{Kalib_Reg}               
-	\end{center}            
+		\begin{center}
+			\includegraphics[scale=0.9]{Images/Kalibrierung_Regression.pdf}
+			\caption{Regressionsgerade der Kalibrierung}             
+			\label{Kalib_Reg}               
+		\end{center}            
 	\end{figure} 
-
+	
 	\begin{figure}
-	\begin{center}
-		\includegraphics[scale=0.9]{Images/Kalibrierung_Residuum.pdf}
-		\caption{Residuenplot der Kalibrationsgeraden}
-		\label{Kalib_Res}
-	\end{center}
-	\end{figure}
-
-	\subsection{Messung von Laufzeit und Laufstrecke eines Signals}
-	Ein Piezo-Hochtöner wird auf einer Geraden mit einem darauf verschiebbaren Mikrophon fest angebracht. Für verschiedene Mikrophonpositionen wird die Zeitdifferenz zwischen Tonerzeugung und Tonempfang gemessen. Die Postionen des Mikrophons werden über einen Wegaufnehmer bestimmt.
-
-	In der ersten Versuchsreihe wurden die Laufzeiten und -wege wie in Abb.\ref{Va_Reg} aufgenommen. Hier hilft der zweite Teil von Formel \ref{e1}, um die Geschwindigkeit des Schalls in Luft mit einer linearen Regression $s(t)=v_{Schall}*t+s_0$ zu bestimmen. 
-
-	\begin{figure}
-	\begin{center}
-		\includegraphics[scale=0.9]{Images/VA_Regression.pdf}
-		\caption{Regression zur Ermittlung der Schallgeschwindigkeit}
-		\label{Va_Reg}
-	\end{center}
+		\begin{center}
+			\includegraphics[scale=0.9]{Images/Kalibrierung_Residuum.pdf}
+			\caption{Residuenplot der Kalibrationsgeraden}
+			\label{Kalib_Res}
+		\end{center}
 	\end{figure}
 	
-	Das Residuum kann man in Abb.\ref{Va_Res} sehen. Die Werte liegen gestreut um die Gerade, so wie es auch sein sollte, allerdings sind die Punkte zum Teil zu weit von der Geraden entfernt - gemessen an ihrem Fehler. Das kann man auch an dem $X^2$-Wert von $\approx13.70/4\approx3.43$, der etwas zu groß, aber bei der geringen Zahl an Freiheitsgraden noch gut akzeptabel ist.
-
+	\subsection{Messung von Laufzeit und Laufstrecke eines Signals}
+	\subsubsection{Aufbau}
+	Ein Piezo-Hochtöner wird auf einer Geraden mit einem darauf verschiebbaren Mikrophon fest angebracht. Für verschiedene Mikrophonpositionen (die aus den zuvor bestimmten Kalibrationsdaten ermittelt wird) wird die Zeitdifferenz zwischen Tonerzeugung und Tonempfang mit dem Sensor Cassy gemessen.
+	
+	\subsubsection{Durchführung}
+	In der ersten Versuchsreihe wurden die Laufzeiten und -wege wie in Abb.\ref{Va_Reg} aufgenommen. Hier hilft der zweite Teil von Formel \ref{e1}, um die Geschwindigkeit des Schalls in Luft mit einer linearen Regression $s(t)=v_{Schall}*t+s_0$ zu bestimmen. Als Unsicherheit der Abstandmessung wurde derselbe Wert wie bei der Kalibrierung genommen, der Fehler der Laufzeit wurde über die Standardabweichung der Messzeiten ermittelt. Da bei der Position 
+	$L = 25.7 cm$ letztere inkonsistent sind und zwischen zwei unterschiedlichen Werten schwanken, wurden diese aus der Bewertung ignoriert, und aus dem Residuenplot entfernt.\\
+	
 	\begin{figure}
-	\begin{center}
-		\includegraphics[scale=0.9]{Images/VA_Residuum.pdf}
-		\caption{Residuum der Geradenanpassung}
-		\label{Va_Res}
-	\end{center}
+		\begin{center}
+			\includegraphics[scale=0.9]{Images/Schallg.pdf}
+			\caption{Regression zur Ermittlung der Schallgeschwindigkeit}
+			\label{Va_Reg}
+		\end{center}
 	\end{figure}	
+	
+	\begin{figure}
+		\begin{center}
+			\includegraphics[scale=0.9]{Images/Schallg_res.pdf}
+			\caption{Residuum der Geradenanpassung}
+			\label{Va_Res}
+		\end{center}
+	\end{figure}
+	
+	Die lineare Regression liefert
+	
+	\begin{equation*}
+	s = (-34453.19\pm58.37) cm/s\cdot t+ (47.06\pm0.06)cm
+	\end{equation*}
+	
+	mit einem $\chi^2/Ndf \approx 4.46$. Man kann auch aus dem Residuenplot entnehmen, dass die Daten ohne irgendeine Tendenz um die angepasste Gerade streuen und meist im $1\sigma$-Bereich liegen. Um den systematischen Fehler bzgl. der Steigung abzuschätzen, wurde die Verschiebemethode verwendet. Damit ergibt sich das gesamte Ergebnis auf
+	
+	\begin{equation*}
+	v = (34453.19\pm58.37\pm1.90) \frac{cm}{s}
+	\end{equation*}
+	
+	was knapp außerhalb des $1/sigma$-Bereichs des theoretischen Werts von
+	
+	\begin{equation*}
+	v = 331.5 \, \frac{m}{s} +\frac{0.6}{\SI{} {\celsius}} \cdot \SI{22.8}{\celsius} \frac{m}{s} \approx 345.18 \frac{m}{s}
+	\end{equation*}
+	
+	liegt.
+	
+	\subsection{Messung von Resonanzfrequenzen einer stehenden Welle}
+	\subsubsection{Aufbau und Durchführung}
+	Im diesem Teil untersucht man die Resonanzfrequenzen einer akkustischen Welle, indem man ihr Profil durch Variieren der Frequenz eines von einem Lautsprecher erzeugten Testklangs mithilfe eines Mikrofons aufnimmt. An der Resonanzstelle springt am Mikrofon abgegriffene Spannung hoch, dessen Maximalstellen mit \ref{e3} zur Bestimmung der Schallgeschwindigkeit dienen (Fall konstanter Länge $L$).\\
+	\subsubsection{Auswertung}
 
 
 	
@@ -150,13 +176,15 @@
 	\end{equation}
 	, wobei die allgemeine Gaskonstante $R=8.3145 \frac{J}{mol*K}$, der Adiabatenexponent für Luft $\kappa=\frac{7}{5}$ und deren molare Masse $M_{Mol}=28.984*10^{-3} \frac{kg}{mol}$ bereits ziemlich genau bekannt sind.
 	Nun soll die Temperatur in Abhängigkeit von der Zeit bestimmt werden.\\
-	Zu Beginn der Versuchsreihe um 17:05 Uhr wurde die Temperatur gemessen, ebenso wie zwischen den Experimenten und am Ende. Ungefähre Zeiten (die Endzeiten), wann die Experimente genau stattfanden, finden sich in Abb.\ref{Temp_Zeiten}. Für die Temperaturmessungen, die nur 2s Sekunden dauerten, wird der statistische Fehler als $\sigma_{t_T}=15min$ angenommen. Da keine eigentliche Geschwindigkeitsmessung (ohne Vorbereitung) länger als 15 Minuten dauerte, wird ein statistische Fehler auf die Zeit zu $\sigma_{t_v}=15min$ abgeschätzt. Der Digitalisierungsfehler der Temperatur ist $\sigma_T=\SI{0.1}{\celsius}/\sqrt{12}$.\\	\begin{figure}
+	Zu Beginn der Versuchsreihe um 17:05 Uhr wurde die Temperatur gemessen, ebenso wie zwischen den Experimenten und am Ende. Ungefähre Zeiten (die Endzeiten), wann die Experimente genau stattfanden, finden sich in Abb.\ref{Temp_Zeiten}. Für die Temperaturmessungen, die nur 2s Sekunden dauerten, wird der statistische Fehler als $\sigma_{t_T}=15min$ angenommen. Da keine eigentliche Geschwindigkeitsmessung (ohne Vorbereitung) länger als 15 Minuten dauerte, wird ein statistische Fehler auf die Zeit zu $\sigma_{t_v}=15min$ abgeschätzt. Der Digitalisierungsfehler der Temperatur ist $\sigma_T=\SI{0.1}{\celsius}/\sqrt{12}$.\\
+	\/*	\begin{figure}
+		
 		\begin{center}
 			\includegraphics[scale=0.9]{Images/Messreihenendzeiten.png}
 			\caption{Zeiten, zu denen die Experimente stattfanden}
 			\label{Temp_Zeiten}
 		\end{center}
-	\end{figure}
+	\end{figure}*/
 	17:05 Uhr wird als Zeitnullpunkt festgesetzt. Es wird in Minuten gezählt. Die Daten der drei Messungen sind in Abb.\ref{Temp_vorn} bis Abb.\ref{Temp_hinten} zu finden. Darin wurde bereits der Mittelwert eingezeichnet. Die Histogramme der Temperaturverteilungen zu den verschiedenen Zeiten sind von Abb.\ref{Temp_vorn_hist}
  	bis Abb.\ref{Temp_hinten_hist} dargestellt. Man kann sehen, dass sie gaußverteilt sind und deren Mittelwerte, Standardabweichungen und systematischen Fehler berechnen. So findet man schließlich drei Messpaare mitsamt Fehler:
  	
