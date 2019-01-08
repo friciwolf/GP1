@@ -81,7 +81,8 @@ for i,n in enumerate(dateien):
 zeiten=np.array([0,86,160]) #min
 Ts=np.log(np.array(Ts))
 T_errs=np.array(T_errs)/np.array(Ts)
-c,c_err,b,b_err,chiq,corr=analyse.lineare_regression(zeiten,Ts,T_errs)
+zeiten_err=np.ones(len(zeiten))*1/60
+c,c_err,b,b_err,chiq,corr=analyse.lineare_regression_xy(zeiten,Ts,T_errs,zeiten_err)
 
 #Plot
 if __name__=='__main__':
@@ -100,7 +101,7 @@ if __name__=='__main__':
 #Residuum
     plt.title('Residuenplot')
     plt.plot(x,np.zeros(len(x)),'r--')
-    plt.errorbar(zeiten,Ts-(c*zeiten+b),yerr=np.sqrt(T_errs**2),fmt='ko',capsize=3)
+    plt.errorbar(zeiten,Ts-(c*zeiten+b),yerr=np.sqrt(T_errs**2+c**2*zeiten_err**2),fmt='ko',capsize=3)
     #plt.text(,'Chi²={}'.format(chiq))
     plt.xlabel(r'R/$\Omega$')
     plt.ylabel('L-(k*R+L0) /cm')
@@ -118,8 +119,8 @@ def Temperatur_mit_Fehlern(t):
     '''
     t=0 ist 17:05
     input: Zeit in Minuten ab t0
-    returns: Temperatur an diesem Zeitpunkt und Fehler (T,T_estat,T_esys)
+    returns: Temperatur an diesem Zeitpunkt und Fehler (T,T_estat,T_esys) in °C
     '''
-    T_estat2=max(np.abs(np.exp(Ts)-Temperatur(zeiten)))**2+(c*np.exp(c*t+b)*0.5)**2 #Halbe Minute Zeitdigitalisierungsfehler
+    T_estat2=(c*np.exp(c*t+b)*15)**2 #Zeitfehler durch Experimentedauer
     T_esys=np.sqrt(t**2*np.exp(c*t+b)**2*c_err**2+np.exp(c*t+b)**2*b_err**2)
     return np.exp(c*t+b),np.sqrt(T_estat2),T_esys
