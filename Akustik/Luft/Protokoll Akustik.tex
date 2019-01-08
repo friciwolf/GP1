@@ -56,11 +56,11 @@
 	\end{equation}	
 	mit der Ordnung n.
 	
-	%Bild stehende Welle
+	%TODO: Bild stehende Welle
 	
 	\section{Versuche}
 	
-	\subsection{Kalibration des Wegaufnehmers}
+	\subsection{Kalibrierung des Wegaufnehmers}
 	\subsubsection{Aufbau und Durchführung}
 
 	Um die Position des Mikrophons in allen späteren Versuchen genau bestimmen zu können, wird der Wegaufnehmer gegenüber einem Messband der Güteklasse II kalibriert. Ziel dieses Teilversuches ist damit, einen funktionalen Zusammenhang zwischen den am Wegaufnehmer gemessenen Widerstand ,der sich wie ein Schiebewiderstand charakterisieren lässt, und der Längenverschiebung L zu finden. Dazu wurde der Schiebekopf auf die 0.5 cm - Marke des Messbandes gelegt und der Widerstand mithilfe eines Teststroms gemessen. Dies wurde in 5-cm Schritten wiederholt, wobei sich die Rohdaten in der folgenden Tabelle zusammenfassen lassen:
@@ -68,7 +68,7 @@
 	\begin{center}
 	\begin{tabular}{|c|c|c|c|c|c|c|}
 		\hline 
-		Abstand s in cm & 0.5 & 5.5 & 10.5 & 15.5 & 20.5 & 25.5 \\ 
+		Abstand s in cm & 25 & 20 & 15 & 10 & 5 & 0 \\ 
 		\hline 
 		Widerstand R in $k\Omega$ & 1.685 & 1.375, & 1.06 & 0.755, & 0.44 & 0.125 \\ 
 		\hline 
@@ -79,7 +79,12 @@
 
 	Die Messpunkte des Widerstands R gegen die Position L des Mikrophons kann man in Abb.\ref{Kalib_Reg} erkennen. Mit diesen wurde eine lineare Regression $L=k*R+L_0$ durchgeführt, die ebenfalls dargestellt ist. Als Fehler gehen hierbei die Ablese- beziehungsweise Digitalisierungslimitierungen ein: $L_{err}=0.1cm/2$ und $R_{err}=0.005k\Omega/\sqrt{12}$ ein. Der konstante systematische Fehler des Maßbandes spielt keine Rolle, da später nur die Steigung des Graphen, sowie Längendifferenzen wichtig werden.      
 
-	Das Ergebnis der Regression beträgt  $(16.040\pm0.042)cm/k\Omega*R+(2.957\pm0.044)cm$ {\color{red} {(Referenzierbar machen?)}} mit einem $X^2/f \approx 2.704/4 \approx 0.676$. Der Residuenplot dazu ist in Abb.\ref{Kalib_Res} dargestellt. Man erkennt, dass alle Fehler $\sqrt{k^2*R_{err}^2+L_{err}^2}$ etwa im Rahmen einer Standardabweichung um die Funktion gestreut sind.\\   
+	Das Ergebnis der Regression beträgt 
+	\begin{equation}
+		(16.040\pm0.042)cm/k\Omega*R+(-2.043\pm0.044)cm
+		\label{Kalib}
+	\end{equation}
+	mit einem $X^2/f \approx 2.704/4 \approx 0.676$. Der Residuenplot dazu ist in Abb.\ref{Kalib_Res} dargestellt. Man erkennt, dass alle Fehler $\sqrt{k^2*R_{err}^2+L_{err}^2}$ etwa im Rahmen einer Standardabweichung um die Funktion gestreut sind.\\   
 
 	\begin{figure}
 	\begin{center}
@@ -97,15 +102,16 @@
 	\end{center}
 	\end{figure}
 
+	Bei Nutzung der Kalibrierungsformel fallen folgende Fehler auf die Länge an: $\sigma_{Lstat}=k*\sigma_R$ und $\sigma_{Lsys}=R*k_err$. Auch hier wird der durch den Fehler auf L0 entstehende systematische Fehler nicht eingerechnet, da immer nur Differenzen von L gebraucht werden.
+
 	\subsection{Messung von Laufzeit und Laufstrecke eines Signals}
 	\subsubsection{Aufbau und Durchführung}
-	Ein Piezo-Hochtöner wird auf einer Geraden mit einem darauf verschiebbaren Mikrophon fest angebracht. Für verschiedene Mikrophonpositionen (die mit den zuvor bestimmten Kalibrationsdaten aus den mit dem Wegaufnehmer gemessenen Widerständen ermittelt werden) wird die Zeitdifferenz zwischen Tonerzeugung und Tonempfang mit dem Sensor Cassy gemessen.  Die Postionen des Mikrophons werden über den Wegaufnehmer bestimmt. Dafür wurde das Messbereich auf $10 k\Omega$, $\Delta t = 2 ms$ gestellt und für jeden Abstand 15 Messungen durchgeführt.
+	Ein Piezo-Hochtöner wird auf einer Geraden mit einem darauf verschiebbaren Mikrophon fest angebracht. Für verschiedene Mikrophonpositionen (die mit den zuvor bestimmten Kalibrationsdaten aus den mit dem Wegaufnehmer gemessenen Widerständen ermittelt werden) wird die Zeitdifferenz zwischen Tonerzeugung und Tonempfang mit dem Sensor Cassy gemessen.  Die Postionen des Mikrophons werden über den Wegaufnehmer bestimmt. Dafür wurde der Messbereich auf $0k\Omega$ bis $10k\Omega$, $\Delta t=2ms$ gestellt und für jeden Abstand 15 Messungen durchgeführt.
 
-	In der ersten Versuchsreihe wurden die Laufzeiten und -wege -letztere wurden unter Verwendung der Kalibrierungsgleichung {\color{red} ref} aus dem gemessenen Widerstand umgerechnet- wie in Abb.\ref{Va_Reg} aufgenommen. Hier hilft der zweite Teil von Formel \ref{e1}, um die Geschwindigkeit des Schalls in Luft mit einer linearen Regression $s(t)=v_{Schall}*t+s_0$ zu bestimmen. 
+	In der ersten Versuchsreihe wurden die Laufzeiten und -wege -letztere wurden unter Verwendung der Kalibrierungsgleichung (\ref{Kalib}) aus dem gemessenen Widerstand umgerechnet- wie in Abb.\ref{Va_Reg} aufgenommen. Hier hilft der zweite Teil von Formel \ref{e1}, um die Geschwindigkeit des Schalls in Luft mit einer linearen Regression $s(t)=v_{Schall}*t+s_0$ zu bestimmen. 
 	
 	
- Als Unsicherheit der Abstandmessung wurde derselbe Wert wie bei der Kalibrierung genommen, der Fehler der Laufzeit wurde über die Standardabweichung der Messzeiten ermittelt. Da an der Position 
-	$L = 25.7 cm$ letztere inkonsistent sind und zwischen zwei unterschiedlichen Werten schwanken, wurden diese aus der Bewertung ignoriert, und aus dem Residuenplot entfernt.\\
+ 	Als Unsicherheit der Abstandmessung wurden die aus der Kalibrierungen folgenden Fehlerverwendet, der Fehler der Laufzeit wurde als Maximum des statistischen Fehlers der Messzeiten und dem Auflösevermögen definiert. Da an der Position $L = -0.1984 cm$ die Zeitwerte inkonsistent sind und zwischen zwei unterschiedlichen Werten schwanken, wurden diese in der Bewertung ignoriert, und aus dem Residuenplot entfernt.\\
 	
 	
 	\begin{figure}
@@ -116,10 +122,6 @@
 	\end{center}
 	\end{figure}
 	
-	Das Residuum kann man in Abb.\ref{Va_Res} sehen. Die Werte liegen gestreut um die Gerade, so wie es auch sein sollte, allerdings sind die Punkte zum Teil zu weit von der Geraden entfernt - gemessen an ihrem Fehler. Das kann man auch an dem $X^2$-Wert von $\approx13.70/4\approx3.43$, der etwas zu groß, aber bei der geringen Zahl an Freiheitsgraden noch gut akzeptabel ist.
-	Die Ergebnisse sind 
-
-
 
 	\begin{figure}
 	\begin{center}
@@ -132,17 +134,19 @@
 Die lineare Regression liefert
 
 \begin{equation*}
-s = (-34453.19\pm58.37) cm/s\cdot t+ (47.06\pm0.06)cm
+L = (34452.3\pm59.3) cm/s\cdot t+ (-21.556 \pm 0.058)cm
 \end{equation*}
 
-mit einem $\chi^2/Ndf \approx 4.46$. Man kann auch aus dem Residuenplot entnehmen, dass die Daten ohne irgendeine Tendenz um die angepasste Gerade streuen und meist im $1\sigma$-Bereich liegen. Um den systematischen Fehler bzgl. der Steigung abzuschätzen, wurden die einzelnen Datenpunkte einmal mit $+\sigma$ und einmal mit $-\sigma$ verschoben, und die lineare Regression wieder durchgefürt, wobei das Ergebnis
+Das Residuum kann man in Abb.\ref{Va_Res} sehen. Die Werte liegen gestreut um die Gerade, so wie es auch sein sollte, allerdings sind die Punkte zum Teil zu weit von der Geraden entfernt - gemessen an ihrem Fehler. Das kann man auch an dem $X^2/f$-Wert von $\approx13.70/3\approx4.46$ sehen, der etwas zu groß, aber bei der geringen Zahl an Freiheitsgraden noch gut akzeptabel ist. \\
+
+Um den systematischen Fehler bzgl. der Steigung abzuschätzen, wurden die einzelnen Datenpunkte einmal mit $+\sigma_{Lsys}$ und einmal mit $-\sigma_{Lsys}$ verschoben, und die lineare Regression wieder durchgefürt, wobei das Ergebnis
 \begin{equation}
-	\sigma = \frac{|k-k_+|+|k-k_-|}{2}
+	\sigma = \frac{|v-v_+|+|v-v_-|}{2}
 \end{equation}
 eine Abschätzung des systematischen Fehlers ist (Verschiebemethode). Damit ergibt sich das gesamte Ergebnis auf
 
 \begin{equation*}
-	v = (34453.19\pm58.37\pm1.90) \frac{cm}{s}
+	v_{Schall} = (34453.19\pm58.37\pm1.90) \frac{cm}{s}
 \end{equation*}
 
 was knapp außerhalb des $1\sigma$-Bereichs des theoretischen Werts von
@@ -151,17 +155,19 @@ was knapp außerhalb des $1\sigma$-Bereichs des theoretischen Werts von
 v = 331.5 \, \frac{m}{s} +\frac{0.6}{\SI{} {\celsius}} \cdot \SI{22.8}{\celsius} \frac{m}{s} \approx 345.18 \frac{m}{s}
 \end{equation*}
 
-liegt.
+liegt (siehe "Ergebnisse" für nähere Diskussion).
+
+Aus dem y-Achsenabschnitt kann man auch die Postion der Schallquelle ablesen, die nach der obigen, im Abschnitt "Kalibrierung des Wegaufnehmers" getroffenen Wahl des Koordinatensystems $(21.556 \pm 0.058)cm$ von der Position $L=0$ entfernt ist.
 
 	
 	\subsection{Messung von Resonanzfrequenzen einer stehenden Welle}
 	\subsubsection{Aufbau und Durchführung}
-	Im diesem Teil untersucht man die Resonanzfrequenzen einer akkustischen Welle, indem man ihr Profil durch Variieren der Frequenz eines von einem Lautsprecher erzeugten Testklangs mithilfe eines Mikrofons aufnimmt. An der Resonanzstelle springt am Mikrofon abgegriffene Spannung hoch, dessen Maximalstellen mit Gleichung \ref{e3} zur Bestimmung der Schallgeschwindigkeit dienen (Fall konstanter Länge $L$).\\
+	In diesem Teil untersucht man die Resonanzfrequenzen einer akustischen Welle, indem man ihr Profil durch Variieren der Frequenz eines von einem Lautsprecher erzeugten Testklangs mithilfe eines Mikrofons aufnimmt. An der Resonanzstelle springt die am Mikrofon abgegriffene Spannung hoch, dessen Maximalstellen mit Gleichung \ref{e3} zur Bestimmung der Schallgeschwindigkeit dienen (Fall konstanter Länge $L$).\\
 	Vor dem Versuch wurde die Grundfrequenz $f=2v/L$ näherungsweise bestimmt, um die Lage der Resonanzfrequenzen abzuschätzen. Für die Messung wurde  am Mikrofon ein Spannungsbereich von 1 V (Mittlung über 1000 ns), am Timerbox des Cassy-Sensors eine Torzeit von 1s mit einer Frequenz $fb1=5000$ Hz eingestellt.
 	
 	\subsubsection{Auswertung}
 	
-	Die Rohdaten sind in der Abbildung \ref{Resfreq} dargestellt. Da die Peaks der einzelnen Resonanzkurven bei dieser Methode ziemlich unscharf erscheinen, wurden sie durch vier verschiedene Methoden bestimmt, dessen Mittelwert und die Hälfte (vier Methoden) der Standardabweichung als Ergebnis bzw. Fehler genommen wurde. Die Ergebnisse dieser Verusche wurden in der Abbildung \ref{Resfreq_teil} und in der Tabelle zusammengefasst.\\
+	Die Rohdaten sind in der Abbildung \ref{Resfreq} dargestellt. Da die Peaks der einzelnen Resonanzkurven bei dieser Methode ziemlich unscharf erscheinen, wurden sie durch vier verschiedene Methoden bestimmt, dessen Mittelwert und die Hälfte (vier Methoden) der Standardabweichung als Ergebnis bzw. Fehler genommen wurde. Die Ergebnisse dieser Versuche wurden in der Abbildung \ref{Resfreq_teil} und in der Tabelle zusammengefasst.\\
 	\begin{center}
 	\begin{tabular}{cc}
 		\includegraphics[scale=0.4]{Images/teilspektrum_0.pdf}& \includegraphics[scale=0.4]{Images/teilspektrum_1.pdf}\\
@@ -214,7 +220,7 @@ liegt.
 		v = 2L*a = (336.21 \pm 0.43 \pm 0.56) m/s; \, \, \, \chi^2/Ndf \approx 0.22
 	\end{equation}
 	
-	wobei der statischtische Fehler mit dem Gaußschen Fehlerfortpflanzung und der Systematische mithilfe der Verschiebemethode berechnet wurden. Dieses Ergebnis liegt aber deutlich unterhalb von dem theoretischen Wert, was sowohl an dem möglichen fehlerhaften Aufbau des Experiments (z.B. Mikrofonende lag innerhalb des Rohrs), als auch an dem zu großen Unsicherheiten und Ungenauigkeiten in der erhaltenen Datenmenge zurückgeführt werden kann.
+	wobei der statischtische Fehler mit dem Gaußschen Fehlerfortpflanzung und der Systematische mithilfe der Verschiebemethode berechnet wurden. Dieses Ergebnis liegt aber deutlich unterhalb des theoretischen Werts, was sowohl an dem möglichen fehlerhaften Aufbau des Experiments (z.B. Mikrofonende lag innerhalb des Rohrs), als auch an den zu großen Unsicherheiten und Ungenauigkeiten in der erhaltenen Datenmenge zurückgeführt werden kann.
 	
 	\subsection{Messung der Wellenlänge einer stehenden Welle}
 	\subsubsection{Aufbau und Durchführung}
@@ -239,10 +245,12 @@ liegt.
 	\section{Ergebnisse}
 	\subsection{Temperaturauswertung}
 	Die theoretische Schallgeschwindigkeit in Luft kann in Abhängigkeit von der Temperatur (in K) hergeleitet werden:
+	
 	\begin{equation}
 	v_{theo}=\sqrt{\frac{R*\kappa}{M_{Mol}}*T}
 	\label{v(T)}
 	\end{equation}
+	
 	, wobei die allgemeine Gaskonstante $R=8.3145 \frac{J}{mol*K}$, der Adiabatenexponent für Luft $\kappa=\frac{7}{5}$ und deren molare Masse $M_{Mol}=28.984*10^{-3} \frac{kg}{mol}$ bereits ziemlich genau bekannt sind.
 	Nun soll die Temperatur in Abhängigkeit von der Zeit bestimmt werden.\\
 	Zu Beginn der Versuchsreihe um 17:05 Uhr wurde die Temperatur gemessen, ebenso wie zwischen den Experimenten und am Ende. Genutzt wurden dabei ein Bereich von $\SI{-20}{\celsius}$ bis $\SI{120}{\celsius}$ und Messintervalle von $\SI{10}{\milli\second}$ für $2s$ (2000 Werte).
@@ -271,10 +279,12 @@ liegt.
  	\end{center}
  	
  	Ausprobiert wurden nun sowohl eine lineare Regression (mit $\sigma_T$ und $\sigma_{t_T}$) als auch die Anpassung einer Exponentialfunktion durch vorheriges exponentieren der Zeit, sowie logarrithmieren der Temperatur, wobei letzteres deutlich am besten funktionierte. Es ergibt sich der Zusammenhang
+ 	
  	\begin{equation}
  	T(t)=e^{c*t+b} *\SI{1}{\celsius}
  	\label{T(t)}
  	\end{equation}
+ 	
 	mit $c=(3.2\pm1.4)*10^{-4}\SI{}{\frac{1}{\minute}}$ und $b=3.131\pm0.015$ (vgl. Abb.\ref{Temp_Fit}).
 	In Abb.\ref{Temp_Res} findet sich noch das Residuum dazu, das allerdings bei drei Messpaaren nur soweit aussagekräftig ist, alsdass die Punkte ungefähr eine Standardabweichung von der Regression entfernt liegen. Das bestätigt auch der $X^2$-Wert, der mit $X^2\approx0.68$ bei einem Freiheitsgrad nicht unwahrscheinlich ist (vgl. entsprechende Tabellen).\\
 	Für die Nutzung von Formel (\ref{T(t)}) ergibt sich durch Fehlerfortpflanzung der Fehler $\sigma_c$ und $\sigma_b$ ein systematischer Fehler von $\sigma_{Tsys}=\sqrt{t^2*e^{2(c*t+b)}*\sigma_c^2+e^{2(c*t+b)}*\sigma_b^2}*\SI{1}{\celsius}$. Der statistischer Fehler, der berücksichtigt, dass man nur die Experimentendzeiten nutzt, berechnet sich zu $\sigma_{Tstat}=c*exp{(c*t+b)}*\sigma_{t_v}*\SI{1}{\celsius}$. Fortgepflanzt auf v mit Formel (\ref{v(T)}) ergibt sich für $\sigma_{vstat}/\sigma_{vsys}=v_{theo}*\frac{0.5}{T}*\sigma_{Tstat}/\sigma_{Tsys}$ mit T in K.\\
@@ -347,6 +357,12 @@ liegt.
 
 	Für das erste Experiment erhält man $t=82min$. Es ergibt sich eine Temperatur von $T=(23.50 \pm 0.11 \pm 0.46)\SI{}{\celsius}$ und mit Formel (\ref{v(T)}) folgt und der Fehlerfortpflanzung eben genannter Fehler: $v_{theo}=(345.17 \pm 0.07 \pm 0.27)\frac{m}{s}$
 
-	%\section{Anhang} ?
+	Das zweite Experiment endete um $t=?$
+
+	Die Endzeit des dritten Experimentes betrug $t=157min$
+	Die theoretische Geschwindigkeit bei $T=(24.07 \pm 0.11 \pm 0.67)\SI{}{\celsius}$ beträgt $v_{theo}=(345.49 \pm 0.07 \pm 0.39)\frac{m}{s}$
 	
+	
+	
+	%\section{Anhang} ?
 \end{document}
