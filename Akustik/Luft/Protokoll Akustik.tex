@@ -59,7 +59,7 @@
 		\begin{figure}
 		\begin{center}
 			\includegraphics[scale=0.9]{Images/stehende_welle.png}
-			\caption{Schematische Darstellung einer stehenden Welle im Rohr (Quelle: Demtröder: Experimentalphysik 1)}
+			\caption{Schematische Darstellung einer stehenden Welle im Rohr}
 			\label{welle_stehend}
 		\end{center}
 	\end{figure}
@@ -90,7 +90,7 @@
 		(16.040\pm0.042)cm/k\Omega*R+(-2.043\pm0.044)cm
 		\label{Kalib}
 	\end{equation}
-	mit einem $\chi^2/f \approx 2.704/4 \approx 0.676$. Der Residuenplot dazu ist in Abb.\ref{Kalib_Res} dargestellt. Man erkennt, dass alle Fehler $\sqrt{k^2*R_{err}^2+L_{err}^2}$ etwa im Rahmen einer Standardabweichung um die Funktion gestreut sind.\\   
+	mit einem $X^2/f \approx 2.704/4 \approx 0.676$. Der Residuenplot dazu ist in Abb.\ref{Kalib_Res} dargestellt. Man erkennt, dass alle Fehler $\sqrt{k^2*R_{err}^2+L_{err}^2}$ etwa im Rahmen einer Standardabweichung um die Funktion gestreut sind.\\   
 
 	\begin{figure}
 	\begin{center}
@@ -112,12 +112,12 @@
 
 	\subsection{Messung von Laufzeit und Laufstrecke eines Signals}
 	\subsubsection{Aufbau und Durchführung}
-	Ein Piezo-Hochtöner wird auf ein Ende eines Rohrs der Länge $L=(42.1\pm0.05)cm$ und ein verschiebbares Mikrophon auf das andere Ende fest angebracht. Letzteres wurde im Trigger-Modus eingestellt, um die Welle am besten zu messen. Für verschiedene Mikrophonpositionen (die mit den zuvor bestimmten Kalibrationsdaten aus den mit dem Wegaufnehmer gemessenen Widerständen ermittelt werden) wird die Zeitdifferenz zwischen Tonerzeugung und Tonempfang mit dem Sensor Cassy gemessen.  Die Postionen des Mikrophons werden über den Wegaufnehmer bestimmt. Dafür wurde der Messbereich auf $0k\Omega$ bis $10k\Omega$, $\Delta t=2ms$ gestellt und für jeden Abstand 15 Messungen durchgeführt.
+	Ein Piezo-Hochtöner wird auf einer Geraden mit einem darauf verschiebbaren Mikrophon fest angebracht. Für verschiedene Mikrophonpositionen (die mit den zuvor bestimmten Kalibrationsdaten aus den mit dem Wegaufnehmer gemessenen Widerständen ermittelt werden) wird die Zeitdifferenz zwischen Tonerzeugung und Tonempfang mit dem Sensor Cassy gemessen.  Die Postionen des Mikrophons werden über den Wegaufnehmer bestimmt. Dafür wurde der Messbereich auf $0k\Omega$ bis $10k\Omega$, $\Delta t=2ms$ gestellt und für jeden Abstand 15 Messungen durchgeführt.
 
 	In der ersten Versuchsreihe wurden die Laufzeiten und -wege -letztere wurden unter Verwendung der Kalibrierungsgleichung (\ref{Kalib}) aus dem gemessenen Widerstand umgerechnet- wie in Abb.\ref{Va_Reg} aufgenommen. Hier hilft der zweite Teil von Formel \ref{e1}, um die Geschwindigkeit des Schalls in Luft mit einer linearen Regression $s(t)=v_{Schall}*t+s_0$ zu bestimmen. 
 	
 	
- 	Als Unsicherheit der Abstandmessung wurden die aus der Kalibrierungen folgenden Fehler verwendet, der Fehler der Laufzeit wurde als Maximum des statistischen Fehlers der Messzeiten und dem Auflösevermögen definiert. Da an der Position $L = -0.1984 cm$ die Zeitwerte inkonsistent sind und zwischen zwei unterschiedlichen Werten schwanken, wurden diese in der Bewertung ignoriert, und aus dem Residuenplot entfernt.\\
+ 	Als Unsicherheit der Abstandmessung wurden die aus der Kalibrierungen folgenden Fehlerverwendet, der Fehler der Laufzeit wurde als Maximum des statistischen Fehlers der Messzeiten und dem Auflösevermögen definiert. Da an der Position $L = -0.1984 cm$ die Zeitwerte inkonsistent sind und zwischen zwei unterschiedlichen Werten schwanken, wurden diese in der Bewertung ignoriert, und aus dem Residuenplot entfernt.\\
 	
 	
 	\begin{figure}
@@ -161,18 +161,18 @@ was knapp außerhalb des $1\sigma$-Bereichs des theoretischen Werts von
 v = 331.5 \, \frac{m}{s} +\frac{0.6}{\SI{} {\celsius}} \cdot \SI{22.8}{\celsius} \frac{m}{s} \approx 345.18 \frac{m}{s}
 \end{equation*}
 
-liegt.
+liegt (siehe "Ergebnisse" für nähere Diskussion).
 
 Aus dem y-Achsenabschnitt kann man auch die Postion der Schallquelle ablesen, die nach der obigen, im Abschnitt "Kalibrierung des Wegaufnehmers" getroffenen Wahl des Koordinatensystems $(21.556 \pm 0.058)cm$ von der Position $L=0$ entfernt ist.
 
 	
 	\subsection{Messung von Resonanzfrequenzen einer stehenden Welle}
 	\subsubsection{Aufbau und Durchführung}
-	In diesem Teil untersucht man die Resonanzfrequenzen einer akustischen Welle, indem man ihr Profil durch Variieren der Frequenz eines von einem Lautsprecher erzeugten Testklangs mithilfe eines Mikrofons aufnimmt. An der Resonanzstelle springt die am Mikrofon abgegriffene Spannung hoch, dessen Maximalstellen mit Gleichung \ref{e3} zur Bestimmung der Schallgeschwindigkeit dienen (Fall konstanter Länge $L$). Für diese Zwecke wurde der Timer-Box des Sensor Cassy mit einem Funktionsgenerator verbunden, um die Frequenz zu variieren. Dieser erzeugte Sinusschwingungen im Bereich von 0.2-2.4 kHz Wellen mittiger Amplitude ohne Offset.
-	Vor dem Versuch wurde die Grundfrequenz $f=2v/L$ näherungsweise bestimmt, um die Lage der Resonanzfrequenzen abzuschätzen. Für die Messung wurde am Mikrofon im Effektivmodus ein Spannungsbereich von 1 V (Mittlung über 1000 ns), am Timerbox des Cassy-Sensors eine Torzeit von 1s mit einer Frequenz $fb1=5000$ Hz eingestellt.
+	In diesem Teil untersucht man die Resonanzfrequenzen einer akustischen Welle, indem man ihr Profil durch Variieren der Frequenz eines von einem Lautsprecher erzeugten Testklangs mithilfe eines Mikrofons aufnimmt. An der Resonanzstelle springt die am Mikrofon abgegriffene Spannung hoch, dessen Maximalstellen mit Gleichung \ref{e3} zur Bestimmung der Schallgeschwindigkeit dienen (Fall konstanter Länge $L$).\\
+	Vor dem Versuch wurde die Grundfrequenz $f=2v/L$ näherungsweise bestimmt, um die Lage der Resonanzfrequenzen abzuschätzen. Für die Messung wurde  am Mikrofon ein Spannungsbereich von 1 V (Mittlung über 1000 ns), am Timerbox des Cassy-Sensors eine Torzeit von 1s mit einer Frequenz $fb1=5000$ Hz eingestellt.
 	
 	\subsubsection{Auswertung}
-	Die Rohdaten sind in der Abbildung \ref{Resfreq} dargestellt. Da die Peaks der einzelnen Resonanzkurven bei dieser Methode ziemlich unscharf erscheinen, wurden sie durch vier verschiedene Methoden bestimmt, indem sie zuerst mithilfe der Praktikumsbibliothek identifiziert wurden. Mithilfe der so gewonnenen Information wurde in einem Bereich um diese Maximalstellen lokal auch der Maximalwert gesucht, wobei Punkte deutlich außerhalb der Resonanzkurve ignoriert wurden. Als dritte Methode wurden diese Stellen einfach aus dem Diagramm abgelesen und bei der vierten Methode eine Lorentzkurve mithilfe von Matlab auf die Daten bei der Resonanzstelle gefittet. Der so erhaltene Mittelwert und die Hälfte (vier Methoden) der Standardabweichung wurden als Ergebnis bzw. Fehler genommen. Die Ergebnisse dieser Versuche wurden in der Abbildung \ref{Resfreq_teil} und in der Tabelle zusammengefasst.\\
+	Die Rohdaten sind in der Abbildung \ref{Resfreq} dargestellt. Da die Peaks der einzelnen Resonanzkurven bei dieser Methode ziemlich unscharf erscheinen, wurden sie durch vier verschiedene Methoden bestimmt, indem sie zuerst mithilfe der Praktikumsbibliothek identifiziert wurden. Mithilfe der so gewonnenen Information wurde in einem Bereich um diese Maximalstellen lokal auch der Maximalwert gesucht, wobei Punkte deutlich außerhalb der Resonanzkurve ignoriert wurden. Als dritte Methode wurde diese Stelle einfach aus dem Diagramm abgelesen und bei der vierten Methode eine Lorentzkurve mithilfe von Matlab auf die Daten bei der Resonanzstelle gefittet. Der so erhaltene Mittelwert und die Hälfte (vier Methoden) der Standardabweichung wurden als Ergebnis bzw. Fehler genommen. Die Ergebnisse dieser Versuche wurden in der Abbildung \ref{Resfreq_teil} und in der Tabelle zusammengefasst.\\
 	\begin{center}
 	\begin{tabular}{cc}
 		\includegraphics[scale=0.4]{Images/teilspektrum_0.pdf}& \includegraphics[scale=0.4]{Images/teilspektrum_1.pdf}\\
@@ -225,7 +225,7 @@ Aus dem y-Achsenabschnitt kann man auch die Postion der Schallquelle ablesen, di
 		v_{Schall} = 2L*a = (336.21 \pm 0.43 \pm 0.56) m/s; \, \, \, \chi^2/Ndf \approx 0.433/2 \approx 0.216
 	\end{equation}
 	
-	wobei der statistische Fehler mit dem Gaußschen Fehlerfortpflanzung und der Systematische (wofür auch eine Kalibrierungsunsicherheit des Messbands von $\pm$0.7mm angenommen wurde) mithilfe der Verschiebemethode berechnet wurden. Für die Fortpflanzung wurde die Gleichung $\sigma_v=2La\sqrt{(\sigma_a/a)^2+(\sigma_L/L)^2}$ verwendet. Dieses Ergebnis liegt aber deutlich unterhalb des theoretischen Werts, was sowohl an dem möglichen fehlerhaften Aufbau des Experiments (z.B. Mikrofonende lag innerhalb des Rohrs), als auch an den zu großen Unsicherheiten und Ungenauigkeiten in der erhaltenen Datenmenge zurückgeführt werden könnte. Auch die Möglichkeit, bei der Datenaufzeichnung einen unbekannten Fehler gemacht zu haben, ist nicht ausgeschlossen.
+	wobei der statistische Fehler mit dem Gaußschen Fehlerfortpflanzung und der Systematische (wofür auch eine Kalibrierungsunsicherheit des Messbands von $\pm$0.7mm angenommen wurde) mithilfe der Verschiebemethode berechnet wurden. Dieses Ergebnis liegt aber deutlich unterhalb des theoretischen Werts, was sowohl an dem möglichen fehlerhaften Aufbau des Experiments (z.B. Mikrofonende lag innerhalb des Rohrs), als auch an den zu großen Unsicherheiten und Ungenauigkeiten in der erhaltenen Datenmenge zurückgeführt werden könnte.
 	
 	\subsection{Messung der Wellenlänge einer stehenden Welle}
 	\subsubsection{Aufbau und Durchführung}
@@ -366,6 +366,8 @@ Aus dem y-Achsenabschnitt kann man auch die Postion der Schallquelle ablesen, di
 
 	Die Endzeit des dritten Experimentes betrug $t=157min$
 	Die theoretische Geschwindigkeit bei $T=(24.07 \pm 0.11 \pm 0.67)\SI{}{\celsius}$ beträgt $v_{theo}=(345.49 \pm 0.07 \pm 0.39)\frac{m}{s}$. Hier wurde  $v_{Schall}=(345.70 \pm 4.02 \pm 0.62)\frac{m}{s}$ gemessen. Hier scheint der Fehler viel zu groß abgeschätzt worden zu sein, da die Werte bereits sehr nah beieinander liegen, allerdings war das bei der eher unsicheren Ablesung und Messung nicht besser möglich.
+	
+	\subsection{Diskussion der Ergebnisse}
 	
 	
 	
