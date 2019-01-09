@@ -121,6 +121,6 @@ def Temperatur_mit_Fehlern(t):
     input: Zeit in Minuten ab t0
     returns: Temperatur an diesem Zeitpunkt und Fehler (T,T_estat,T_esys) in °C
     '''
-    T_estat2=(c*np.exp(c*t+b)*15)**2 #Zeitfehler durch Experimentedauer
+    T_estat=c*np.exp(c*t+b)*15 #Zeitfehler durch Experimentedauer
     T_esys=np.sqrt(t**2*np.exp(c*t+b)**2*c_err**2+np.exp(c*t+b)**2*b_err**2)
-    return np.exp(c*t+b),np.sqrt(T_estat2),T_esys
+    return np.exp(c*t+b),T_estat,T_esys

@@ -47,8 +47,8 @@ def sort(eins,zwei='none',drei='none'):
 L_Rohr=42.1 #cm
 L_Rohr_estat=0.05 #cm
 L_Rohr_esys=0.0003+0.0002*1 #Güteklasse II:a+b*L mit a=0.3mm, b=0.2mm/m, L= auf ganzen Meter gerundete zu messende Länge
-f=1607.4 #????! #Hz
-f_err=0.1 #Hz #TODO: V2.1B
+f=1608.38 #????! #Hz
+f_err=0.30 #Hz #TODO: V2.1B
 
 
 #Daten einlesen
