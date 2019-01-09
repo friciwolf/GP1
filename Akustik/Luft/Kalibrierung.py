@@ -17,7 +17,7 @@ n = np.array(data.messung(1).datenreihe("n").werte) #Nummer des Messpunktes, wob
 R = np.array(data.messung(1).datenreihe("R_B1").werte) #Widerstand in kOhm
 
 #n->L
-L=(5*len(n)-5*(n-1)) #in cm #es wurde in 5cm-Schritten gemessen #TODO: Gut? 
+L=(5*len(n)-5*(n)) #in cm #es wurde in 5cm-Schritten gemessen #TODO: np.arange(0.5,30.5,5)
 #So ist L=0 bei der Messung, die am nächsten an der Quelle war und L wird bei größerem Abstand von der Quelle größer
 
 L_err=np.ones(len(L))*0.1/2 #cm
@@ -33,7 +33,7 @@ if __name__=='__main__':
     print('\nRegression L=R*x+L0=({} +- {})cm/kOhm * R+({} +- {})cm'.format(k,k_err,L0,L0_err))
     
     #Plot: Messpaare und Regression
-    plt.title('Regression: Kalibration')
+    plt.title('Regression: Kalibrierung')
     plt.errorbar(R,L,xerr=R_err,yerr=L_err,fmt='ko', label=u'Messpaare                       Chi²/f={}/{}'.format(chiq,len(R)-2))
     x=np.arange(min(R),max(R),0.001)
     plt.plot(x,k*x+L0,label=r'$k*R+L_0=({}\pm{})cm/k\Omega * R+({}\pm{})cm$'.format(k,k_err,L0,L0_err))
@@ -58,4 +58,4 @@ def Länge(R,Rerr):
     R,Rerr: Widerstand-Array, statistisches Fehler-Array
     returns: L,L_estat,L_esys
     '''
-    return (k*R+L0,k*Rerr,np.sqrt(k_err**2*R**2+L0_err**2)) #L,L_estat,L_esys #TODO: Systematischer mit L0? Was ist bei Differenzen?
+    return (k*R+L0,k*Rerr,np.sqrt(k_err**2*R**2)) #L,L_estat,L_esys    #+(L0_err**2+L_esys**2)))  #TODO: Systematischer mit L0? Was ist bei Differenzen?
