@@ -56,7 +56,13 @@
 	\end{equation}	
 	mit der Ordnung n.
 	
-	%TODO: Bild stehende Welle
+		\begin{figure}
+		\begin{center}
+			\includegraphics[scale=0.9]{Images/stehende_welle.png}
+			\caption{Schematische Darstellung einer stehenden Welle im Rohr}
+			\label{welle_stehend}
+		\end{center}
+	\end{figure}
 	
 	\section{Versuche}
 	
@@ -166,8 +172,7 @@ Aus dem y-Achsenabschnitt kann man auch die Postion der Schallquelle ablesen, di
 	Vor dem Versuch wurde die Grundfrequenz $f=2v/L$ näherungsweise bestimmt, um die Lage der Resonanzfrequenzen abzuschätzen. Für die Messung wurde  am Mikrofon ein Spannungsbereich von 1 V (Mittlung über 1000 ns), am Timerbox des Cassy-Sensors eine Torzeit von 1s mit einer Frequenz $fb1=5000$ Hz eingestellt.
 	
 	\subsubsection{Auswertung}
-	
-	Die Rohdaten sind in der Abbildung \ref{Resfreq} dargestellt. Da die Peaks der einzelnen Resonanzkurven bei dieser Methode ziemlich unscharf erscheinen, wurden sie durch vier verschiedene Methoden bestimmt, dessen Mittelwert und die Hälfte (vier Methoden) der Standardabweichung als Ergebnis bzw. Fehler genommen wurde. Die Ergebnisse dieser Versuche wurden in der Abbildung \ref{Resfreq_teil} und in der Tabelle zusammengefasst.\\
+	Die Rohdaten sind in der Abbildung \ref{Resfreq} dargestellt. Da die Peaks der einzelnen Resonanzkurven bei dieser Methode ziemlich unscharf erscheinen, wurden sie durch vier verschiedene Methoden bestimmt, indem sie zuerst mithilfe der Praktikumsbibliothek identifiziert wurden. Mithilfe der so gewonnenen Information wurde in einem Bereich um diese Maximalstellen lokal auch der Maximalwert gesucht, wobei Punkte deutlich außerhalb der Resonanzkurve ignoriert wurden. Als dritte Methode wurde diese Stelle einfach aus dem Diagramm abgelesen und bei der vierten Methode eine Lorentzkurve mithilfe von Matlab auf die Daten bei der Resonanzstelle gefittet. Der so erhaltene Mittelwert und die Hälfte (vier Methoden) der Standardabweichung wurden als Ergebnis bzw. Fehler genommen. Die Ergebnisse dieser Versuche wurden in der Abbildung \ref{Resfreq_teil} und in der Tabelle zusammengefasst.\\
 	\begin{center}
 	\begin{tabular}{cc}
 		\includegraphics[scale=0.4]{Images/teilspektrum_0.pdf}& \includegraphics[scale=0.4]{Images/teilspektrum_1.pdf}\\
@@ -217,7 +222,7 @@ Aus dem y-Achsenabschnitt kann man auch die Postion der Schallquelle ablesen, di
 
 	Diese lieferte ein Ergebnis mit der Rohrlänge L = (42.1 $\pm$0.05)cm und der Steigung $a$ von 
 	\begin{equation}
-		v_{Schall} = 2L*a = (336.21 \pm 0.43 \pm 0.56) m/s; \, \, \, \chi^2/Ndf \approx 0.22
+		v_{Schall} = 2L*a = (336.21 \pm 0.43 \pm 0.56) m/s; \, \, \, \chi^2/Ndf \approx 0.433/2 \approx 0.216
 	\end{equation}
 	
 	wobei der statistische Fehler mit dem Gaußschen Fehlerfortpflanzung und der Systematische mithilfe der Verschiebemethode berechnet wurden. Dieses Ergebnis liegt aber deutlich unterhalb des theoretischen Werts, was sowohl an dem möglichen fehlerhaften Aufbau des Experiments (z.B. Mikrofonende lag innerhalb des Rohrs), als auch an den zu großen Unsicherheiten und Ungenauigkeiten in der erhaltenen Datenmenge zurückgeführt werden kann.
