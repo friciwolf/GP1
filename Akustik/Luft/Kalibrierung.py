@@ -34,7 +34,7 @@ if __name__=='__main__':
     
     #Plot: Messpaare und Regression
     plt.title('Regression: Kalibrierung')
-    plt.errorbar(R,L,xerr=R_err,yerr=L_err,fmt='ko', label=u'Messpaare                       Chi²/f={}/{}'.format(chiq,len(R)-2))
+    plt.errorbar(R,L,xerr=R_err,yerr=L_err,fmt='ko', label=u'Messpaare                       Chi²/f={}/{} ≈ {}'.format(chiq,len(R)-2,np.round(chiq/(len(R)-2),2)))
     x=np.arange(min(R),max(R),0.001)
     plt.plot(x,k*x+L0,label=r'$k*R+L_0=({}\pm{})cm/k\Omega * R+({}\pm{})cm$'.format(k,k_err,L0,L0_err))
     plt.xlabel(r'Widerstand R/k$\Omega$')
@@ -48,7 +48,7 @@ if __name__=='__main__':
     plt.plot(x,np.zeros(len(x)),'r--')
     plt.errorbar(R,L-(k*R+L0),yerr=np.sqrt(L_err**2+k**2*R_err**2),fmt='ko',capsize=3)
     #plt.text(1.2,0.08,'Chi²/f={}/{}'.format(chiq,len(R)-2))
-    plt.xlabel(r'R/$\Omega$')
+    plt.xlabel(r'R/k$\Omega$')
     plt.ylabel(r'$L-(k*R+L_0)$ /cm')
     plt.savefig('Images/Kalibrierung_Residuum.pdf')
 
