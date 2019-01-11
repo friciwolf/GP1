@@ -16,7 +16,6 @@ v_0T_0=np.sqrt(8.3145*7/5/28.984*10**3)
 
 ns=[]
 #Daten einlesen
-for i in range(1,6):
     data = cassy.CassyDaten('V2.1A.lab')
     R_i = np.array(data.messung(i).datenreihe('R_B1').werte)
     dt_i = list(data.messung(i).datenreihe('&Dt_A1').werte)
@@ -57,9 +56,10 @@ print('\nv_Schall=({} +- {} +- {})cm/s\nAbstand von der Quelle:({} +- {})cm\nChi
 plt.title('Laufzeit gegen Laufstrecke')
 plt.plot(dt,L,'ko')
 x=np.arange(min(dt),max(dt),0.0000001)
-plt.plot(x,v*x+s0,'r-')
+plt.plot(x,v*x+s0,'r-', label='$v\cdot x+s_0=({}\pm{})cm/s*t+({}\pm{})cm $ \n Chi²/f={}/{} ≈ {}'.format(v,v_err,s0,s0_err, chiq,len(R)-2,np.round(chiq/(len(R)-2),2)))
 plt.xlabel(r'Laufzeit $\Delta$t/s')
 plt.ylabel('Strecke L/cm')
+plt.legend(loc=2)
 plt.savefig('Images/VA_Regression.pdf')
 plt.figure()
 
