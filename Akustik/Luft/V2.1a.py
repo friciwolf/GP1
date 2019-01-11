@@ -16,6 +16,7 @@ v_0T_0=np.sqrt(8.3145*7/5/28.984*10**3)
 
 ns=[]
 #Daten einlesen
+for i in range(1,7):
     data = cassy.CassyDaten('V2.1A.lab')
     R_i = np.array(data.messung(i).datenreihe('R_B1').werte)
     dt_i = list(data.messung(i).datenreihe('&Dt_A1').werte)
